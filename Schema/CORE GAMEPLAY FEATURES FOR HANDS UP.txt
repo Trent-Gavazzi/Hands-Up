@@ -1,0 +1,35 @@
+CORE GAMEPLAY FEATURES FOR "HANDS UP!"
+- player movement
+	- state machine logic
+		- idle
+		- move
+		- run
+		- roll
+	- collision with environment and customers
+- player shooting
+	- gun sits relative to player
+	- holster/unholster
+	- npcs friendly/enemy can be hit by the bullets
+	- bullets need to collide with the environment
+	- (optional) players with two drinks can't unholster
+- NPCs
+	- pathing to chairs -> pure math and walk cycle 
+		- add a 2D path to each chair
+		- each character coming in scans for an open chair and takes said path in/out of the saloon
+		- Certain groups require an entire table
+	- asking for drinks -> UI needed for this as well
+	- reaction to shooting -> animation 
+	- death animations -> animation
+	- NPCs that match the wanted poster art slightly
+		- Player must take out these wanted enemies
+		- If the player doesn't take them out quick enough they will try to shoot back
+			- (optional) this could cause a quick draw or shootout in which the player can die
+- Drinks/Player Manager
+	- Behind the bar the player makes drinks (beer, whiskey, and milk)
+	- Brings them to NPCs that request certain drinks
+	- Hold 2 at a time (can't pull out gun if you have 2 drinks)
+	- NPCs will get upset if they can't get their drink in time
+	- (LOW PRIORITY)
+	- Saloon rating will go down if you can't meet the demands
+		- Causes the npcs coming in will get meaner and meaner
+		- If you shoot a customer the rating will go down as well
