@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://btimgqfud7uvk"]
+
+[ext_resource type="Script" uid="uid://c1nnpa282q8qq" path="res://Scripts/Environment/Chair.cs" id="1_67f5f"]
+[ext_resource type="Texture2D" uid="uid://c6b75wrd67v2y" path="res://icon.svg" id="2_8mf1i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dgcv6"]
+radius = 3.5560687
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ojl55"]
+
+[sub_resource type="Curve2D" id="Curve2D_67f5f"]
+
+[node name="Chair" type="Node2D" unique_id=854854217 node_paths=PackedStringArray("collider", "area", "pathToDoor")]
+visibility_layer = 4
+z_index = 1
+script = ExtResource("1_67f5f")
+collider = NodePath("PlayerCollider")
+area = NodePath("Area")
+pathToDoor = NodePath("pathToDoor")
+
+[node name="PlayerCollider" type="StaticBody2D" parent="." unique_id=553425355]
+disable_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollider" unique_id=953099893]
+z_index = 1
+scale = Vector2(19.958853, 22.312849)
+shape = SubResource("CircleShape2D_dgcv6")
+
+[node name="chairSprite" type="Sprite2D" parent="." unique_id=1746774582]
+texture = ExtResource("2_8mf1i")
+
+[node name="Area" type="Area2D" parent="." unique_id=2097900149]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area" unique_id=576954861]
+light_mask = 0
+visibility_layer = 0
+shape = SubResource("CircleShape2D_ojl55")
+
+[node name="pathToDoor" type="Path2D" parent="." unique_id=2006730707]
+curve = SubResource("Curve2D_67f5f")

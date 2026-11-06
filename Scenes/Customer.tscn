@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cyrd2yd15fg5v"]
+
+[ext_resource type="Script" uid="uid://cn7ueui0br4ef" path="res://Scripts/Npc/Customer.cs" id="1_o7g7w"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r206j"]
+
+[node name="Customer" type="Node2D" unique_id=1371934740 node_paths=PackedStringArray("hitbox", "navAgent") groups=["navAgent"]]
+z_index = 10
+position = Vector2(1, 0)
+script = ExtResource("1_o7g7w")
+hitbox = NodePath("Collider")
+navAgent = NodePath("NavigationAgent2D")
+
+[node name="Collider" type="Area2D" parent="." unique_id=863958769]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collider" unique_id=589474660]
+z_index = 10
+shape = SubResource("CapsuleShape2D_r206j")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1618989754]

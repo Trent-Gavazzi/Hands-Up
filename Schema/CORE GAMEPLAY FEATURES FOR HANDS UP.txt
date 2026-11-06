@@ -6,6 +6,14 @@ CORE GAMEPLAY FEATURES FOR "HANDS UP!"
 		- run
 		- roll
 	- collision with environment and customers
+	- build environment
+		- Navigation Region with a new NavPolygon (the bar's walkable floor)
+			- Leave parsed Geometry type on static colliders.
+			- Put tables, bar counter, etc. under Navigation Region2D so their StaticBody2D colliders get cut out
+		- Set agent radius
+		- Bake (Rebake whenever a new object is dragged in)
+		- Door (add a 2D marker at the door, in the Global Node tab "groups")
+		- Chairs ()
 - player shooting
 	- gun sits relative to player
 	- holster/unholster

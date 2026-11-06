@@ -8,6 +8,7 @@ public enum moveState
     Rolling
 }
 
+// TODO: ADD PLAYER NAVIGATIONAGENT
 public partial class PlayerMovement : CharacterBody2D
 {
     [ExportGroup("Nodes")]
