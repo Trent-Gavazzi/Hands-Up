@@ -16,6 +16,7 @@ public partial class PlayerMovement : CharacterBody2D
     [Export] public Sprite2D BodySprite;   // optional; flipped to match the facing side
     [Export] public bool TextureFacesLeft = false;
 
+
     [ExportGroup("Speeds")]
     [Export] public float WalkSpeed = 200f;
     [Export] public float RunSpeed = 350f;

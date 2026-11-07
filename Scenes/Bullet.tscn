@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://btd24125367b6"]
+
+[ext_resource type="Script" uid="uid://doiptekswyo8r" path="res://Scripts/Player/Gun/Bullet.cs" id="1_14k46"]
+[ext_resource type="Texture2D" uid="uid://c6b75wrd67v2y" path="res://icon.svg" id="1_vlxeq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dgcv6"]
+
+[node name="Bullet" type="Node2D" unique_id=1466599047 node_paths=PackedStringArray("texture", "hitBox")]
+script = ExtResource("1_14k46")
+texture = NodePath("Sprite2D")
+hitBox = NodePath("Area2D")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=886130315]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1684242900]
+shape = SubResource("CircleShape2D_dgcv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1847184288]
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("1_vlxeq")

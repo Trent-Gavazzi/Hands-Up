@@ -2,26 +2,44 @@
 
 [ext_resource type="Script" uid="uid://bhwuwk7nen1bf" path="res://Scripts/Player/PlayerMovement.cs" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://c6b75wrd67v2y" path="res://icon.svg" id="2_gntrk"]
-[ext_resource type="Script" uid="uid://bojdqdg28b27g" path="res://Scripts/Player/Gun.cs" id="2_kyqiw"]
+[ext_resource type="Script" uid="uid://bra1bstbpuf8u" path="res://Scripts/Player/Gun/Gun.cs" id="3_gntrk"]
+[ext_resource type="PackedScene" uid="uid://btd24125367b6" path="res://Scenes/Bullet.tscn" id="4_dewec"]
 
-[node name="Player" type="CharacterBody2D" unique_id=1800572126 groups=["navAgent"]]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ojl55"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dgcv6"]
+
+[node name="Player" type="Node2D" unique_id=176422580]
+
+[node name="PlayerBody" type="CharacterBody2D" parent="." unique_id=1800572126 node_paths=PackedStringArray("Gun", "BodySprite") groups=["navAgent"]]
 z_index = 10
 disable_mode = 2
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_rpqav")
+Gun = NodePath("Gun")
+BodySprite = NodePath("PlayerSprite")
 
-[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=398942296]
+[node name="PlayerSprite" type="Sprite2D" parent="PlayerBody" unique_id=398942296]
 texture = ExtResource("2_gntrk")
 
-[node name="Gun" type="Node2D" parent="." unique_id=1331938409 node_paths=PackedStringArray("GunSprite")]
+[node name="Gun" type="Node2D" parent="PlayerBody" unique_id=1331938409 node_paths=PackedStringArray("GunSprite")]
 position = Vector2(0, -1)
-script = ExtResource("2_kyqiw")
+script = ExtResource("3_gntrk")
 GunSprite = NodePath("GunSprite")
+BulletScene = ExtResource("4_dewec")
 
-[node name="GunSprite" type="Sprite2D" parent="Gun" unique_id=1382153982]
+[node name="GunSprite" type="Sprite2D" parent="PlayerBody/Gun" unique_id=1382153982]
+texture = ExtResource("2_gntrk")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1077600568]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="PlayerBody" unique_id=1077600568]
 
-[node name="PlayerCollider" type="CollisionPolygon2D" parent="." unique_id=880682012]
+[node name="PlayerCollider" type="CollisionShape2D" parent="PlayerBody" unique_id=227589741]
 position = Vector2(-18.78007, 9.044515)
 scale = Vector2(2.443083, 1.6648859)
-polygon = PackedVector2Array(11.496155, 37.663544, 35.420166, 33.585114, 37.41382, -11.277649, 31.4328, -44.924698, -16.4151, -40.846268, -20.402466, -6.179596, -15.418274, 35.62433)
+shape = SubResource("CapsuleShape2D_ojl55")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1544285134]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1168957605]
+shape = SubResource("CapsuleShape2D_dgcv6")

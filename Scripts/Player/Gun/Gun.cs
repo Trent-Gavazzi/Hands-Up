@@ -12,6 +12,7 @@ public partial class Gun : Node2D
 {
     [ExportGroup("Nodes")]
     [Export] public Sprite2D GunSprite;
+    [Export] public PackedScene BulletScene { get; set; }
 
     [ExportGroup("Holstered")]
     // Position relative to the player when facing right; mirrored automatically when facing left
@@ -22,6 +23,8 @@ public partial class Gun : Node2D
     // Point on the player the gun orbits around (e.g. the shoulder)
     [Export] public Vector2 ShoulderOffset = new(0f, -4f);
     [Export] public float AimRadius = 12f;
+
+    [Export] public float MuzzleDistance = 10f;
 
     [Signal] public delegate void StateChangedEventHandler(gunState previous, gunState next);
 
@@ -64,6 +67,10 @@ public partial class Gun : Node2D
                 Vector2 aim = GetAimDirection();
                 Position = ShoulderOffset + aim * AimRadius;
                 Rotation = aim.Angle();
+                if (Input.IsActionJustPressed("shoot"))
+                {
+                    shoot();
+                }
                 break;
         }
 
@@ -91,5 +98,19 @@ public partial class Gun : Node2D
         gunState previous = CurrentState;
         CurrentState = next;
         EmitSignal(SignalName.StateChanged, Variant.From(previous), Variant.From(next));
+    }
+
+    public void shoot()
+    {
+        Vector2 aim = GetAimDirection();
+
+        Bullet bulletInstance = BulletScene.Instantiate<Bullet>();
+        bulletInstance.init(aim, _player);
+
+        bulletInstance.Position = HolsterOffset;
+        GetTree().CurrentScene.AddChild(bulletInstance);
+        bulletInstance.GlobalPosition = GlobalPosition + aim * MuzzleDistance;
+
+        GD.Print("Created and fired bullet");
     }
 }

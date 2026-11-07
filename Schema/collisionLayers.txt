@@ -1,0 +1,10 @@
+Layer 1:
+	Enity and player collisions in Saloon
+
+Layer 2:
+	NPC collisions with found chairs
+
+Layer 3:
+	Saloon Wall Layers (exterior wall for bullets that are fired)
+Layer 5:
+	Bullet Collisions

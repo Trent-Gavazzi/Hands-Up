@@ -2,18 +2,19 @@
 
 [ext_resource type="PackedScene" uid="uid://dmaf8x2drmsx7" path="res://Scenes/Player.tscn" id="1_rfbf8"]
 [ext_resource type="PackedScene" uid="uid://btimgqfud7uvk" path="res://Scenes/Chair.tscn" id="2_rs0cq"]
+[ext_resource type="PackedScene" uid="uid://cyrd2yd15fg5v" path="res://Scenes/Customer.tscn" id="3_wa1r4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rs0cq"]
-vertices = PackedVector2Array(1130.0313, 498.89844, 8.5390625, 488.10156, 33.492188, 22.773438, 570.2422, 10, 1131.9609, 10)
+vertices = PackedVector2Array(1130.0313, 498.89844, 8, 488.09375, 8, 14.90625, 570.09375, 10, 1131.9609, 10)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(24, 13, 570, 0, 1142, 0, 1140, 509, -2, 498)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-2, 5, 570, 0, 1142, 0, 1140, 509, -2, 498)])
 
 [node name="Saloon" type="Node2D" unique_id=2031524267]
 
 [node name="Player" parent="." unique_id=1800572126 instance=ExtResource("1_rfbf8")]
 position = Vector2(564, 252)
 
-[node name="PlayerCollider" parent="Player" index="3" unique_id=880682012]
+[node name="PlayerCollider" parent="Player/PlayerBody" parent_id_path=PackedInt32Array(1800572126, 1800572126) index="3" unique_id=227589741]
 light_mask = 0
 visibility_layer = 0
 scale = Vector2(2.4183478, 1.6648859)
@@ -27,6 +28,11 @@ position = Vector2(745, 179)
 position = Vector2(555, 18)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1893911941]
+position = Vector2(-8, -7)
 navigation_polygon = SubResource("NavigationPolygon_rs0cq")
+
+[node name="Customer" parent="." unique_id=1371934740 node_paths=PackedStringArray("targetChair") instance=ExtResource("3_wa1r4")]
+position = Vector2(559, 96)
+targetChair = NodePath("../Chairs/Chair")
 
 [editable path="Player"]
