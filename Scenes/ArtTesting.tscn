@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://68nxxv2tnfah" path="res://Sprites/BackgroundArt/BackWall/SaloonWallOutlined.png" id="1_8rhag"]
 [ext_resource type="Texture2D" uid="uid://c5mb04kh40wtp" path="res://Sprites/BackgroundArt/BackWall/SaloonWallNormal.png" id="2_ucxhr"]
 [ext_resource type="Texture2D" uid="uid://c6b75wrd67v2y" path="res://icon.svg" id="3_ucxhr"]
-[ext_resource type="Texture2D" uid="uid://5fxnmv54hjgt" path="res://Sprites/BackgroundArt/Floor/SaloonFloorDiffuse.png" id="4_lk8je"]
+[ext_resource type="Texture2D" uid="uid://bkywoh27aqn54" path="res://Sprites/BackgroundArt/Floor/SaloonFloorOutlinedDiffuse.png" id="4_mrqir"]
 [ext_resource type="Texture2D" uid="uid://ifpkfjxbsmx4" path="res://Sprites/BackgroundArt/Floor/SaloonFloorNormal.png" id="5_mrqir"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j3rb5"]
@@ -11,7 +11,7 @@ diffuse_texture = ExtResource("1_8rhag")
 normal_texture = ExtResource("2_ucxhr")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_mrqir"]
-diffuse_texture = ExtResource("4_lk8je")
+diffuse_texture = ExtResource("4_mrqir")
 normal_texture = ExtResource("5_mrqir")
 
 [node name="ArtTesting" type="Node2D" unique_id=1642862765]
@@ -46,11 +46,13 @@ scale = Vector2(0.69, 0.69)
 texture = SubResource("CanvasTexture_j3rb5")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=74057527]
+visible = false
 scale = Vector2(15.439999, 8.720001)
 texture = ExtResource("3_ucxhr")
 height = 504.0
 
 [node name="SaloonFloorDiffuse" type="Sprite2D" parent="." unique_id=389113686]
+modulate = Color(0.69992745, 0.61872655, 0.633243, 1)
 z_index = -5
 position = Vector2(-7, 157.00002)
 scale = Vector2(0.725, 0.725)
