@@ -2,16 +2,56 @@
 
 [ext_resource type="Texture2D" uid="uid://68nxxv2tnfah" path="res://Sprites/BackgroundArt/BackWall/SaloonWallOutlined.png" id="1_8rhag"]
 [ext_resource type="Texture2D" uid="uid://c5mb04kh40wtp" path="res://Sprites/BackgroundArt/BackWall/SaloonWallNormal.png" id="2_ucxhr"]
+[ext_resource type="Texture2D" uid="uid://c6b75wrd67v2y" path="res://icon.svg" id="3_ucxhr"]
+[ext_resource type="Texture2D" uid="uid://5fxnmv54hjgt" path="res://Sprites/BackgroundArt/Floor/SaloonFloorDiffuse.png" id="4_lk8je"]
+[ext_resource type="Texture2D" uid="uid://ifpkfjxbsmx4" path="res://Sprites/BackgroundArt/Floor/SaloonFloorNormal.png" id="5_mrqir"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j3rb5"]
 diffuse_texture = ExtResource("1_8rhag")
 normal_texture = ExtResource("2_ucxhr")
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_mrqir"]
+diffuse_texture = ExtResource("4_lk8je")
+normal_texture = ExtResource("5_mrqir")
+
 [node name="ArtTesting" type="Node2D" unique_id=1642862765]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1667972893]
 
-[node name="SaloonWall" type="Sprite2D" parent="." unique_id=2400334]
+[node name="SaloonBackWall" type="Sprite2D" parent="." unique_id=2400334]
 position = Vector2(-27, -256)
+scale = Vector2(0.63, 0.63)
+texture = SubResource("CanvasTexture_j3rb5")
+
+[node name="SaloonBounds" type="Node2D" parent="." unique_id=1833261147]
+
+[node name="SaloonBottomBound" type="Sprite2D" parent="SaloonBounds" unique_id=1057550241]
+modulate = Color(0.5529556, 0.55295557, 0.55295557, 1)
+position = Vector2(-27, 388)
 scale = Vector2(0.69, 0.69)
 texture = SubResource("CanvasTexture_j3rb5")
+
+[node name="SaloonLeftBound" type="Sprite2D" parent="SaloonBounds" unique_id=1180119016]
+modulate = Color(0.6255971, 0.6255971, 0.62559694, 1)
+position = Vector2(-641, 158)
+rotation = 1.5707964
+scale = Vector2(0.69, 0.69)
+texture = SubResource("CanvasTexture_j3rb5")
+
+[node name="SaloonRightBound" type="Sprite2D" parent="SaloonBounds" unique_id=74239455]
+modulate = Color(0.627451, 0.627451, 0.627451, 1)
+position = Vector2(641, 158)
+rotation = -1.5707964
+scale = Vector2(0.69, 0.69)
+texture = SubResource("CanvasTexture_j3rb5")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=74057527]
+scale = Vector2(15.439999, 8.720001)
+texture = ExtResource("3_ucxhr")
+height = 504.0
+
+[node name="SaloonFloorDiffuse" type="Sprite2D" parent="." unique_id=389113686]
+z_index = -5
+position = Vector2(-7, 157.00002)
+scale = Vector2(0.725, 0.725)
+texture = SubResource("CanvasTexture_mrqir")
