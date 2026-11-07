@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bpjvakpqiygki"]
 
-[ext_resource type="Texture2D" uid="uid://cv31ku8j1ca16" path="res://Sprites/BackgroundArt/BackWall/SaloonWall.png" id="1_8sg38"]
+[ext_resource type="Texture2D" uid="uid://68nxxv2tnfah" path="res://Sprites/BackgroundArt/BackWall/SaloonWallOutlined.png" id="1_8rhag"]
 [ext_resource type="Texture2D" uid="uid://c5mb04kh40wtp" path="res://Sprites/BackgroundArt/BackWall/SaloonWallNormal.png" id="2_ucxhr"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_8rhag"]
-diffuse_texture = ExtResource("1_8sg38")
+[sub_resource type="CanvasTexture" id="CanvasTexture_j3rb5"]
+diffuse_texture = ExtResource("1_8rhag")
 normal_texture = ExtResource("2_ucxhr")
 
 [node name="ArtTesting" type="Node2D" unique_id=1642862765]
@@ -14,4 +14,4 @@ normal_texture = ExtResource("2_ucxhr")
 [node name="SaloonWall" type="Sprite2D" parent="." unique_id=2400334]
 position = Vector2(-27, -256)
 scale = Vector2(0.69, 0.69)
-texture = SubResource("CanvasTexture_8rhag")
+texture = SubResource("CanvasTexture_j3rb5")
