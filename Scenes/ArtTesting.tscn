@@ -9,6 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://bvw8j03igwb52" path="res://Sprites/Furniture/Tables/Table1Outline.png" id="7_3bog8"]
 [ext_resource type="Texture2D" uid="uid://cyguywpx3dma8" path="res://Sprites/Furniture/Tables/TableNormal.png" id="8_id5vj"]
 [ext_resource type="Texture2D" uid="uid://ynk4lpiwt6q" path="res://Sprites/Furniture/Tables/Table2Outline.png" id="9_id5vj"]
+[ext_resource type="Texture2D" uid="uid://cp4j16d7x3ydo" path="res://Sprites/Furniture/Tables/Table1.png" id="9_mwkde"]
+[ext_resource type="Texture2D" uid="uid://c7m27rwmch6n5" path="res://Sprites/Furniture/Chair/StoolOutline.png" id="10_1p0ck"]
+[ext_resource type="Texture2D" uid="uid://cntpa0lqrrbrw" path="res://Sprites/Furniture/Chair/StoolNormal.png" id="11_f6hfk"]
+[ext_resource type="Texture2D" uid="uid://fcdurpq87q1" path="res://Sprites/BackgroundArt/Decor/Rugs/Rug1.png" id="12_f6hfk"]
+[ext_resource type="Texture2D" uid="uid://tq2pmtdq0ko7" path="res://Sprites/BackgroundArt/Decor/Paintings/Paintings/Coyboy.png" id="13_k5a3a"]
+[ext_resource type="Texture2D" uid="uid://dhf1yr4v7o72k" path="res://Sprites/BackgroundArt/Decor/Paintings/Paintings/Landscape.png" id="14_83cbv"]
+[ext_resource type="SpriteFrames" uid="uid://cgxjdya4txh1e" path="res://Sprites/BackgroundArt/Decor/Candle/CandleFrames.tres" id="16_mwkde"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j3rb5"]
 diffuse_texture = ExtResource("1_8rhag")
@@ -18,14 +25,18 @@ normal_texture = ExtResource("2_ucxhr")
 diffuse_texture = ExtResource("4_mrqir")
 normal_texture = ExtResource("5_mrqir")
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_gxody"]
-diffuse_texture = ExtResource("7_3bog8")
-normal_texture = ExtResource("8_id5vj")
+[sub_resource type="CanvasTexture" id="CanvasTexture_5yfkb"]
+diffuse_texture = ExtResource("10_1p0ck")
+normal_texture = ExtResource("11_f6hfk")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hjaso"]
 polygon = PackedVector2Array(1.7857056, -128.57144, 48.214294, -121.428566, 96.42856, -105.35714, 126.785706, -83.928566, 151.7857, -55.357147, 162.5, -19.64286, 155.35712, 14.285713, 137.5, 44.642853, 98.214264, 75, 55.357117, 91.07143, -1.7857056, 96.428566, -53.57141, 94.64285, -91.07141, 75, -130.35718, 49.999996, -157.14288, 14.285713, -158.92859, -28.571434, -144.64288, -66.071434, -117.85718, -91.071434, -80.35718, -112.50001, -41.07141, -123.21429)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_3bog8"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_hjaso"]
+diffuse_texture = ExtResource("7_3bog8")
+normal_texture = ExtResource("8_id5vj")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_mwkde"]
 diffuse_texture = ExtResource("9_id5vj")
 normal_texture = ExtResource("8_id5vj")
 
@@ -74,38 +85,269 @@ texture = SubResource("CanvasTexture_mrqir")
 [node name="SunEffect" type="Node2D" parent="." unique_id=1175852095]
 
 [node name="ConeSunlight" type="PointLight2D" parent="SunEffect" unique_id=74057527]
-position = Vector2(-30, -255)
-scale = Vector2(2.7879999, 1.6120003)
+position = Vector2(-18, -250)
+scale = Vector2(0.7479999, 1.6120003)
 color = Color(0.8506182, 0.6228676, 0.0728878, 1)
 range_item_cull_mask = 3
 shadow_enabled = true
 texture = ExtResource("3_mrqir")
 height = 145.0
 
+[node name="ConeSunlight2" type="PointLight2D" parent="SunEffect" unique_id=1921407099]
+position = Vector2(-16.000002, -258)
+scale = Vector2(3.3479998, 1.8920003)
+color = Color(0.8506182, 0.6228676, 0.0728878, 1)
+energy = 0.3
+range_item_cull_mask = 3
+shadow_enabled = true
+texture = ExtResource("3_mrqir")
+height = 145.0
+
 [node name="PointSunlight" type="PointLight2D" parent="SunEffect" unique_id=69047601]
-position = Vector2(-1.9073486e-06, -415)
+position = Vector2(-24, -353)
 scale = Vector2(3.152, 1.6120003)
 color = Color(0.9165839, 0.8532558, 0, 1)
+energy = 0.5
 range_item_cull_mask = 3
 texture = ExtResource("4_u3lyv")
 height = 450.0
 
-[node name="Table1Outline" type="Sprite2D" parent="." unique_id=823797416]
+[node name="TableHolder" type="Node2D" parent="." unique_id=804318840]
 light_mask = 7
 visibility_layer = 3
-position = Vector2(-316.6, -17.400002)
+z_index = 200
+position = Vector2(-395, 215)
 scale = Vector2(0.56, 0.56)
-texture = SubResource("CanvasTexture_gxody")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Table1Outline" unique_id=790808518]
+[node name="Candle" type="AnimatedSprite2D" parent="TableHolder" unique_id=1516842772]
+z_index = 10
+position = Vector2(1.0714722, -51.071423)
+scale = Vector2(0.3125, 0.3125)
+sprite_frames = ExtResource("16_mwkde")
+autoplay = "default"
+frame_progress = 0.69472134
+
+[node name="PointLight2D" type="PointLight2D" parent="TableHolder/Candle" unique_id=1201735756]
+color = Color(1, 0.34509805, 0, 1)
+energy = 2.0
+range_item_cull_mask = 6
+texture = ExtResource("4_u3lyv")
+texture_scale = 2.75
+height = 81.0
+
+[node name="Sprite2D" type="Sprite2D" parent="TableHolder/Candle" unique_id=1254052577]
+modulate = Color(0.8666667, 0.41568628, 0, 0.3254902)
+position = Vector2(-5.7142854, -45.714283)
+texture = ExtResource("4_u3lyv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="TableHolder/Candle" unique_id=2117436611]
+modulate = Color(0.8666667, 0.41568628, 0, 0.19215687)
+position = Vector2(-5.7142854, -45.714283)
+scale = Vector2(2.21, 2.21)
+texture = ExtResource("4_u3lyv")
+
+[node name="StoolOutline" type="Sprite2D" parent="TableHolder" unique_id=1414985526]
+z_index = -5
+position = Vector2(-213.21426, 9.642859)
+scale = Vector2(0.45535713, 0.45535713)
+texture = SubResource("CanvasTexture_5yfkb")
+
+[node name="StoolShadow" type="Sprite2D" parent="TableHolder/StoolOutline" unique_id=1108150483]
+modulate = Color(0, 0, 0, 0.15294118)
+z_index = -390
+z_as_relative = false
+position = Vector2(0.00011730194, 70.58824)
+scale = Vector2(0.42358732, 0.4285222)
+texture = ExtResource("9_mwkde")
+
+[node name="StoolOutline2" type="Sprite2D" parent="TableHolder" unique_id=50922635]
+z_index = -5
+position = Vector2(-0.71424866, -142.14287)
+scale = Vector2(0.45535713, 0.45535713)
+texture = SubResource("CanvasTexture_5yfkb")
+
+[node name="StoolShadow" type="Sprite2D" parent="TableHolder/StoolOutline2" unique_id=132909117]
+modulate = Color(0, 0, 0, 0.15294118)
+z_index = -390
+z_as_relative = false
+position = Vector2(0.00011730194, 70.58824)
+scale = Vector2(0.42358732, 0.4285222)
+texture = ExtResource("9_mwkde")
+
+[node name="StoolOutline3" type="Sprite2D" parent="TableHolder" unique_id=1083251539]
+z_index = -5
+position = Vector2(210.00005, 6.0714417)
+scale = Vector2(0.45535713, 0.45535713)
+texture = SubResource("CanvasTexture_5yfkb")
+
+[node name="StoolShadow" type="Sprite2D" parent="TableHolder/StoolOutline3" unique_id=651833689]
+modulate = Color(0, 0, 0, 0.15294118)
+z_index = -390
+z_as_relative = false
+position = Vector2(0.00011730194, 70.58824)
+scale = Vector2(0.42358732, 0.4285222)
+texture = ExtResource("9_mwkde")
+
+[node name="StoolOutlineOver" type="Sprite2D" parent="TableHolder" unique_id=324700737]
+z_index = 5
+position = Vector2(-4.285736, 147.14287)
+scale = Vector2(0.45535713, 0.45535713)
+texture = SubResource("CanvasTexture_5yfkb")
+
+[node name="StoolShadow" type="Sprite2D" parent="TableHolder/StoolOutlineOver" unique_id=1522949315]
+modulate = Color(0, 0, 0, 0.15294118)
+z_index = -390
+z_as_relative = false
+position = Vector2(0.00011730194, 70.58824)
+scale = Vector2(0.42358732, 0.4285222)
+texture = ExtResource("9_mwkde")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="TableHolder" unique_id=790808518]
 occluder = SubResource("OccluderPolygon2D_hjaso")
 
-[node name="Table2Outline" type="Sprite2D" parent="." unique_id=768334649]
+[node name="Sprite2D" type="Sprite2D" parent="TableHolder" unique_id=2043962966]
+modulate = Color(0, 0, 0, 0.39215687)
+z_index = -390
+z_as_relative = false
+position = Vector2(-2.499989, 15.000002)
+texture = ExtResource("9_mwkde")
+
+[node name="TableSprite" type="Sprite2D" parent="TableHolder" unique_id=1305965853]
+modulate = Color(0.47397572, 0.47397572, 0.47397572, 1)
+texture = SubResource("CanvasTexture_hjaso")
+
+[node name="TableHolder2" type="Node2D" parent="." unique_id=2146794612]
 light_mask = 7
 visibility_layer = 3
-position = Vector2(300.4, -17.400002)
+z_index = 200
+position = Vector2(415, 96)
 scale = Vector2(0.56, 0.56)
-texture = SubResource("CanvasTexture_3bog8")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Table2Outline" unique_id=631837228]
+[node name="Candle" type="AnimatedSprite2D" parent="TableHolder2" unique_id=935568641]
+z_index = 10
+position = Vector2(1.0714722, -51.071423)
+scale = Vector2(0.3125, 0.3125)
+sprite_frames = ExtResource("16_mwkde")
+autoplay = "default"
+frame_progress = 0.9216506
+
+[node name="PointLight2D" type="PointLight2D" parent="TableHolder2/Candle" unique_id=1420486191]
+color = Color(1, 0.34509805, 0, 1)
+energy = 2.0
+range_item_cull_mask = 6
+texture = ExtResource("4_u3lyv")
+texture_scale = 2.75
+height = 81.0
+
+[node name="Sprite2D" type="Sprite2D" parent="TableHolder2/Candle" unique_id=1940347661]
+modulate = Color(0.8666667, 0.41568628, 0, 0.3254902)
+position = Vector2(-5.7142854, -45.714283)
+texture = ExtResource("4_u3lyv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="TableHolder2/Candle" unique_id=1314860369]
+modulate = Color(0.8666667, 0.41568628, 0, 0.19215687)
+position = Vector2(-5.7142854, -45.714283)
+scale = Vector2(2.21, 2.21)
+texture = ExtResource("4_u3lyv")
+
+[node name="StoolOutline" type="Sprite2D" parent="TableHolder2" unique_id=680647474]
+z_index = -5
+position = Vector2(-213.21426, 9.642859)
+scale = Vector2(0.45535713, 0.45535713)
+texture = SubResource("CanvasTexture_5yfkb")
+
+[node name="StoolShadow" type="Sprite2D" parent="TableHolder2/StoolOutline" unique_id=1493567024]
+modulate = Color(0, 0, 0, 0.15294118)
+z_index = -390
+z_as_relative = false
+position = Vector2(0.00011730194, 70.58824)
+scale = Vector2(0.42358732, 0.4285222)
+texture = ExtResource("9_mwkde")
+
+[node name="StoolOutline2" type="Sprite2D" parent="TableHolder2" unique_id=432671883]
+z_index = -5
+position = Vector2(-0.71424866, -142.14287)
+scale = Vector2(0.45535713, 0.45535713)
+texture = SubResource("CanvasTexture_5yfkb")
+
+[node name="StoolShadow" type="Sprite2D" parent="TableHolder2/StoolOutline2" unique_id=1254532679]
+modulate = Color(0, 0, 0, 0.15294118)
+z_index = -390
+z_as_relative = false
+position = Vector2(0.00011730194, 70.58824)
+scale = Vector2(0.42358732, 0.4285222)
+texture = ExtResource("9_mwkde")
+
+[node name="StoolOutline3" type="Sprite2D" parent="TableHolder2" unique_id=830997601]
+z_index = -5
+position = Vector2(210.00005, 6.0714417)
+scale = Vector2(0.45535713, 0.45535713)
+texture = SubResource("CanvasTexture_5yfkb")
+
+[node name="StoolShadow" type="Sprite2D" parent="TableHolder2/StoolOutline3" unique_id=922208853]
+modulate = Color(0, 0, 0, 0.15294118)
+z_index = -390
+z_as_relative = false
+position = Vector2(0.00011730194, 70.58824)
+scale = Vector2(0.42358732, 0.4285222)
+texture = ExtResource("9_mwkde")
+
+[node name="StoolOutlineOver" type="Sprite2D" parent="TableHolder2" unique_id=1710293313]
+z_index = 5
+position = Vector2(-4.285736, 147.14287)
+scale = Vector2(0.45535713, 0.45535713)
+texture = SubResource("CanvasTexture_5yfkb")
+
+[node name="StoolShadow" type="Sprite2D" parent="TableHolder2/StoolOutlineOver" unique_id=846916536]
+modulate = Color(0, 0, 0, 0.15294118)
+z_index = -390
+z_as_relative = false
+position = Vector2(0.00011730194, 70.58824)
+scale = Vector2(0.42358732, 0.4285222)
+texture = ExtResource("9_mwkde")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="TableHolder2" unique_id=1093769364]
 occluder = SubResource("OccluderPolygon2D_hjaso")
+
+[node name="Sprite2D" type="Sprite2D" parent="TableHolder2" unique_id=1213944159]
+modulate = Color(0, 0, 0, 0.39215687)
+z_index = -390
+z_as_relative = false
+position = Vector2(-2.499989, 15.000002)
+texture = ExtResource("9_mwkde")
+
+[node name="TableSprite" type="Sprite2D" parent="TableHolder2" unique_id=773517727]
+modulate = Color(0.47397572, 0.47397572, 0.47397572, 1)
+texture = SubResource("CanvasTexture_mwkde")
+
+[node name="Decor" type="Node2D" parent="." unique_id=57882654]
+
+[node name="Rug2" type="Sprite2D" parent="Decor" unique_id=1214182718]
+modulate = Color(0.9091661, 0.682279, 0.64813995, 1)
+z_index = -490
+position = Vector2(-395, 224.99998)
+rotation = -4.7486086
+scale = Vector2(0.261, 0.385)
+texture = ExtResource("12_f6hfk")
+
+[node name="Rug3" type="Sprite2D" parent="Decor" unique_id=1125941221]
+modulate = Color(0.87828046, 0.8863126, 0.7580773, 1)
+z_index = -490
+position = Vector2(415.00003, 112)
+rotation = -4.6863203
+scale = Vector2(0.272, 0.402)
+texture = ExtResource("12_f6hfk")
+
+[node name="Coyboy" type="Sprite2D" parent="Decor" unique_id=366073926]
+modulate = Color(0.70796657, 0.7079665, 0.7079665, 1)
+z_index = -350
+position = Vector2(-505.99997, -236)
+scale = Vector2(0.415, 0.415)
+texture = ExtResource("13_k5a3a")
+
+[node name="Landscape" type="Sprite2D" parent="Decor" unique_id=1640922104]
+z_index = -350
+position = Vector2(505.99997, -245)
+rotation = -1.5885348
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("14_83cbv")
