@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://bkywoh27aqn54" path="res://Sprites/BackgroundArt/Floor/SaloonFloorOutlinedDiffuse.png" id="4_mrqir"]
 [ext_resource type="Texture2D" uid="uid://n6556xqv3hes" path="res://Sprites/BackgroundArt/Lighting/Radial.png" id="4_u3lyv"]
 [ext_resource type="Texture2D" uid="uid://ifpkfjxbsmx4" path="res://Sprites/BackgroundArt/Floor/SaloonFloorNormal.png" id="5_mrqir"]
+[ext_resource type="Texture2D" uid="uid://bvw8j03igwb52" path="res://Sprites/Furniture/Tables/Table1Outline.png" id="7_3bog8"]
+[ext_resource type="Texture2D" uid="uid://cyguywpx3dma8" path="res://Sprites/Furniture/Tables/TableNormal.png" id="8_id5vj"]
+[ext_resource type="Texture2D" uid="uid://ynk4lpiwt6q" path="res://Sprites/Furniture/Tables/Table2Outline.png" id="9_id5vj"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j3rb5"]
 diffuse_texture = ExtResource("1_8rhag")
@@ -14,6 +17,17 @@ normal_texture = ExtResource("2_ucxhr")
 [sub_resource type="CanvasTexture" id="CanvasTexture_mrqir"]
 diffuse_texture = ExtResource("4_mrqir")
 normal_texture = ExtResource("5_mrqir")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_gxody"]
+diffuse_texture = ExtResource("7_3bog8")
+normal_texture = ExtResource("8_id5vj")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hjaso"]
+polygon = PackedVector2Array(1.7857056, -128.57144, 48.214294, -121.428566, 96.42856, -105.35714, 126.785706, -83.928566, 151.7857, -55.357147, 162.5, -19.64286, 155.35712, 14.285713, 137.5, 44.642853, 98.214264, 75, 55.357117, 91.07143, -1.7857056, 96.428566, -53.57141, 94.64285, -91.07141, 75, -130.35718, 49.999996, -157.14288, 14.285713, -158.92859, -28.571434, -144.64288, -66.071434, -117.85718, -91.071434, -80.35718, -112.50001, -41.07141, -123.21429)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3bog8"]
+diffuse_texture = ExtResource("9_id5vj")
+normal_texture = ExtResource("8_id5vj")
 
 [node name="ArtTesting" type="Node2D" unique_id=1642862765]
 
@@ -63,6 +77,8 @@ texture = SubResource("CanvasTexture_mrqir")
 position = Vector2(-30, -255)
 scale = Vector2(2.7879999, 1.6120003)
 color = Color(0.8506182, 0.6228676, 0.0728878, 1)
+range_item_cull_mask = 3
+shadow_enabled = true
 texture = ExtResource("3_mrqir")
 height = 145.0
 
@@ -70,5 +86,26 @@ height = 145.0
 position = Vector2(-1.9073486e-06, -415)
 scale = Vector2(3.152, 1.6120003)
 color = Color(0.9165839, 0.8532558, 0, 1)
+range_item_cull_mask = 3
 texture = ExtResource("4_u3lyv")
 height = 450.0
+
+[node name="Table1Outline" type="Sprite2D" parent="." unique_id=823797416]
+light_mask = 7
+visibility_layer = 3
+position = Vector2(-316.6, -17.400002)
+scale = Vector2(0.56, 0.56)
+texture = SubResource("CanvasTexture_gxody")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Table1Outline" unique_id=790808518]
+occluder = SubResource("OccluderPolygon2D_hjaso")
+
+[node name="Table2Outline" type="Sprite2D" parent="." unique_id=768334649]
+light_mask = 7
+visibility_layer = 3
+position = Vector2(300.4, -17.400002)
+scale = Vector2(0.56, 0.56)
+texture = SubResource("CanvasTexture_3bog8")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Table2Outline" unique_id=631837228]
+occluder = SubResource("OccluderPolygon2D_hjaso")
