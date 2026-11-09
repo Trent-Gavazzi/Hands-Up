@@ -45,6 +45,17 @@ normal_texture = ExtResource("8_id5vj")
 diffuse_texture = ExtResource("9_id5vj")
 normal_texture = ExtResource("8_id5vj")
 
+[sub_resource type="Environment" id="Environment_4gyey"]
+background_mode = 3
+tonemap_mode = 2
+glow_enabled = true
+glow_normalized = true
+glow_bloom = 0.3
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.1
+adjustment_saturation = 1.1
+
 [node name="ArtTesting" type="Node2D" unique_id=1642862765]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1667972893]
@@ -121,7 +132,7 @@ height = 450.0
 light_mask = 7
 visibility_layer = 3
 z_index = 200
-position = Vector2(-395, 215)
+position = Vector2(-9, 206)
 scale = Vector2(0.56, 0.56)
 
 [node name="Candle" type="AnimatedSprite2D" parent="TableHolder" unique_id=1516842772]
@@ -141,12 +152,12 @@ texture_scale = 2.75
 height = 81.0
 
 [node name="Sprite2D" type="Sprite2D" parent="TableHolder/Candle" unique_id=1254052577]
-modulate = Color(0.8666667, 0.41568628, 0, 0.3254902)
+modulate = Color(0.8666667, 0.41568628, 0, 0.08235294)
 position = Vector2(-5.7142854, -45.714283)
 texture = ExtResource("4_u3lyv")
 
 [node name="Sprite2D2" type="Sprite2D" parent="TableHolder/Candle" unique_id=2117436611]
-modulate = Color(0.8666667, 0.41568628, 0, 0.19215687)
+modulate = Color(0.8666667, 0.41568628, 0, 0.08235294)
 position = Vector2(-5.7142854, -45.714283)
 scale = Vector2(2.21, 2.21)
 texture = ExtResource("4_u3lyv")
@@ -221,6 +232,14 @@ texture = ExtResource("9_mwkde")
 modulate = Color(0.47397572, 0.47397572, 0.47397572, 1)
 texture = SubResource("CanvasTexture_hjaso")
 
+[node name="Rug2" type="Sprite2D" parent="TableHolder" unique_id=1214182718]
+modulate = Color(0.9091661, 0.682279, 0.64813995, 1)
+z_index = -490
+position = Vector2(0, 17.857117)
+rotation = 1.5345768
+scale = Vector2(0.46607143, 0.6875)
+texture = ExtResource("12_f6hfk")
+
 [node name="TableHolder2" type="Node2D" parent="." unique_id=2006996095]
 light_mask = 7
 visibility_layer = 3
@@ -245,12 +264,12 @@ texture_scale = 2.75
 height = 81.0
 
 [node name="Sprite2D" type="Sprite2D" parent="TableHolder2/Candle" unique_id=996793131]
-modulate = Color(0.8666667, 0.41568628, 0, 0.3254902)
+modulate = Color(0.8666667, 0.41568628, 0, 0.08235294)
 position = Vector2(-5.7142854, -45.714283)
 texture = ExtResource("4_u3lyv")
 
 [node name="Sprite2D2" type="Sprite2D" parent="TableHolder2/Candle" unique_id=2070147616]
-modulate = Color(0.8666667, 0.41568628, 0, 0.19215687)
+modulate = Color(0.8666667, 0.41568628, 0, 0.08235294)
 position = Vector2(-5.7142854, -45.714283)
 scale = Vector2(2.21, 2.21)
 texture = ExtResource("4_u3lyv")
@@ -325,6 +344,14 @@ texture = ExtResource("9_mwkde")
 modulate = Color(0.47397572, 0.47397572, 0.47397572, 1)
 texture = SubResource("CanvasTexture_lpyuc")
 
+[node name="Rug3" type="Sprite2D" parent="TableHolder2" unique_id=1125941221]
+modulate = Color(0.87828046, 0.8863126, 0.7580773, 1)
+z_index = -490
+position = Vector2(6.1035156e-05, 14.285721)
+rotation = 1.596865
+scale = Vector2(0.48571432, 0.7178572)
+texture = ExtResource("12_f6hfk")
+
 [node name="Decor" type="Node2D" parent="." unique_id=57882654]
 
 [node name="PottedPlant1" type="Sprite2D" parent="Decor" unique_id=930082906]
@@ -354,22 +381,6 @@ z_as_relative = false
 position = Vector2(17.241364, 272.41388)
 scale = Vector2(0.322, 0.258)
 texture = ExtResource("9_mwkde")
-
-[node name="Rug2" type="Sprite2D" parent="Decor" unique_id=1214182718]
-modulate = Color(0.9091661, 0.682279, 0.64813995, 1)
-z_index = -490
-position = Vector2(-395, 224.99998)
-rotation = -4.7486086
-scale = Vector2(0.261, 0.385)
-texture = ExtResource("12_f6hfk")
-
-[node name="Rug3" type="Sprite2D" parent="Decor" unique_id=1125941221]
-modulate = Color(0.87828046, 0.8863126, 0.7580773, 1)
-z_index = -490
-position = Vector2(415.00003, 112)
-rotation = -4.6863203
-scale = Vector2(0.272, 0.402)
-texture = ExtResource("12_f6hfk")
 
 [node name="Coyboy" type="Sprite2D" parent="Decor" unique_id=366073926]
 modulate = Color(0.70796657, 0.7079665, 0.7079665, 1)
@@ -403,3 +414,6 @@ z_index = 250
 position = Vector2(133, -230)
 scale = Vector2(0.215, 0.215)
 texture = ExtResource("21_4n5rv")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1498683399]
+environment = SubResource("Environment_4gyey")
