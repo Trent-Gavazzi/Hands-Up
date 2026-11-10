@@ -3,25 +3,36 @@
 [ext_resource type="Script" uid="uid://cn7ueui0br4ef" path="res://Scripts/Npc/Customer.cs" id="1_o7g7w"]
 [ext_resource type="Texture2D" uid="uid://c6b75wrd67v2y" path="res://icon.svg" id="2_r206j"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_r206j"]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r206j"]
 
-[node name="Customer" type="Node2D" unique_id=1371934740 node_paths=PackedStringArray("hitbox", "sprite", "navAgent") groups=["navAgent"]]
+[node name="Customer" type="CharacterBody2D" unique_id=1912752529 node_paths=PackedStringArray("hitbox", "navAgent") groups=["navAgent"]]
 z_index = 10
 script = ExtResource("1_o7g7w")
-hitbox = NodePath("Collider")
-sprite = NodePath("Sprite2D")
+hitbox = NodePath("HitBox")
 navAgent = NodePath("NavigationAgent2D")
 
-[node name="Collider" type="Area2D" parent="." unique_id=863958769]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1401653171]
+position = Vector2(0, -9.000001)
+scale = Vector2(0.145, 0.145)
+texture = ExtResource("2_r206j")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1618989754]
+path_desired_distance = 3.0
+target_desired_distance = 6.0
+path_postprocessing = 1
+debug_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1336249219]
+shape = SubResource("CircleShape2D_r206j")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=863958769]
+position = Vector2(0, -13.05)
+scale = Vector2(0.885, 0.885)
 collision_layer = 17
 collision_mask = 17
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collider" unique_id=589474660]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=589474660]
 z_index = 10
 shape = SubResource("CapsuleShape2D_r206j")
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1618989754]
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1401653171]
-scale = Vector2(0.325, 0.325)
-texture = ExtResource("2_r206j")

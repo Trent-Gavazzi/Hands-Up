@@ -52,6 +52,7 @@ public partial class Bullet : Node2D
         {
             return;
         }
+        GD.PushWarning($"Bullet entered {body}.");
         tryHit();
     }
 

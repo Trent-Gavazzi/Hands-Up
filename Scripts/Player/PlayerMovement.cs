@@ -93,7 +93,7 @@ public partial class PlayerMovement : CharacterBody2D
     {
         if (CurrentState == moveState.Rolling)
             FacingDirection = _rollDirection;
-        else if (Gun != null && Gun.IsDrawn)
+        else if (Gun != null && Gun.isDrawn())
             FacingDirection = Gun.GetAimDirection();
         else
             FacingDirection = MoveDirection;

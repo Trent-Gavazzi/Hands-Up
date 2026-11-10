@@ -11,25 +11,27 @@ public enum gunState
 public partial class Gun : Node2D
 {
     [ExportGroup("Nodes")]
-    [Export] public Sprite2D GunSprite;
-    [Export] public PackedScene BulletScene { get; set; }
+    [Export] private Sprite2D GunSprite;
+    [Export] private PackedScene BulletScene { get; set; }
 
     [ExportGroup("Holstered")]
     // Position relative to the player when facing right; mirrored automatically when facing left
-    [Export] public Vector2 HolsterOffset = new(8f, 4f);
-    [Export(PropertyHint.Range, "-180,180,1,radians_as_degrees")] public float HolsterRotation = Mathf.Pi / 2f; // pointing down
+    [Export] private Vector2 HolsterOffset = new(8f, 4f);
+    [Export(PropertyHint.Range, "-180,180,1,radians_as_degrees")] private float HolsterRotation = Mathf.Pi / 2f; // pointing down
 
     [ExportGroup("Drawn")]
     // Point on the player the gun orbits around (e.g. the shoulder)
-    [Export] public Vector2 ShoulderOffset = new(0f, -4f);
-    [Export] public float AimRadius = 12f;
+    [Export] private Vector2 ShoulderOffset = new(0f, -4f);
+    [Export] private float AimRadius = 12f;
+    [Export] private float MuzzleDistance = 10f;
+    // Attack speed
+    [Export] private ulong gunCooldownMsec = 250;
+    private ulong lastFireTime = 0;
 
-    [Export] public float MuzzleDistance = 10f;
-
-    [Signal] public delegate void StateChangedEventHandler(gunState previous, gunState next);
+    [Signal] private delegate void StateChangedEventHandler(gunState previous, gunState next);
 
     public gunState CurrentState { get; private set; } = gunState.Holstered;
-    public bool IsDrawn => CurrentState == gunState.Drawn;
+    private bool IsDrawn => CurrentState == gunState.Drawn;
 
     private PlayerMovement _player;
     private Vector2 _lastAim = Vector2.Right;
@@ -69,7 +71,7 @@ public partial class Gun : Node2D
                 Rotation = aim.Angle();
                 if (Input.IsActionJustPressed("shoot"))
                 {
-                    shoot();
+                   tryShoot();
                 }
                 break;
         }
@@ -100,7 +102,18 @@ public partial class Gun : Node2D
         EmitSignal(SignalName.StateChanged, Variant.From(previous), Variant.From(next));
     }
 
-    public void shoot()
+    private void tryShoot()
+    {
+        ulong currentTime = Time.GetTicksMsec();
+        
+        if(currentTime - lastFireTime >= gunCooldownMsec)
+        {
+            shoot();
+            lastFireTime = currentTime;
+        }
+    }
+
+    private void shoot()
     {
         Vector2 aim = GetAimDirection();
 
@@ -112,5 +125,10 @@ public partial class Gun : Node2D
         bulletInstance.GlobalPosition = GlobalPosition + aim * MuzzleDistance;
 
         GD.Print("Created and fired bullet");
+    }
+
+    public bool isDrawn()
+    {
+        return IsDrawn;
     }
 }

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://khwa7pitxa5v"]
+
+[node name="Door" type="Marker2D" unique_id=854244518 groups=["door"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1886079565]

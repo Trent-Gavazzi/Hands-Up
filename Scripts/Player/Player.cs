@@ -5,6 +5,7 @@ public partial class Player : Node2D
 {
 	[Export] private PlayerMovement player;
     [Export] private Area2D hurtBox;
+    [Export] private NavigationObstacle2D navObstacle;
     private const int maxHealth = 100;
 	private int health;
 
@@ -18,7 +19,12 @@ public partial class Player : Node2D
         hurtBox.AreaEntered += onHurtBoxAreaEntered;
     }
 
-	public void takeDamage(int amount)
+    public override void _PhysicsProcess(double delta)
+    {
+        navObstacle.Velocity = player.Velocity;
+    }
+
+    public void takeDamage(int amount)
 	{
 		if (health <= 0) return;
 

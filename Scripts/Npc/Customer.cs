@@ -1,42 +1,47 @@
 using Godot;
 using System;
+using System.Security.Cryptography.X509Certificates;
 
-public partial class Customer : Node2D
+public partial class Customer : CharacterBody2D
 {
-    // Used both to detect the chair and to get hit by bullets
+    // Gets hit by bullets
     [Export] private Area2D hitbox;
-    [Export] private Sprite2D sprite;
     [Export] private NavigationAgent2D navAgent;
     [Export] private Chair targetChair;
-    [Export] private float walkSpeed = 100f;
+    [Export] private float walkSpeed = 50f;
     protected bool isWanted = false;
     private bool isSeated = false;
     private bool isLeaving = false;
 
-    private const int maxHealth = 10;
+    private const int maxHealth = 100;
     private int health;
     private bool isDead = false;
 
     [Signal] public delegate void HealthChangedEventHandler(int current, int max);
     [Signal] public delegate void DiedEventHandler();
+    [Signal] public delegate void ExitEventHandler(bool wasWanted, Customer customerInstance);
 
-    // How far ahead along the path the customer aims (higher = smoother corners, more corner-cutting)
-    [Export] private float lookAhead = 24f;
-
-    // How close to the end of the path (chair or door) counts as arrived
-    [Export] private float arriveDistance = 4f;
-
-    private Path2D path;
-    private float pathDistance;
-    private bool hasReachedDoor;
+    private Node2D door;
+    private bool isNavReady = false;
+    private bool hasReachedDoor = false;
 
     public override void _Ready()
     {
+        // Top-down: no floor/ceiling logic, collisions treated equally on all sides
+        MotionMode = MotionModeEnum.Floating;
+
         health = maxHealth;
         hitbox.SetCollisionMaskValue(5, true); // also listen for the bullet layer
         hitbox.AreaEntered += onHitboxAreaEntered;
 
-        // The agent is only used for avoidance; the route comes from the chair's path
+        door = GetTree().GetFirstNodeInGroup("door") as Node2D;
+        if (door == null)
+        {
+            GD.PushError($"{Name}: no node in the \"door\" group");
+        }
+
+        // The agent handles both the route (navmesh) and avoiding other customers
+        navAgent.PathPostprocessing = NavigationPathQueryParameters2D.PathPostProcessing.Edgecentered;
         navAgent.AvoidanceEnabled = true;
         navAgent.MaxSpeed = walkSpeed;
         navAgent.VelocityComputed += onVelocityComputed;
@@ -49,32 +54,40 @@ public partial class Customer : Node2D
         {
             targetChair.setOccupied(true);
         }
+
+        // Never collide with our own chair, so we can sit on it and walk back out of it
+        AddCollisionExceptionWith(targetChair.getCollider());
+
+        // The navigation map is empty until the first physics frame, so wait before asking for a path
+        Callable.From(setupNavigation).CallDeferred();
+    }
+
+    private async void setupNavigation()
+    {
+        await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
+        navAgent.TargetPosition = targetChair.GlobalPosition;
+        isNavReady = true;
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        if (hasReachedDoor || isDead)
+        if (!isNavReady || hasReachedDoor || isDead)
         {
             return;
         }
 
-        // The chair builds its path after the first physics frame, so wait until it exists
-        if (path == null)
-        {
-            if (!targetChair.hasPathToDoor())
-            {
-                return;
-            }
-            path = targetChair.getPath();
-        }
-
         if (isLeaving)
         {
-            moveAlongPath(delta, true);
+            moveToTarget(delta);
+            if (navAgent.IsNavigationFinished())
+            {
+                hasReachedDoor = true;
+                navAgent.AvoidanceEnabled = false; // stops blocking doorway
+            }
         }
         else if (!isSeated)
         {
-            moveAlongPath(delta, false);
+            moveToTarget(delta);
             isSeated = sitInChair();
             if (isSeated)
             {
@@ -85,11 +98,15 @@ public partial class Customer : Node2D
 
     public bool sitInChair()
     {
-        // Chair was already reserved in _Ready, so only check that we've arrived
-        if (hitbox.OverlapsArea(targetChair.getArea()))
+        // The chair's collider is cut out of the navmesh, so the agent stops at the
+        // closest point it can reach. Finishing the path counts as reaching the chair.
+        if (navAgent.IsNavigationFinished())
         {
-            // TODO: ANIMATION FOR SITTING GOES HERE
+            Velocity = Vector2.Zero;
+            GlobalPosition = targetChair.GlobalPosition; // snap onto the seat
 
+            // TODO: ANIMATION FOR SITTING GOES HERE
+            GetTree().CreateTimer(2.0).Timeout += onSatDown;
             return true;
         }
         return false;
@@ -102,6 +119,11 @@ public partial class Customer : Node2D
         targetChair.setOccupied(false);
         isSeated = false;
         isLeaving = true;
+
+        if (door != null)
+        {
+            navAgent.TargetPosition = door.GlobalPosition;
+        }
     }
 
     // ---------- Health ----------
@@ -112,7 +134,7 @@ public partial class Customer : Node2D
 
         health = Mathf.Max(health - amount, 0);
         EmitSignal(SignalName.HealthChanged, health, maxHealth);
-        GD.Print($"NPC took damage now health is {health}");
+
         if (health == 0)
         {
             die();
@@ -143,10 +165,12 @@ public partial class Customer : Node2D
         }
 
         // Stop moving and stop other customers steering around the body
+        Velocity = Vector2.Zero;
         navAgent.Velocity = Vector2.Zero;
         navAgent.AvoidanceEnabled = false;
 
         // TODO: Death animation, then QueueFree()
+        EmitSignal(SignalName.Exit, isWanted, this);
         EmitSignal(SignalName.Died);
         QueueFree();
     }
@@ -161,51 +185,40 @@ public partial class Customer : Node2D
 
     // ---------- Movement ----------
 
-    // Works out where the customer wants to go and passes to nav agent
-    private void moveAlongPath(double delta, bool towardDoor)
+    // Asks the agent for the next point on its navmesh path and passes the desired velocity on.
+    // The agent adjusts it to avoid other customers and returns it in onVelocityComputed.
+    private void moveToTarget(double delta)
     {
-        Curve2D curve = path.Curve;
-        float pathLength = curve.GetBakedLength();
-
-        pathDistance = curve.GetClosestOffset(path.ToLocal(GlobalPosition));
-
-        Vector2 endPoint = path.ToGlobal(curve.SampleBaked(towardDoor ? pathLength : 0f, true));
-        if (GlobalPosition.DistanceTo(endPoint) <= arriveDistance)
+        if (navAgent.IsNavigationFinished())
         {
             navAgent.Velocity = Vector2.Zero;
-            if (towardDoor)
-            {
-                hasReachedDoor = true;
-                navAgent.AvoidanceEnabled = false; // stops blocking doorway
-            }
             return;
         }
 
-        float targetDistance;
-        if (towardDoor)
-        {
-            targetDistance = Mathf.Min(pathDistance + lookAhead, pathLength);
-        }
-        else
-        {
-            targetDistance = Mathf.Max(pathDistance - lookAhead, 0f);
-        }
-        Vector2 target = path.ToGlobal(curve.SampleBaked(targetDistance, true));
-        Vector2 toTarget = target - GlobalPosition;
+        Vector2 nextPoint = navAgent.GetNextPathPosition();
+        Vector2 toNext = nextPoint - GlobalPosition;
 
-        // Slow down near the end so we don't overshoot it in one frame
-        float speed = Mathf.Min(walkSpeed, toTarget.Length() / (float)delta);
-        navAgent.Velocity = toTarget.Normalized() * speed;
+        // Slow down near the point so we don't overshoot it in one frame
+        float speed = Mathf.Min(walkSpeed, toNext.Length() / (float)delta);
+        navAgent.Velocity = toNext.Normalized() * speed;
     }
 
     private void onVelocityComputed(Vector2 safeVelocity)
     {
-        // Seated and dead customers stay put
+        // Seated and dead customers stay put, but seated ones still act as obstacles
         if (hasReachedDoor || isSeated || isDead)
         {
             return;
         }
 
-        GlobalPosition += safeVelocity * (float)GetPhysicsProcessDeltaTime();
+        Velocity = safeVelocity;
+        MoveAndSlide();
+    }
+
+    private void onSatDown()
+    {
+        if (isDead) return;
+
+        GD.Print("Sitting in chair");
     }
 }

@@ -1,18 +1,29 @@
 [gd_scene format=3 uid="uid://dmaf8x2drmsx7"]
 
+[ext_resource type="Script" uid="uid://lasjm6m7ckms" path="res://Scripts/Player/Player.cs" id="1_5ixxa"]
 [ext_resource type="Script" uid="uid://bhwuwk7nen1bf" path="res://Scripts/Player/PlayerMovement.cs" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://c6b75wrd67v2y" path="res://icon.svg" id="2_gntrk"]
 [ext_resource type="Script" uid="uid://bra1bstbpuf8u" path="res://Scripts/Player/Gun/Gun.cs" id="3_gntrk"]
 [ext_resource type="PackedScene" uid="uid://btd24125367b6" path="res://Scenes/Bullet.tscn" id="4_dewec"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ojl55"]
+radius = 40.0
+height = 120.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dgcv6"]
+radius = 32.7
+height = 65.4
 
-[node name="Player" type="Node2D" unique_id=176422580]
+[node name="Player" type="Node2D" unique_id=176422580 node_paths=PackedStringArray("player", "hurtBox", "navObstacle")]
+script = ExtResource("1_5ixxa")
+player = NodePath("PlayerBody")
+hurtBox = NodePath("PlayerBody/HurtBox")
+navObstacle = NodePath("PlayerBody/NavigationObstacle2D")
 
-[node name="PlayerBody" type="CharacterBody2D" parent="." unique_id=1800572126 node_paths=PackedStringArray("Gun", "BodySprite") groups=["navAgent"]]
+[node name="PlayerBody" type="CharacterBody2D" parent="." unique_id=1800572126 node_paths=PackedStringArray("Gun", "BodySprite") groups=["navigation_obstacles"]]
 z_index = 10
+position = Vector2(0, -31)
+scale = Vector2(0.5, 0.5)
 disable_mode = 2
 collision_layer = 5
 collision_mask = 5
@@ -32,14 +43,18 @@ BulletScene = ExtResource("4_dewec")
 [node name="GunSprite" type="Sprite2D" parent="PlayerBody/Gun" unique_id=1382153982]
 texture = ExtResource("2_gntrk")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="PlayerBody" unique_id=1077600568]
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="PlayerBody" unique_id=1953331764 groups=["navigation_obstacles"]]
+position = Vector2(-1, 0)
+radius = 10.0
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="PlayerBody" unique_id=227589741]
-position = Vector2(-18.78007, 9.044515)
-scale = Vector2(2.443083, 1.6648859)
+scale = Vector2(1.466, 1)
 shape = SubResource("CapsuleShape2D_ojl55")
 
-[node name="HurtBox" type="Area2D" parent="." unique_id=1544285134]
+[node name="HurtBox" type="Area2D" parent="PlayerBody" unique_id=1544285134]
+position = Vector2(0, 62)
+scale = Vector2(2, 2)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1168957605]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody/HurtBox" unique_id=1168957605]
+position = Vector2(0, -31)
 shape = SubResource("CapsuleShape2D_dgcv6")
