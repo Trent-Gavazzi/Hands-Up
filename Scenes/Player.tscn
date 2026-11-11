@@ -34,11 +34,12 @@ BodySprite = NodePath("PlayerSprite")
 [node name="PlayerSprite" type="Sprite2D" parent="PlayerBody" unique_id=398942296]
 texture = ExtResource("2_gntrk")
 
-[node name="Gun" type="Node2D" parent="PlayerBody" unique_id=1331938409 node_paths=PackedStringArray("GunSprite")]
+[node name="Gun" type="Node2D" parent="PlayerBody" unique_id=1331938409 node_paths=PackedStringArray("GunSprite", "player")]
 position = Vector2(0, -1)
 script = ExtResource("3_gntrk")
 GunSprite = NodePath("GunSprite")
 BulletScene = ExtResource("4_dewec")
+player = NodePath("../..")
 
 [node name="GunSprite" type="Sprite2D" parent="PlayerBody/Gun" unique_id=1382153982]
 texture = ExtResource("2_gntrk")

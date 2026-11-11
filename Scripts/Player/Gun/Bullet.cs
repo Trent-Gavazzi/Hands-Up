@@ -40,7 +40,12 @@ public partial class Bullet : Node2D
         Position += direction * velocity * (float)delta;
 
         lifetime -= (float)delta;
-        if(lifetime <= 0f)
+        if (lifetime <= 0f)
+        {
+            GD.Print($"{Name}: expired");
+            QueueFree();
+        }
+        else if (hasHit)
         {
             QueueFree();
         }
@@ -52,7 +57,7 @@ public partial class Bullet : Node2D
         {
             return;
         }
-        GD.PushWarning($"Bullet entered {body}.");
+        GD.Print($"Bullet entered {body}.");
         tryHit();
     }
 
@@ -62,8 +67,8 @@ public partial class Bullet : Node2D
         {
             return false;
         }
+        GD.Print($"{Name}: hit registered\n{System.Environment.StackTrace}");
         hasHit = true;
-        QueueFree();
         return true;
     }
 

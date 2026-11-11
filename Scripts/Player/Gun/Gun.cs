@@ -13,6 +13,7 @@ public partial class Gun : Node2D
     [ExportGroup("Nodes")]
     [Export] private Sprite2D GunSprite;
     [Export] private PackedScene BulletScene { get; set; }
+    [Export] private Player player;
 
     [ExportGroup("Holstered")]
     // Position relative to the player when facing right; mirrored automatically when facing left
@@ -118,7 +119,7 @@ public partial class Gun : Node2D
         Vector2 aim = GetAimDirection();
 
         Bullet bulletInstance = BulletScene.Instantiate<Bullet>();
-        bulletInstance.init(aim, _player);
+        bulletInstance.init(aim, player);
 
         bulletInstance.Position = HolsterOffset;
         GetTree().CurrentScene.AddChild(bulletInstance);

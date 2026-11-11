@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cyrd2yd15fg5v" path="res://Scenes/Customer.tscn" id="3_wa1r4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rs0cq"]
-vertices = PackedVector2Array(792.35156, 352, 1130.0313, 498.89844, 8, 488.09375, 727.64844, 352, 1131.9609, 10, 923.35156, 215, 923.35156, 145, 792.35156, 282, 858.64844, 215, 570.09375, 10, 858.64844, 145, 8, 14.90625, 727.64844, 282)
+vertices = PackedVector2Array(801, 363.52344, 1130.0313, 498.89844, 8, 488.09375, 721, 363.52344, 1131.9609, 10, 932, 224.96094, 932, 139.11719, 801, 277.65625, 852, 224.96094, 570.09375, 10, 852, 139.11719, 8, 14.90625, 721, 277.65625)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 5, 6), PackedInt32Array(5, 1, 0, 7, 8), PackedInt32Array(9, 4, 6, 10), PackedInt32Array(3, 2, 11, 9, 12), PackedInt32Array(12, 9, 10, 8, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-2, 5, 570, 0, 1142, 0, 1140, 509, -2, 498)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-2, 5, 570, 0, 1142, 0, 1140, 509, 182.41025, 499.77625, -2, 498)])
 parsed_collision_mask = 4294901763
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation_obstacles"
@@ -66,25 +66,25 @@ navigation_polygon = SubResource("NavigationPolygon_rs0cq")
 
 [node name="SaloonWalls" type="Node" parent="." unique_id=118256499]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="SaloonWalls" unique_id=382975101]
+[node name="WallColliders" type="StaticBody2D" parent="SaloonWalls" unique_id=382975101]
 position = Vector2(-1, 1)
 collision_layer = 21
 collision_mask = 21
 
-[node name="TopWall" type="CollisionShape2D" parent="SaloonWalls/StaticBody2D" unique_id=1308816401]
+[node name="TopWall" type="CollisionShape2D" parent="SaloonWalls/WallColliders" unique_id=1308816401]
 position = Vector2(576.5, 0)
 shape = SubResource("RectangleShape2D_dgcv6")
 
-[node name="RightWall" type="CollisionShape2D" parent="SaloonWalls/StaticBody2D" unique_id=1329690187]
+[node name="RightWall" type="CollisionShape2D" parent="SaloonWalls/WallColliders" unique_id=1329690187]
 position = Vector2(1152, 261)
 scale = Vector2(1, 25.32)
 shape = SubResource("RectangleShape2D_ojl55")
 
-[node name="BotWall" type="CollisionShape2D" parent="SaloonWalls/StaticBody2D" unique_id=196051229]
+[node name="BotWall" type="CollisionShape2D" parent="SaloonWalls/WallColliders" unique_id=196051229]
 position = Vector2(570.5, 506)
 shape = SubResource("RectangleShape2D_cxuum")
 
-[node name="LeftWall" type="CollisionShape2D" parent="SaloonWalls/StaticBody2D" unique_id=1147670908]
+[node name="LeftWall" type="CollisionShape2D" parent="SaloonWalls/WallColliders" unique_id=1147670908]
 position = Vector2(7, 252.5)
 shape = SubResource("RectangleShape2D_mt4hs")
 

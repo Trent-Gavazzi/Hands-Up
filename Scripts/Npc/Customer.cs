@@ -1,11 +1,9 @@
 using Godot;
 using System;
-using System.Security.Cryptography.X509Certificates;
 
 public partial class Customer : CharacterBody2D
 {
-    // Gets hit by bullets
-    [Export] private Area2D hitbox;
+    [Export] private Area2D hitbox; // Gets hit by bullets
     [Export] private NavigationAgent2D navAgent;
     [Export] private Chair targetChair;
     [Export] private float walkSpeed = 50f;
@@ -25,8 +23,40 @@ public partial class Customer : CharacterBody2D
     private bool isNavReady = false;
     private bool hasReachedDoor = false;
 
+    // ---------- Drinks & satisfaction ----------
+
+    [Signal] public delegate void DrinkRequestedEventHandler(DrinkType drink);
+    [Signal] public delegate void DrinkRequestClearedEventHandler();
+    [Signal] public delegate void SatisfactionChangedEventHandler(float current, float max);
+    [Signal] public delegate void SatisfactionFilledEventHandler();
+
+    [Export] private float minReqDelay = 15f;
+    [Export] private float maxReqDelay = 45f;
+    [Export] private float gracePeriod = 5f;
+    [Export] private float stayTime = 120f;
+    [Export] private float drainRate = 6f;             // satisfaction lost per second while draining
+    [Export] private float satisfactionPerDrink = 25f;
+    [Export] private float maxSatisfaction = 100f;
+    [Export] private float startingSatisfaction = 40f;
+
+    private float satisfaction;
+    private bool drinkRequest = false;
+    private DrinkType drinkTypeReq;
+    private bool isDraining = false;
+
+    private Timer requestTimer;
+    private Timer graceTimer;
+    private Timer stayTimer;
+
     public override void _Ready()
     {
+        // Timers for customer drink request logic
+        requestTimer = makeTimer(onRequestTimeout);
+        graceTimer = makeTimer(onGraceTimeout);
+        stayTimer = makeTimer(onStayTimeout);
+
+        satisfaction = Mathf.Min(startingSatisfaction, maxSatisfaction);
+
         // Top-down: no floor/ceiling logic, collisions treated equally on all sides
         MotionMode = MotionModeEnum.Floating;
 
@@ -94,6 +124,20 @@ public partial class Customer : CharacterBody2D
                 navAgent.Velocity = Vector2.Zero;
             }
         }
+        else
+        {
+            // Seated: the meter only drains once a request has gone unanswered past the grace period
+            if (isDraining)
+            {
+                satisfaction = Mathf.Max(satisfaction - drainRate * (float)delta, 0f);
+                EmitSignal(SignalName.SatisfactionChanged, satisfaction, maxSatisfaction);
+
+                if (satisfaction <= 0f)
+                {
+                    leaveChair();
+                }
+            }
+        }
     }
 
     public bool sitInChair()
@@ -105,7 +149,6 @@ public partial class Customer : CharacterBody2D
             Velocity = Vector2.Zero;
             GlobalPosition = targetChair.GlobalPosition; // snap onto the seat
 
-            // TODO: ANIMATION FOR SITTING GOES HERE
             GetTree().CreateTimer(2.0).Timeout += onSatDown;
             return true;
         }
@@ -114,8 +157,10 @@ public partial class Customer : CharacterBody2D
 
     public void leaveChair()
     {
-        // TODO: Animation for getting our of a chair
-        // Customer needs to leave after some amount of time
+        if (isLeaving || isDead) return;
+
+        // TODO: Animation for getting out of a chair
+        clearDrinkState();
         targetChair.setOccupied(false);
         isSeated = false;
         isLeaving = true;
@@ -157,6 +202,7 @@ public partial class Customer : CharacterBody2D
     private void die()
     {
         isDead = true;
+        clearDrinkState();
 
         // Free the chair unless we'd already given it up by leaving
         if (!isLeaving)
@@ -179,6 +225,7 @@ public partial class Customer : CharacterBody2D
     {
         if (area.GetParent() is Bullet bullet && bullet.getShooter() != this && bullet.tryHit())
         {
+            GD.Print($"{Name} overlapped {bullet.Name}, shooter = {bullet.getShooter()?.Name ?? "null"}");
             takeDamage(bullet.getDamage());
         }
     }
@@ -217,8 +264,106 @@ public partial class Customer : CharacterBody2D
 
     private void onSatDown()
     {
-        if (isDead) return;
+        if (isDead || isLeaving) return;
 
-        GD.Print("Sitting in chair");
+        // TODO: ANIMATION FOR SITTING GOES HERE
+        EmitSignal(SignalName.SatisfactionChanged, satisfaction, maxSatisfaction);
+        stayTimer.Start(stayTime);
+        scheduleNextDrinkRequest();
+    }
+
+    // ---------- Drinks ----------
+
+    public bool hasDrinkRequest()
+    {
+        return drinkRequest;
+    }
+
+    public DrinkType getRequestedDrink()
+    {
+        return drinkTypeReq;
+    }
+
+    public float getSatisfaction()
+    {
+        return satisfaction;
+    }
+
+    // Called by the player/bar. Returns true if the drink was accepted.
+    public bool tryServeDrink(DrinkType drink)
+    {
+        if (isDead || !isSeated || !drinkRequest || drink != drinkTypeReq) return false;
+
+        graceTimer.Stop();
+        drinkRequest = false;
+        isDraining = false;
+        EmitSignal(SignalName.DrinkRequestCleared);
+
+        satisfaction = Mathf.Min(satisfaction + satisfactionPerDrink, maxSatisfaction);
+        EmitSignal(SignalName.SatisfactionChanged, satisfaction, maxSatisfaction);
+
+        if (satisfaction >= maxSatisfaction)
+        {
+            EmitSignal(SignalName.SatisfactionFilled);
+            leaveChair();
+        }
+        else
+        {
+            scheduleNextDrinkRequest();
+        }
+        return true;
+    }
+
+    private Timer makeTimer(Action onTimeout)
+    {
+        Timer timer = new Timer();
+        timer.OneShot = true;              // fire once, then stop
+        timer.Timeout += onTimeout;
+        AddChild(timer);                   // must be in the tree to tick
+        return timer;
+    }
+
+    private void scheduleNextDrinkRequest()
+    {
+        requestTimer.Start(GD.RandRange(minReqDelay, maxReqDelay));
+    }
+
+    // Stops all drink timers and drops any open request (used when leaving or dying)
+    private void clearDrinkState()
+    {
+        requestTimer.Stop();
+        graceTimer.Stop();
+        stayTimer.Stop();
+        isDraining = false;
+
+        if (drinkRequest)
+        {
+            drinkRequest = false;
+            EmitSignal(SignalName.DrinkRequestCleared);
+        }
+    }
+
+    private void onRequestTimeout()
+    {
+        if (isDead || !isSeated || isLeaving || drinkRequest) return;
+
+        var drinks = Enum.GetValues<DrinkType>();
+        drinkTypeReq = drinks[GD.Randi() % (uint)drinks.Length];
+        drinkRequest = true;
+
+        EmitSignal(SignalName.DrinkRequested, (int)drinkTypeReq);
+        graceTimer.Start(gracePeriod);
+    }
+
+    private void onGraceTimeout()
+    {
+        if (isDead || !drinkRequest) return;
+        isDraining = true;
+    }
+
+    private void onStayTimeout()
+    {
+        if (isDead || isLeaving) return;
+        leaveChair();
     }
 }

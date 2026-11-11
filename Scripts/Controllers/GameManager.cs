@@ -35,9 +35,7 @@ public partial class GameManager : Node
 	public override void _Process(double delta)
 	{
 		ulong currentTime = Time.GetTicksMsec();
-        tryCreateNewCustomer(currentTime);
-
-
+		tryCreateNewCustomer(currentTime);
     }
 
 	private bool tryCreateNewCustomer(ulong currentTime)

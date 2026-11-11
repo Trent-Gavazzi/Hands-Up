@@ -47,9 +47,15 @@ public partial class Player : Node2D
 
     private void onHurtBoxAreaEntered(Area2D area)
     {
-        if (area.GetParent() is Bullet bullet && this != bullet.getShooter() && bullet.tryHit())
+        if (area.GetParent() is not Bullet bullet) return;
+
+        Node shooter = bullet.getShooter();
+        bool isOwnBullet = shooter != null && (shooter == this || IsAncestorOf(shooter));
+        if (isOwnBullet) return;
+
+        if (bullet.tryHit())
         {
-            takeDamage(bullet.getDamage()); // emits HealthChanged from the last example
+            takeDamage(bullet.getDamage());
         }
     }
 
