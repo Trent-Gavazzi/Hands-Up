@@ -53,23 +53,29 @@ public partial class Bullet : Node2D
 
     private void onBodyEntered(Node2D body)
     {
-        if (body == shooter)
-        {
-            return;
-        }
-        GD.Print($"Bullet entered {body}.");
-        tryHit();
+        tryHit(body);
     }
 
-    public bool tryHit()
+    public bool tryHit(Node target)
     {
-        if (hasHit)
-        {
-            return false;
-        }
-        GD.Print($"{Name}: hit registered\n{System.Environment.StackTrace}");
+        if (hasHit) return false;          // whatever your existing one-hit guard is
+        if (isShooter(target)) return false;
+
         hasHit = true;
+        GD.Print("Bullet: hit registered");
+        // existing hit logic (QueueFree, effects, etc.)
         return true;
+    }
+
+    // Decides if the body we are colliding with shot us
+    private bool isShooter(Node target)
+    {
+        var shooter = getShooter();
+        if (shooter == null || target == null) return false;
+
+        return target == shooter
+            || shooter.IsAncestorOf(target)
+            || target.IsAncestorOf(shooter);
     }
 
     public int getDamage()

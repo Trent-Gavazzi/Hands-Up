@@ -4,7 +4,7 @@ using System;
 public partial class Player : Node2D
 {
 	[Export] private PlayerMovement player;
-    [Export] private Area2D hurtBox;
+    [Export] private Area2D hitbox;
     [Export] private NavigationObstacle2D navObstacle;
     private const int maxHealth = 100;
 	private int health;
@@ -15,8 +15,8 @@ public partial class Player : Node2D
 	public override void _Ready()
 	{
 		health = maxHealth;
-        hurtBox.SetCollisionMaskValue(5, true); // listen for the bullet layer
-        hurtBox.AreaEntered += onHurtBoxAreaEntered;
+        hitbox.SetCollisionMaskValue(5, true); // listen for the bullet layer
+        hitbox.AreaEntered += onHitboxAreaEntered;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -45,18 +45,13 @@ public partial class Player : Node2D
 		EmitSignal(SignalName.HealthChanged, health, maxHealth);
 	}
 
-    private void onHurtBoxAreaEntered(Area2D area)
+    private void onHitboxAreaEntered(Area2D area)
     {
         if (area.GetParent() is not Bullet bullet) return;
+        if (!bullet.tryHit(this)) return;
 
-        Node shooter = bullet.getShooter();
-        bool isOwnBullet = shooter != null && (shooter == this || IsAncestorOf(shooter));
-        if (isOwnBullet) return;
-
-        if (bullet.tryHit())
-        {
-            takeDamage(bullet.getDamage());
-        }
+        GD.Print($"{Name} hit by {bullet.Name}, shooter = {bullet.getShooter()?.Name ?? "null"}");
+        takeDamage(bullet.getDamage());
     }
 
     public int getHealth()

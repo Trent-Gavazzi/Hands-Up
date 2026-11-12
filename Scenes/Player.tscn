@@ -14,10 +14,9 @@ height = 120.0
 radius = 32.7
 height = 65.4
 
-[node name="Player" type="Node2D" unique_id=176422580 node_paths=PackedStringArray("player", "hurtBox", "navObstacle")]
+[node name="Player" type="Node2D" unique_id=176422580 node_paths=PackedStringArray("player", "navObstacle")]
 script = ExtResource("1_5ixxa")
 player = NodePath("PlayerBody")
-hurtBox = NodePath("PlayerBody/HurtBox")
 navObstacle = NodePath("PlayerBody/NavigationObstacle2D")
 
 [node name="PlayerBody" type="CharacterBody2D" parent="." unique_id=1800572126 node_paths=PackedStringArray("Gun", "BodySprite") groups=["navigation_obstacles"]]
@@ -55,6 +54,8 @@ shape = SubResource("CapsuleShape2D_ojl55")
 [node name="HurtBox" type="Area2D" parent="PlayerBody" unique_id=1544285134]
 position = Vector2(0, 62)
 scale = Vector2(2, 2)
+collision_layer = 21
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody/HurtBox" unique_id=1168957605]
 position = Vector2(0, -31)

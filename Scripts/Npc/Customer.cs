@@ -223,11 +223,11 @@ public partial class Customer : CharacterBody2D
 
     private void onHitboxAreaEntered(Area2D area)
     {
-        if (area.GetParent() is Bullet bullet && bullet.getShooter() != this && bullet.tryHit())
-        {
-            GD.Print($"{Name} overlapped {bullet.Name}, shooter = {bullet.getShooter()?.Name ?? "null"}");
-            takeDamage(bullet.getDamage());
-        }
+        if (area.GetParent() is not Bullet bullet) return;
+        if (!bullet.tryHit(this)) return;
+
+        GD.Print($"{Name} overlapped {bullet.Name}, shooter = {bullet.getShooter()?.Name ?? "null"}");
+        takeDamage(bullet.getDamage());
     }
 
     // ---------- Movement ----------
