@@ -536,9 +536,9 @@ scale = Vector2(0.56, 0.56)
 [node name="LongRug" type="Sprite2D" parent="BarTableHolder" unique_id=765794879]
 z_index = -490
 z_as_relative = false
-position = Vector2(-716.0714, -426.7857)
+position = Vector2(-716.07153, -394.64285)
 rotation = -1.5547916
-scale = Vector2(0.3606012, 0.7165571)
+scale = Vector2(0.71769935, 0.7165571)
 texture = ExtResource("27_vhiot")
 
 [node name="BarTable" type="Sprite2D" parent="BarTableHolder" unique_id=1675108776]
@@ -651,11 +651,11 @@ position = Vector2(3.5714834, 19.642857)
 scale = Vector2(0.559, 0.615)
 texture = ExtResource("24_fsh3r")
 
-[node name="StoolShadow" type="Sprite2D" parent="LongTable/TableSprite" unique_id=195404743]
+[node name="DropShadow" type="Sprite2D" parent="LongTable/TableSprite" unique_id=195404743]
 modulate = Color(0, 0, 0, 0.42745098)
 z_index = -390
 z_as_relative = false
-position = Vector2(3.1944003, 43.554005)
+position = Vector2(-28.750397, 69.68641)
 scale = Vector2(1.1902702, 1.1253774)
 texture = ExtResource("24_fsh3r")
 
@@ -663,7 +663,7 @@ texture = ExtResource("24_fsh3r")
 modulate = Color(0.87828046, 0.8863126, 0.7580773, 1)
 z_index = -490
 z_as_relative = false
-position = Vector2(-14.285654, 48.21428)
+position = Vector2(-107.14279, 67.85713)
 rotation = -0.002473116
 scale = Vector2(0.631, 0.805)
 texture = ExtResource("24_88ows")
@@ -702,7 +702,7 @@ scale = Vector2(5.7142854, 5.7142854)
 amount = 30
 texture = ExtResource("23_7r23e")
 lifetime = 10.0
-preprocess = 8.0
+preprocess = 11.0
 explosiveness = 1.0
 visibility_rect = Rect2(-960, -540, 1920, 1080)
 process_material = SubResource("ParticleProcessMaterial_ec112")
@@ -712,7 +712,7 @@ z_index = 599
 amount = 30
 texture = ExtResource("23_7r23e")
 lifetime = 10.0
-preprocess = 13.0
+preprocess = 16.0
 explosiveness = 1.0
 visibility_rect = Rect2(-960, -540, 1920, 1080)
 process_material = SubResource("ParticleProcessMaterial_ec112")
@@ -751,7 +751,7 @@ scale = Vector2(5.7142854, 5.7142854)
 amount = 30
 texture = ExtResource("23_7r23e")
 lifetime = 10.0
-preprocess = 8.0
+preprocess = 7.0
 explosiveness = 1.0
 visibility_rect = Rect2(-960, -540, 1920, 1080)
 process_material = SubResource("ParticleProcessMaterial_ec112")
@@ -761,7 +761,7 @@ z_index = 599
 amount = 30
 texture = ExtResource("23_7r23e")
 lifetime = 10.0
-preprocess = 13.0
+preprocess = 12.0
 explosiveness = 1.0
 visibility_rect = Rect2(-960, -540, 1920, 1080)
 process_material = SubResource("ParticleProcessMaterial_ec112")
