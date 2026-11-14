@@ -3,50 +3,55 @@ using System;
 
 public partial class Customer : CharacterBody2D
 {
-    [Export] private Area2D hitbox; // Gets hit by bullets
-    [Export] private NavigationAgent2D navAgent;
-    [Export] private Chair targetChair;
-    [Export] private float walkSpeed = 50f;
+    [Export] protected Area2D hitbox; // Gets hit by bullets
+    [Export] protected NavigationAgent2D navAgent;
+    [Export] protected Chair targetChair;
+    [Export] protected float walkSpeed = 50f;
     protected bool isWanted = false;
-    private bool isSeated = false;
-    private bool isLeaving = false;
+    protected bool isSeated = false;
+    protected bool isLeaving = false;
 
-    private const int maxHealth = 100;
-    private int health;
-    private bool isDead = false;
+    protected const int maxHealth = 100;
+    protected int health;
+    protected bool isDead = false;
 
     [Signal] public delegate void HealthChangedEventHandler(int current, int max);
     [Signal] public delegate void DiedEventHandler();
     [Signal] public delegate void ExitEventHandler(bool wasWanted, Customer customerInstance);
 
-    private Node2D door;
-    private bool isNavReady = false;
-    private bool hasReachedDoor = false;
+    protected Node2D door;
+    protected bool isNavReady = false;
+    protected bool hasReachedDoor = false;
 
     // ---------- Drinks & satisfaction ----------
 
     [Signal] public delegate void DrinkRequestedEventHandler(DrinkType drink);
     [Signal] public delegate void DrinkRequestClearedEventHandler();
-    [Signal] public delegate void SatisfactionChangedEventHandler(float current, float max);
-    [Signal] public delegate void SatisfactionFilledEventHandler();
 
-    [Export] private float minReqDelay = 15f;
-    [Export] private float maxReqDelay = 45f;
-    [Export] private float gracePeriod = 5f;
-    [Export] private float stayTime = 120f;
-    [Export] private float drainRate = 6f;             // satisfaction lost per second while draining
-    [Export] private float satisfactionPerDrink = 25f;
+    // DRINK REQUESTS
+    [Export] private float minReqDelay = 5f;
+    [Export] private float maxReqDelay = 20f;
+    [Export] private float gracePeriod = 10f;
+    protected bool drinkRequest = false;
+    protected DrinkType drinkTypeReq;
+    protected bool isDraining = false;
+
+    // STAY TIME & SATISFACTION
+    [Export] private float stayTime = 60f;
+    [Export] private float drainRate = 3f;             // satisfaction lost per second while draining
     [Export] private float maxSatisfaction = 100f;
-    [Export] private float startingSatisfaction = 40f;
-
     private float satisfaction;
-    private bool drinkRequest = false;
-    private DrinkType drinkTypeReq;
-    private bool isDraining = false;
 
-    private Timer requestTimer;
-    private Timer graceTimer;
-    private Timer stayTimer;
+    protected Timer requestTimer;
+    protected Timer graceTimer;
+    protected Timer stayTimer;
+
+
+    // TODO: PASS IN CUSTOMER ATTRIBUTES TO CONSTRUCTOR
+    public Customer(Chair target)
+    {
+        targetChair = target;
+    }
 
     public override void _Ready()
     {
@@ -55,7 +60,7 @@ public partial class Customer : CharacterBody2D
         graceTimer = makeTimer(onGraceTimeout);
         stayTimer = makeTimer(onStayTimeout);
 
-        satisfaction = Mathf.Min(startingSatisfaction, maxSatisfaction);
+        satisfaction = maxSatisfaction;
 
         // Top-down: no floor/ceiling logic, collisions treated equally on all sides
         MotionMode = MotionModeEnum.Floating;
@@ -130,7 +135,6 @@ public partial class Customer : CharacterBody2D
             if (isDraining)
             {
                 satisfaction = Mathf.Max(satisfaction - drainRate * (float)delta, 0f);
-                EmitSignal(SignalName.SatisfactionChanged, satisfaction, maxSatisfaction);
 
                 if (satisfaction <= 0f)
                 {
@@ -267,7 +271,6 @@ public partial class Customer : CharacterBody2D
         if (isDead || isLeaving) return;
 
         // TODO: ANIMATION FOR SITTING GOES HERE
-        EmitSignal(SignalName.SatisfactionChanged, satisfaction, maxSatisfaction);
         stayTimer.Start(stayTime);
         scheduleNextDrinkRequest();
     }
@@ -299,18 +302,9 @@ public partial class Customer : CharacterBody2D
         isDraining = false;
         EmitSignal(SignalName.DrinkRequestCleared);
 
-        satisfaction = Mathf.Min(satisfaction + satisfactionPerDrink, maxSatisfaction);
-        EmitSignal(SignalName.SatisfactionChanged, satisfaction, maxSatisfaction);
-
-        if (satisfaction >= maxSatisfaction)
-        {
-            EmitSignal(SignalName.SatisfactionFilled);
-            leaveChair();
-        }
-        else
-        {
-            scheduleNextDrinkRequest();
-        }
+        satisfaction = Mathf.Min(satisfaction, maxSatisfaction);
+        scheduleNextDrinkRequest();
+        
         return true;
     }
 

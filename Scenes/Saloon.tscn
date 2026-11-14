@@ -26,9 +26,8 @@ size = Vector2(20, 485)
 
 [node name="Saloon" type="Node2D" unique_id=2031524267]
 
-[node name="Player" parent="." unique_id=1800572126 node_paths=PackedStringArray("hitbox") groups=["navAgent"] instance=ExtResource("1_rfbf8")]
+[node name="Player" parent="." unique_id=1800572126 groups=["navAgent"] instance=ExtResource("1_rfbf8")]
 position = Vector2(564, 252)
-hitbox = NodePath("PlayerBody/HurtBox")
 
 [node name="Customers" type="Node" parent="." unique_id=457267143]
 

@@ -1,5 +1,5 @@
 CORE GAMEPLAY FEATURES FOR "HANDS UP!"
-- player movement
+- player movement (WORKS, POLISH PHASE)
 	- state machine logic
 		- idle
 		- move
@@ -7,20 +7,20 @@ CORE GAMEPLAY FEATURES FOR "HANDS UP!"
 		- roll
 	- collision with environment and customers
 	- build environment
-		- Navigation Region with a new NavPolygon (the bar's walkable floor)
+		- Navigation Region with a new NavPolygon (the bar's walkable floor) (WORKS,POLISH PHASE)
 			- Leave parsed Geometry type on static colliders.
 			- Put tables, bar counter, etc. under Navigation Region2D so their StaticBody2D colliders get cut out
 		- Set agent radius
 		- Bake (Rebake whenever a new object is dragged in)
 		- Door (add a 2D marker at the door, in the Global Node tab "groups")
-		- Chairs ()
-- player shooting
+		- Chairs, tables, etc scenes for easy accessibility
+- player shooting (WORKS, POLISH PHASE)
 	- gun sits relative to player
 	- holster/unholster
 	- npcs friendly/enemy can be hit by the bullets
 	- bullets need to collide with the environment
 	- (optional) players with two drinks can't unholster
-- NPCs
+- NPCs (STILL DEVELOPING, NEEDS LOTS OF TESTING)
 	- pathing to chairs -> pure math and walk cycle 
 		- add a 2D path to each chair
 		- each character coming in scans for an open chair and takes said path in/out of the saloon
@@ -32,7 +32,7 @@ CORE GAMEPLAY FEATURES FOR "HANDS UP!"
 		- Player must take out these wanted enemies
 		- If the player doesn't take them out quick enough they will try to shoot back
 			- (optional) this could cause a quick draw or shootout in which the player can die
-- Drinks/Player Manager
+- Drinks/Player Manager (NOT DONE, IN DEVELPMENT)
 	- Behind the bar the player makes drinks (beer, whiskey, and milk)
 	- Brings them to NPCs that request certain drinks
 	- Hold 2 at a time (can't pull out gun if you have 2 drinks)

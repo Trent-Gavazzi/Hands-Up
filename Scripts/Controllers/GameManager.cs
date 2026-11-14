@@ -14,19 +14,22 @@ public partial class GameManager : Node
 	[Export] private ulong customerEnterTimerMSec = 3000;
 	[Export] private int baseWantedFrequency = 3;
 
+	private float totalSatisfation = 100f;
+
 	private int wantedFrequency;
 	private ulong lastCustomerTime; // Last time a customer was allowed in
 
-    private List<Chair> chairs;
+    private List<Table> tables;
     private List<Customer> activeCustomers = new List<Customer>();
 	
 	// Add some variable for wanted attributes that varies from scene to scene
+	// Will be passed to the wanted constructor
 
     private Random rand = new Random();
 
     public override void _Ready()
 	{ 
-        chairs = GetTree().GetNodesInGroup("Chairs").OfType<Chair>().ToList();
+        tables = GetTree().GetNodesInGroup("Tables").OfType<Table>().ToList();
 		wantedFrequency = baseWantedFrequency;
 		setWantedAttributes();
     }
@@ -53,17 +56,31 @@ public partial class GameManager : Node
 	{
 		rand = new Random();
 		Customer customer;
+		Chair targetChair = null;
+
+		// Pick a target chair
+		// For now just first available seat in all tables
+		// TODO: ADD A DYNAMIC SYSTEM FOR PICKING CHAIR
+		foreach(Table table in tables)
+		{
+			if (targetChair != null) break;
+			foreach(Chair chair in table.GetChairs())
+			{
+				if (!chair.isOccupied()) 
+					targetChair = chair;
+			}
+		}
 
 		int roll = rand.Next(1, 11);
 
 		if (roll > wantedFrequency)
 		{
-			customer = new Customer();
+			customer = new Customer(targetChair);
 			// CUSTOMERS NEED TO BE JUST RANDOMIZED CAN'T BE WANTED LOOK
 		}
 		else
 		{
-			customer = new Wanted();
+			customer = new Wanted(targetChair);
 			// WANTED ENEMIES NEED TO MATCH ONE OF THE POSTERS
 		}
         activeCustomers.Add(customer);
@@ -78,6 +95,8 @@ public partial class GameManager : Node
 	private void onCustomerExit(bool wasWanted, Customer customerInstance)
 	{
 		if(wasWanted) { handleWantedCustomer(); }
+		else { totalSatisfation += customerInstance.getSatisfaction(); }
+
 		GD.Print($"A {wasWanted} customer has exited the saloon");
 		customerInstance.Exit -= onCustomerExit;
 		

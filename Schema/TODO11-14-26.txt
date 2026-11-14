@@ -1,0 +1,18 @@
+1. CREATE THE DRINK SYSTEM
+	- Pouring drinks at the bar
+		- Scenes for the stations
+		- Level design
+	- Delivering them to customers (use the boiler plate in customer script already)
+	- Status bar and effects for visuals
+	
+2. WANTED NPC FIGHTING PLAYER (wait until we can get the poster system worked)
+	- Create zone for aggression and combat with the player
+	- Logic for how these NPCs behave differently
+	TO DISCUSS DURING MEETING:
+	- Wanted posters for the wanted criminals
+
+3. FINISH PARTS OF GAME MANAGER
+	- Allow random customers to come in timers, and track saloon rating
+	- Number will go down as the players fails to get customer drinks
+	- Printing to console is fine for now until group builds a stable UI
+	- Lots of testing with different level flow values and NPC amounts
