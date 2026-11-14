@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://ce27k4b50gfay" path="res://Sprites/BackgroundArt/Decor/Paintings/ElkHead.png" id="27_a6fg5"]
 [ext_resource type="Texture2D" uid="uid://bgt5w5v35nxue" path="res://Sprites/BackgroundArt/Decor/Rugs/LongRug.png" id="27_vhiot"]
 [ext_resource type="Texture2D" uid="uid://cijk561u57j5r" path="res://Sprites/BackgroundArt/Decor/Rugs/HatRack.png" id="29_48ihw"]
+[ext_resource type="SpriteFrames" uid="uid://mmpf2x7dxxdg" path="res://Sprites/Furniture/SaloonDoor/Animations/EntersDoorSwing.tres" id="37_d6lqd"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j3rb5"]
 diffuse_texture = ExtResource("1_8rhag")
@@ -225,36 +226,6 @@ z_index = -3999
 position = Vector2(-14, -240)
 scale = Vector2(0.26, 0.29999998)
 texture = ExtResource("26_65opp")
-
-[node name="SunEffect" type="Node2D" parent="." unique_id=1175852095]
-
-[node name="ConeSunlight" type="PointLight2D" parent="SunEffect" unique_id=74057527]
-position = Vector2(-18, -250)
-scale = Vector2(0.7479999, 1.6120003)
-color = Color(0.8506182, 0.6228676, 0.0728878, 1)
-range_item_cull_mask = 3
-shadow_enabled = true
-texture = ExtResource("3_mrqir")
-height = 145.0
-
-[node name="ConeSunlight2" type="PointLight2D" parent="SunEffect" unique_id=1921407099]
-position = Vector2(-16.000002, -258)
-scale = Vector2(3.3479998, 1.8920003)
-color = Color(0.8506182, 0.6228676, 0.0728878, 1)
-energy = 0.3
-range_item_cull_mask = 3
-shadow_enabled = true
-texture = ExtResource("3_mrqir")
-height = 145.0
-
-[node name="PointSunlight" type="PointLight2D" parent="SunEffect" unique_id=69047601]
-position = Vector2(-24, -353)
-scale = Vector2(3.152, 1.6120003)
-color = Color(0.9165839, 0.8532558, 0, 1)
-energy = 0.5
-range_item_cull_mask = 3
-texture = ExtResource("4_u3lyv")
-height = 450.0
 
 [node name="TableHolder" type="Node2D" parent="." unique_id=804318840]
 light_mask = 7
@@ -797,31 +768,6 @@ texture = ExtResource("21_4n5rv")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1498683399]
 environment = SubResource("Environment_4gyey")
 
-[node name="Particles" type="Node2D" parent="." unique_id=1523457996]
-
-[node name="GeneralDust" type="GPUParticles2D" parent="Particles" unique_id=1056014957]
-z_index = 600
-amount = 60
-texture = ExtResource("22_rwfy2")
-lifetime = 5.0
-preprocess = 5.0
-explosiveness = 0.2
-randomness = 0.4
-visibility_rect = Rect2(-960, -540, 1920, 1080)
-process_material = SubResource("ParticleProcessMaterial_4gyey")
-
-[node name="SunDotEffect" type="GPUParticles2D" parent="Particles" unique_id=594142607]
-z_index = 601
-position = Vector2(0, -365)
-amount = 5
-texture = ExtResource("4_u3lyv")
-lifetime = 8.0
-preprocess = 5.0
-speed_scale = 0.5
-explosiveness = 0.2
-visibility_rect = Rect2(-960, 0, 1920, 1080)
-process_material = SubResource("ParticleProcessMaterial_cb0mw")
-
 [node name="Film_grain" parent="." unique_id=1648775128 instance=ExtResource("25_cb0mw")]
 offset_left = -984.0
 offset_top = -441.0
@@ -930,3 +876,73 @@ position = Vector2(20.833303, -8.3333435)
 rotation = 0.07337405
 scale = Vector2(0.98, 1.039)
 texture = ExtResource("27_a6fg5")
+
+[node name="Particles" type="Node2D" parent="Decor" unique_id=1523457996]
+
+[node name="GeneralDust" type="GPUParticles2D" parent="Decor/Particles" unique_id=1056014957]
+z_index = 600
+amount = 60
+texture = ExtResource("22_rwfy2")
+lifetime = 5.0
+preprocess = 5.0
+explosiveness = 0.2
+randomness = 0.4
+visibility_rect = Rect2(-960, -540, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_4gyey")
+
+[node name="SunDotEffect" type="GPUParticles2D" parent="Decor/Particles" unique_id=594142607]
+z_index = 601
+position = Vector2(0, -365)
+amount = 5
+texture = ExtResource("4_u3lyv")
+lifetime = 8.0
+preprocess = 5.0
+speed_scale = 0.5
+explosiveness = 0.2
+visibility_rect = Rect2(-960, 0, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_cb0mw")
+
+[node name="SunEffect" type="Node2D" parent="Decor" unique_id=1175852095]
+
+[node name="ConeSunlight" type="PointLight2D" parent="Decor/SunEffect" unique_id=74057527]
+position = Vector2(-18, -250)
+scale = Vector2(0.7479999, 1.6120003)
+color = Color(0.8506182, 0.6228676, 0.0728878, 1)
+range_item_cull_mask = 3
+shadow_enabled = true
+texture = ExtResource("3_mrqir")
+height = 145.0
+
+[node name="ConeSunlight2" type="PointLight2D" parent="Decor/SunEffect" unique_id=1921407099]
+position = Vector2(-16.000002, -258)
+scale = Vector2(3.3479998, 1.8920003)
+color = Color(0.8506182, 0.6228676, 0.0728878, 1)
+energy = 0.3
+range_item_cull_mask = 3
+shadow_enabled = true
+texture = ExtResource("3_mrqir")
+height = 145.0
+
+[node name="PointSunlight" type="PointLight2D" parent="Decor/SunEffect" unique_id=69047601]
+position = Vector2(-24, -353)
+scale = Vector2(3.152, 1.6120003)
+color = Color(0.9165839, 0.8532558, 0, 1)
+energy = 0.5
+range_item_cull_mask = 3
+texture = ExtResource("4_u3lyv")
+height = 450.0
+
+[node name="SaloonDoor" type="AnimatedSprite2D" parent="." unique_id=516671616]
+z_index = 300
+position = Vector2(-53, -226.59999)
+scale = Vector2(0.265, 0.231)
+sprite_frames = ExtResource("37_d6lqd")
+
+[node name="SaloonDoor2" type="AnimatedSprite2D" parent="." unique_id=2078011368]
+z_index = 300
+position = Vector2(19, -226.59999)
+scale = Vector2(0.265, 0.231)
+sprite_frames = ExtResource("37_d6lqd")
+frame = 12
+frame_progress = 1.0
+flip_h = true
