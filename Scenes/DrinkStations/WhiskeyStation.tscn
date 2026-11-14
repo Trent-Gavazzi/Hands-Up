@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d0b55o65jtlba"]
+
+[ext_resource type="Script" uid="uid://fcmnddt744us" path="res://Scripts/Environment/DrinkStations/DrinkStation.cs" id="1_hq6qq"]
+[ext_resource type="Texture2D" uid="uid://c6b75wrd67v2y" path="res://icon.svg" id="2_1tidd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hq6qq"]
+
+[node name="WhiskeyStation" type="Node2D" unique_id=1850508077 groups=["navigation_obstacles"]]
+script = ExtResource("1_hq6qq")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=12776611]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=574043602]
+scale = Vector2(3.6574075, 3.4647498)
+shape = SubResource("RectangleShape2D_hq6qq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=7941743]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2006181972]
+scale = Vector2(1, 0.9838256)
+texture = ExtResource("2_1tidd")

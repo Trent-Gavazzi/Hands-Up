@@ -2,118 +2,118 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Transactions;
 
 public partial class GameManager : Node
 {
-	[Export] private Player player;
-
-	[Export] private Marker2D spawnMarker;
+    [Export] private Player player;
+    [Export] private Marker2D spawnMarker;
     [Export] private Node2D door;
 
-	// Will define visuals for generated customers
+    // Root node of each scene must have the matching script attached
+    [Export] private PackedScene customerScene; // Customer.tscn
+    [Export] private PackedScene wantedScene;   // Wanted.tscn
+
+    // Will define visuals for generated customers
     [Export] private PackedScene customerTemplate;
 
+    [Export] private ulong customerEnterTimerMSec = 3000;
+    [Export] private int baseWantedFrequency = 3;
 
-	[Export] private ulong customerEnterTimerMSec = 3000;
-	[Export] private int baseWantedFrequency = 3;
+    private float totalSatisfation = 100f;
 
-	private float totalSatisfation = 100f;
-
-	private int wantedFrequency;
-	private ulong lastCustomerTime; // Last time a customer was allowed in
+    private int wantedFrequency;
+    private ulong lastCustomerTime; // Last time a customer was allowed in
 
     private List<Table> tables;
     private List<Customer> activeCustomers = new List<Customer>();
-	
-	// Add some variable for wanted attributes that varies from scene to scene
-	// Will be passed to the wanted constructor
+
+    // Add some variable for wanted attributes that varies from scene to scene
 
     private Random rand = new Random();
 
     public override void _Ready()
-	{ 
+    {
         tables = GetTree().GetNodesInGroup("Tables").OfType<Table>().ToList();
-		wantedFrequency = baseWantedFrequency;
-		setWantedAttributes();
+        wantedFrequency = baseWantedFrequency;
+        setWantedAttributes();
     }
 
-	
-	public override void _Process(double delta)
-	{
-		ulong currentTime = Time.GetTicksMsec();
-		tryCreateNewCustomer(currentTime);
+    public override void _Process(double delta)
+    {
+        ulong currentTime = Time.GetTicksMsec();
+        tryCreateNewCustomer(currentTime);
     }
 
-	private bool tryCreateNewCustomer(ulong currentTime)
-	{
-		// Add logic to create new customer
-		if(currentTime - lastCustomerTime >= customerEnterTimerMSec)
-		{
-			createNewCustomer();
-			return true;
-		}
-		return false;
-	}
+    private bool tryCreateNewCustomer(ulong currentTime)
+    {
+        if (currentTime - lastCustomerTime < customerEnterTimerMSec) return false;
 
-	private void createNewCustomer()
-	{
-		rand = new Random();
-		Customer customer;
-		Chair targetChair = null;
+        lastCustomerTime = currentTime;
+        return createNewCustomer();
+    }
 
-		// Pick a target chair
-		// For now just first available seat in all tables
-		// TODO: ADD A DYNAMIC SYSTEM FOR PICKING CHAIR
-		foreach(Table table in tables)
-		{
-			if (targetChair != null) break;
-			foreach(Chair chair in table.GetChairs())
-			{
-				if (!chair.isOccupied()) 
-					targetChair = chair;
-			}
-		}
+    private bool createNewCustomer()
+    {
+        Chair targetChair = findFreeChair();
+        if (targetChair == null) return false; // saloon is full
 
-		int roll = rand.Next(1, 11);
+        Customer customer;
+        int roll = rand.Next(1, 11);
 
-		if (roll > wantedFrequency)
-		{
-			customer = new Customer(targetChair, door, spawnMarker);
-			// CUSTOMERS NEED TO BE JUST RANDOMIZED CAN'T BE WANTED LOOK
-		}
-		else
-		{
-			customer = new Wanted(targetChair, door, spawnMarker);
-			// WANTED ENEMIES NEED TO MATCH ONE OF THE POSTERS
-		}
+        if (roll > wantedFrequency)
+        {
+            customer = customerScene.Instantiate<Customer>();
+            // TODO: CUSTOMERS NEED TO BE JUST RANDOMIZED, CAN'T BE WANTED LOOK
+        }
+        else
+        {
+            Wanted wanted = wantedScene.Instantiate<Wanted>();
+            wanted.setPlayer(player);
+            // TODO: WANTED ENEMIES NEED TO MATCH ONE OF THE POSTERS
+            customer = wanted;
+        }
+
+        // Must be configured before AddChild, since _Ready reads these values
+        customer.setup(targetChair, door, spawnMarker);
+        customer.Position = spawnMarker.GlobalPosition;
+        customer.Exit += onCustomerExit;
+
+        AddChild(customer);
         activeCustomers.Add(customer);
-		customer.Exit += onCustomerExit;
+        return true;
     }
 
-	private void setWantedAttributes()
-	{
-		// Creates the attributes to match the wanted customers on the posters
-	}
+    // For now just the first available seat across all tables
+    // TODO: ADD A DYNAMIC SYSTEM FOR PICKING CHAIR
+    private Chair findFreeChair()
+    {
+        foreach (Table table in tables)
+        {
+            foreach (Chair chair in table.GetChairs())
+            {
+                if (!chair.isOccupied()) return chair;
+            }
+        }
+        return null;
+    }
 
-	private void onCustomerExit(bool wasWanted, Customer customerInstance)
-	{
-		if(wasWanted) { handleWantedCustomer(); }
-		else { totalSatisfation += customerInstance.getSatisfaction(); }
+    private void setWantedAttributes()
+    {
+        // Creates the attributes to match the wanted customers on the posters
+    }
 
-		GD.Print($"A {wasWanted} customer has exited the saloon");
-		customerInstance.Exit -= onCustomerExit;
-		
-		if(activeCustomers.Contains(customerInstance))
-		{
-			activeCustomers.Remove(customerInstance);
-		}
-	}
+    private void onCustomerExit(bool wasWanted, Customer customerInstance)
+    {
+        if (wasWanted) { handleWantedCustomer(); }
+        else { totalSatisfation += customerInstance.getSatisfaction(); }
 
-	// Handles wanted customer exiting saloon
-	private void handleWantedCustomer()
-	{
+        GD.Print($"A {wasWanted} customer has exited the saloon");
+        customerInstance.Exit -= onCustomerExit;
+        activeCustomers.Remove(customerInstance);
+    }
 
-	}
+    // Handles wanted customer exiting saloon
+    private void handleWantedCustomer()
+    {
+    }
 }

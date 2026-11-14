@@ -8,3 +8,6 @@ Layer 3:
 	Saloon Wall Layers (exterior wall for bullets that are fired)
 Layer 5:
 	Bullet Collisions
+
+Layer 6:
+	Interaction Layer

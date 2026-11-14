@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Customer : CharacterBody2D
+public partial class Customer : CharacterBody2D, IInteractable
 {
     [Export] protected Area2D hitbox; // Gets hit by bullets
     [Export] protected NavigationAgent2D navAgent;
@@ -47,16 +47,16 @@ public partial class Customer : CharacterBody2D
     protected Timer graceTimer;
     protected Timer stayTimer;
 
+    protected bool interactionEnabled = false; // once seated we turn on the interactable (line 374)
 
-    // TODO: PASS IN CUSTOMER ATTRIBUTES TO CONSTRUCTOR
-    public Customer(Chair target, Node2D d, Marker2D spawn)
+    // Call before adding to the scene tree; _Ready depends on these values
+    // TODO: PASS IN CUSTOMER ATTRIBUTES HERE
+    public void setup(Chair target, Node2D d, Marker2D spawn)
     {
         targetChair = target;
         door = d;
         spawnPoint = spawn;
     }
-
-    public Customer() { }
 
     public override void _Ready()
     {
@@ -77,7 +77,6 @@ public partial class Customer : CharacterBody2D
         if (door == null)
         {
             door = GetTree().GetFirstNodeInGroup("door") as Node2D;
-            GD.PushWarning($"{Name}: no node passed in the \"door\" group");
         }
 
         // The agent handles both the route (navmesh) and avoiding other customers
@@ -314,7 +313,7 @@ public partial class Customer : CharacterBody2D
 
         satisfaction = Mathf.Min(satisfaction, maxSatisfaction);
         scheduleNextDrinkRequest();
-        
+
         return true;
     }
 
@@ -369,5 +368,30 @@ public partial class Customer : CharacterBody2D
     {
         if (isDead || isLeaving) return;
         leaveChair();
+    }
+
+    // ---------- IInteractable ----------
+    public virtual bool isEnabled()
+    {
+        return interactionEnabled && isDead;
+    }
+
+    public virtual void setEnabled(bool value)
+    {
+        interactionEnabled = value;
+    }
+    
+    public virtual bool canInteract(Node interactor)
+    {
+        return isEnabled() && isSeated && drinkRequest;
+    }
+
+    public virtual bool interact(Node interactor)
+    {
+        if (!canInteract(interactor)) return false;
+
+        // TODO: Implement serving drink here
+        GD.Print("Player interact with customer.");
+        return true;
     }
 }

@@ -1,47 +1,47 @@
 [gd_scene format=3 uid="uid://bpjvakpqiygki"]
 
-[ext_resource type="Texture2D" uid="uid://68nxxv2tnfah" path="res://Sprites/BackgroundArt/BackWall/SaloonWallOutlined.png" id="1_8rhag"]
-[ext_resource type="Texture2D" uid="uid://c5mb04kh40wtp" path="res://Sprites/BackgroundArt/BackWall/SaloonWallNormal.png" id="2_ucxhr"]
-[ext_resource type="Texture2D" uid="uid://bjduvic8thfl7" path="res://Sprites/BackgroundArt/Lighting/ConeFade.png" id="3_mrqir"]
-[ext_resource type="Texture2D" uid="uid://bkywoh27aqn54" path="res://Sprites/BackgroundArt/Floor/SaloonFloorOutlinedDiffuse.png" id="4_mrqir"]
-[ext_resource type="Texture2D" uid="uid://n6556xqv3hes" path="res://Sprites/BackgroundArt/Lighting/Radial.png" id="4_u3lyv"]
-[ext_resource type="Texture2D" uid="uid://ifpkfjxbsmx4" path="res://Sprites/BackgroundArt/Floor/SaloonFloorNormal.png" id="5_mrqir"]
-[ext_resource type="Texture2D" uid="uid://bvw8j03igwb52" path="res://Sprites/Furniture/Tables/Table1Outline.png" id="7_3bog8"]
-[ext_resource type="Texture2D" uid="uid://cyguywpx3dma8" path="res://Sprites/Furniture/Tables/TableNormal.png" id="8_id5vj"]
-[ext_resource type="Texture2D" uid="uid://ynk4lpiwt6q" path="res://Sprites/Furniture/Tables/Table2Outline.png" id="9_id5vj"]
-[ext_resource type="Texture2D" uid="uid://cp4j16d7x3ydo" path="res://Sprites/Furniture/Tables/Table1.png" id="9_mwkde"]
-[ext_resource type="Texture2D" uid="uid://c7m27rwmch6n5" path="res://Sprites/Furniture/Chair/StoolOutline.png" id="10_1p0ck"]
-[ext_resource type="Texture2D" uid="uid://cntpa0lqrrbrw" path="res://Sprites/Furniture/Chair/StoolNormal.png" id="11_f6hfk"]
-[ext_resource type="Texture2D" uid="uid://fcdurpq87q1" path="res://Sprites/BackgroundArt/Decor/Rugs/Rug1.png" id="12_f6hfk"]
-[ext_resource type="Texture2D" uid="uid://tq2pmtdq0ko7" path="res://Sprites/BackgroundArt/Decor/Paintings/Paintings/Coyboy.png" id="13_k5a3a"]
-[ext_resource type="Texture2D" uid="uid://dhf1yr4v7o72k" path="res://Sprites/BackgroundArt/Decor/Paintings/Paintings/Landscape.png" id="14_83cbv"]
-[ext_resource type="Texture2D" uid="uid://bbaos5fmkfdib" path="res://Sprites/BackgroundArt/Decor/Plants/PottedPlant1.png" id="14_lpyuc"]
-[ext_resource type="Texture2D" uid="uid://dnnuysq6mhp80" path="res://Sprites/BackgroundArt/Decor/Plants/PottedPlant.png" id="14_q0fy1"]
-[ext_resource type="SpriteFrames" uid="uid://cgxjdya4txh1e" path="res://Sprites/BackgroundArt/Decor/Candle/CandleFrames.tres" id="16_mwkde"]
-[ext_resource type="Texture2D" uid="uid://dpej18pvtuq00" path="res://Sprites/BackgroundArt/Decor/Rugs/WelcomeRug.png" id="17_tc0tx"]
-[ext_resource type="Texture2D" uid="uid://dsj82tk3cptht" path="res://Sprites/Interactibles/Drinks/BarTablev2.png" id="19_88ows"]
-[ext_resource type="Texture2D" uid="uid://dxye758rwnyd6" path="res://Sprites/Interactibles/Drinks/LiquorCabinet.png" id="20_q26e4"]
-[ext_resource type="Texture2D" uid="uid://dgdwhvk2oqpiq" path="res://Sprites/Interactibles/WantedPosters/WantedBoard.png" id="21_4n5rv"]
-[ext_resource type="Texture2D" uid="uid://cau0peispb5hq" path="res://Sprites/BackgroundArt/Lighting/Cloudy.png" id="22_rwfy2"]
-[ext_resource type="Texture2D" uid="uid://cebmieiarmsv0" path="res://Sprites/BackgroundArt/Lighting/SoftRadial.png" id="23_7r23e"]
-[ext_resource type="Texture2D" uid="uid://bn78xtjq882ae" path="res://Sprites/BackgroundArt/Decor/Rugs/BearRug.png" id="24_88ows"]
-[ext_resource type="Texture2D" uid="uid://jctv1qnbn54r" path="res://Sprites/BackgroundArt/Decor/Paintings/Skull.png" id="24_a6fg5"]
-[ext_resource type="Texture2D" uid="uid://dun81womjbtng" path="res://Sprites/WhiteRectangle.png" id="24_ec112"]
-[ext_resource type="Texture2D" uid="uid://dcckv2xmqhmaw" path="res://Sprites/Furniture/Tables/LongTable.png" id="24_fsh3r"]
-[ext_resource type="PackedScene" uid="uid://wlii3h67iqha" path="res://Scenes/film_grain.tscn" id="25_cb0mw"]
-[ext_resource type="Texture2D" uid="uid://muta8xvvnu70" path="res://Sprites/BackgroundArt/Decor/Rugs/BackgroundImage.png" id="26_65opp"]
-[ext_resource type="Texture2D" uid="uid://ce27k4b50gfay" path="res://Sprites/BackgroundArt/Decor/Paintings/ElkHead.png" id="27_a6fg5"]
-[ext_resource type="Texture2D" uid="uid://bgt5w5v35nxue" path="res://Sprites/BackgroundArt/Decor/Rugs/LongRug.png" id="27_vhiot"]
-[ext_resource type="Texture2D" uid="uid://cijk561u57j5r" path="res://Sprites/BackgroundArt/Decor/Rugs/HatRack.png" id="29_48ihw"]
-[ext_resource type="SpriteFrames" uid="uid://mmpf2x7dxxdg" path="res://Sprites/Furniture/SaloonDoor/Animations/EntersDoorSwing.tres" id="37_d6lqd"]
+[ext_resource type="Texture2D" uid="uid://68nxxv2tnfah" path="res://Sprites/BackgroundArt/BackWall/SaloonWallOutlined.png" id="1_uog85"]
+[ext_resource type="Texture2D" uid="uid://c5mb04kh40wtp" path="res://Sprites/BackgroundArt/BackWall/SaloonWallNormal.png" id="2_vqy0o"]
+[ext_resource type="Texture2D" uid="uid://bkywoh27aqn54" path="res://Sprites/BackgroundArt/Floor/SaloonFloorOutlinedDiffuse.png" id="3_8y1bp"]
+[ext_resource type="Texture2D" uid="uid://ifpkfjxbsmx4" path="res://Sprites/BackgroundArt/Floor/SaloonFloorNormal.png" id="4_ys1ld"]
+[ext_resource type="Texture2D" uid="uid://dun81womjbtng" path="res://Sprites/WhiteRectangle.png" id="5_wb3qp"]
+[ext_resource type="Texture2D" uid="uid://muta8xvvnu70" path="res://Sprites/BackgroundArt/Decor/Rugs/BackgroundImage.png" id="6_41405"]
+[ext_resource type="SpriteFrames" uid="uid://cgxjdya4txh1e" path="res://Sprites/BackgroundArt/Decor/Candle/CandleFrames.tres" id="7_nyt7a"]
+[ext_resource type="Texture2D" uid="uid://n6556xqv3hes" path="res://Sprites/BackgroundArt/Lighting/Radial.png" id="8_eg7b0"]
+[ext_resource type="Texture2D" uid="uid://cebmieiarmsv0" path="res://Sprites/BackgroundArt/Lighting/SoftRadial.png" id="9_r5vun"]
+[ext_resource type="Texture2D" uid="uid://c7m27rwmch6n5" path="res://Sprites/Furniture/Chair/StoolOutline.png" id="10_vydcb"]
+[ext_resource type="Texture2D" uid="uid://cntpa0lqrrbrw" path="res://Sprites/Furniture/Chair/StoolNormal.png" id="11_yfstu"]
+[ext_resource type="Texture2D" uid="uid://cp4j16d7x3ydo" path="res://Sprites/Furniture/Tables/Table1.png" id="12_ukjtu"]
+[ext_resource type="Texture2D" uid="uid://bvw8j03igwb52" path="res://Sprites/Furniture/Tables/Table1Outline.png" id="13_6ma3a"]
+[ext_resource type="Texture2D" uid="uid://cyguywpx3dma8" path="res://Sprites/Furniture/Tables/TableNormal.png" id="14_eerjy"]
+[ext_resource type="Texture2D" uid="uid://fcdurpq87q1" path="res://Sprites/BackgroundArt/Decor/Rugs/Rug1.png" id="15_of2lu"]
+[ext_resource type="Texture2D" uid="uid://ynk4lpiwt6q" path="res://Sprites/Furniture/Tables/Table2Outline.png" id="16_2eb28"]
+[ext_resource type="Texture2D" uid="uid://bgt5w5v35nxue" path="res://Sprites/BackgroundArt/Decor/Rugs/LongRug.png" id="17_o0e5i"]
+[ext_resource type="Texture2D" uid="uid://dsj82tk3cptht" path="res://Sprites/Interactibles/Drinks/BarTablev2.png" id="18_35h0c"]
+[ext_resource type="Texture2D" uid="uid://dcckv2xmqhmaw" path="res://Sprites/Furniture/Tables/LongTable.png" id="19_3sdab"]
+[ext_resource type="Texture2D" uid="uid://bn78xtjq882ae" path="res://Sprites/BackgroundArt/Decor/Rugs/BearRug.png" id="20_qr24j"]
+[ext_resource type="Texture2D" uid="uid://dxye758rwnyd6" path="res://Sprites/Interactibles/Drinks/LiquorCabinet.png" id="21_qskt6"]
+[ext_resource type="Texture2D" uid="uid://dgdwhvk2oqpiq" path="res://Sprites/Interactibles/WantedPosters/WantedBoard.png" id="22_5i4qb"]
+[ext_resource type="PackedScene" uid="uid://wlii3h67iqha" path="res://Scenes/ArtScenes/film_grain.tscn" id="23_k27tb"]
+[ext_resource type="Texture2D" uid="uid://bbaos5fmkfdib" path="res://Sprites/BackgroundArt/Decor/Plants/PottedPlant1.png" id="24_5rpvg"]
+[ext_resource type="Texture2D" uid="uid://dnnuysq6mhp80" path="res://Sprites/BackgroundArt/Decor/Plants/PottedPlant.png" id="25_k3ki0"]
+[ext_resource type="Texture2D" uid="uid://tq2pmtdq0ko7" path="res://Sprites/BackgroundArt/Decor/Paintings/Paintings/Coyboy.png" id="26_i1q1h"]
+[ext_resource type="Texture2D" uid="uid://dhf1yr4v7o72k" path="res://Sprites/BackgroundArt/Decor/Paintings/Paintings/Landscape.png" id="27_ev0hw"]
+[ext_resource type="Texture2D" uid="uid://jctv1qnbn54r" path="res://Sprites/BackgroundArt/Decor/Paintings/Skull.png" id="28_4smj5"]
+[ext_resource type="Texture2D" uid="uid://dpej18pvtuq00" path="res://Sprites/BackgroundArt/Decor/Rugs/WelcomeRug.png" id="29_3rtwa"]
+[ext_resource type="Texture2D" uid="uid://cijk561u57j5r" path="res://Sprites/BackgroundArt/Decor/Rugs/HatRack.png" id="30_qxf1g"]
+[ext_resource type="Texture2D" uid="uid://ce27k4b50gfay" path="res://Sprites/BackgroundArt/Decor/Paintings/ElkHead.png" id="31_emf7n"]
+[ext_resource type="Texture2D" uid="uid://cau0peispb5hq" path="res://Sprites/BackgroundArt/Lighting/Cloudy.png" id="32_2h7rh"]
+[ext_resource type="Texture2D" uid="uid://bjduvic8thfl7" path="res://Sprites/BackgroundArt/Lighting/ConeFade.png" id="33_5n6ot"]
+[ext_resource type="SpriteFrames" uid="uid://mmpf2x7dxxdg" path="res://Sprites/Furniture/SaloonDoor/Animations/EntersDoorSwing.tres" id="34_us243"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j3rb5"]
-diffuse_texture = ExtResource("1_8rhag")
-normal_texture = ExtResource("2_ucxhr")
+diffuse_texture = ExtResource("1_uog85")
+normal_texture = ExtResource("2_vqy0o")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_mrqir"]
-diffuse_texture = ExtResource("4_mrqir")
-normal_texture = ExtResource("5_mrqir")
+diffuse_texture = ExtResource("3_8y1bp")
+normal_texture = ExtResource("4_ys1ld")
 
 [sub_resource type="Curve" id="Curve_48ihw"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8851352, 0.39325845), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -75,19 +75,19 @@ hue_variation_max = 0.19999997
 turbulence_enabled = true
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_5yfkb"]
-diffuse_texture = ExtResource("10_1p0ck")
-normal_texture = ExtResource("11_f6hfk")
+diffuse_texture = ExtResource("10_vydcb")
+normal_texture = ExtResource("11_yfstu")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hjaso"]
 polygon = PackedVector2Array(1.7857056, -128.57144, 48.214294, -121.428566, 96.42856, -105.35714, 126.785706, -83.928566, 151.7857, -55.357147, 162.5, -19.64286, 155.35712, 14.285713, 137.5, 44.642853, 98.214264, 75, 55.357117, 91.07143, -1.7857056, 96.428566, -53.57141, 94.64285, -91.07141, 75, -130.35718, 49.999996, -157.14288, 14.285713, -158.92859, -28.571434, -144.64288, -66.071434, -117.85718, -91.071434, -80.35718, -112.50001, -41.07141, -123.21429)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_hjaso"]
-diffuse_texture = ExtResource("7_3bog8")
-normal_texture = ExtResource("8_id5vj")
+diffuse_texture = ExtResource("13_6ma3a")
+normal_texture = ExtResource("14_eerjy")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_lpyuc"]
-diffuse_texture = ExtResource("9_id5vj")
-normal_texture = ExtResource("8_id5vj")
+diffuse_texture = ExtResource("16_2eb28")
+normal_texture = ExtResource("14_eerjy")
 
 [sub_resource type="Gradient" id="Gradient_2arwe"]
 colors = PackedColorArray(0.039215688, 0, 0, 1, 1, 1, 0.93333334, 1)
@@ -219,13 +219,13 @@ modulate = Color(0, 0, 0, 1)
 z_index = -4096
 position = Vector2(-15, -215)
 scale = Vector2(4.4, 1)
-texture = ExtResource("24_ec112")
+texture = ExtResource("5_wb3qp")
 
 [node name="BackgroundImage" type="Sprite2D" parent="SaloonBounds" unique_id=2021310277]
 z_index = -3999
 position = Vector2(-14, -240)
 scale = Vector2(0.26, 0.29999998)
-texture = ExtResource("26_65opp")
+texture = ExtResource("6_41405")
 
 [node name="TableHolder" type="Node2D" parent="." unique_id=804318840]
 light_mask = 7
@@ -238,7 +238,7 @@ scale = Vector2(0.56, 0.56)
 z_index = 10
 position = Vector2(1.0714722, -51.071423)
 scale = Vector2(0.3125, 0.3125)
-sprite_frames = ExtResource("16_mwkde")
+sprite_frames = ExtResource("7_nyt7a")
 autoplay = "default"
 frame_progress = 0.69472134
 
@@ -246,27 +246,27 @@ frame_progress = 0.69472134
 color = Color(1, 0.34509805, 0, 1)
 energy = 2.0
 range_item_cull_mask = 6
-texture = ExtResource("4_u3lyv")
+texture = ExtResource("8_eg7b0")
 texture_scale = 2.75
 height = 81.0
 
 [node name="Sprite2D" type="Sprite2D" parent="TableHolder/Candle" unique_id=1254052577]
 modulate = Color(0.8666667, 0.41568628, 0, 0.08235294)
 position = Vector2(-5.7142854, -45.714283)
-texture = ExtResource("4_u3lyv")
+texture = ExtResource("8_eg7b0")
 
 [node name="Sprite2D2" type="Sprite2D" parent="TableHolder/Candle" unique_id=2117436611]
 modulate = Color(0.8666667, 0.41568628, 0, 0.08235294)
 position = Vector2(-5.7142854, -45.714283)
 scale = Vector2(2.21, 2.21)
-texture = ExtResource("4_u3lyv")
+texture = ExtResource("8_eg7b0")
 
 [node name="FireParticles" type="GPUParticles2D" parent="TableHolder/Candle" unique_id=1695935742]
 z_index = 15
 position = Vector2(-3.428711, -53.714355)
 scale = Vector2(5.7142854, 5.7142854)
 amount = 30
-texture = ExtResource("23_7r23e")
+texture = ExtResource("9_r5vun")
 lifetime = 10.0
 preprocess = 5.0
 explosiveness = 1.0
@@ -276,7 +276,7 @@ process_material = SubResource("ParticleProcessMaterial_ec112")
 [node name="FireParticles2" type="GPUParticles2D" parent="TableHolder/Candle/FireParticles" unique_id=1461304311]
 z_index = 599
 amount = 30
-texture = ExtResource("23_7r23e")
+texture = ExtResource("9_r5vun")
 lifetime = 10.0
 preprocess = 10.0
 explosiveness = 1.0
@@ -295,7 +295,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(0.00011730194, 70.58824)
 scale = Vector2(0.42358732, 0.4285222)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="StoolOutline2" type="Sprite2D" parent="TableHolder" unique_id=50922635]
 z_index = -5
@@ -309,7 +309,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(0.00011730194, 70.58824)
 scale = Vector2(0.42358732, 0.4285222)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="StoolOutline3" type="Sprite2D" parent="TableHolder" unique_id=1083251539]
 z_index = -5
@@ -323,7 +323,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(0.00011730194, 70.58824)
 scale = Vector2(0.42358732, 0.4285222)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="StoolOutlineOver" type="Sprite2D" parent="TableHolder" unique_id=324700737]
 z_index = 5
@@ -337,7 +337,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(0.00011730194, 70.58824)
 scale = Vector2(0.42358732, 0.4285222)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="TableHolder" unique_id=790808518]
 occluder = SubResource("OccluderPolygon2D_hjaso")
@@ -347,7 +347,7 @@ modulate = Color(0, 0, 0, 0.6156863)
 z_index = -390
 z_as_relative = false
 position = Vector2(-2.499989, 15.000002)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="TableSprite" type="Sprite2D" parent="TableHolder" unique_id=1305965853]
 modulate = Color(0.47397572, 0.47397572, 0.47397572, 1)
@@ -360,7 +360,7 @@ z_as_relative = false
 position = Vector2(0, 17.857117)
 rotation = 1.5345768
 scale = Vector2(0.46607143, 0.6875)
-texture = ExtResource("12_f6hfk")
+texture = ExtResource("15_of2lu")
 
 [node name="TableHolder2" type="Node2D" parent="." unique_id=2006996095]
 light_mask = 7
@@ -381,7 +381,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(0.00011730194, 70.58824)
 scale = Vector2(0.42358732, 0.4285222)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="StoolOutline2" type="Sprite2D" parent="TableHolder2" unique_id=805183283]
 z_index = -5
@@ -395,7 +395,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(0.00011730194, 70.58824)
 scale = Vector2(0.42358732, 0.4285222)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="StoolOutline3" type="Sprite2D" parent="TableHolder2" unique_id=2122115257]
 z_index = -5
@@ -409,7 +409,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(0.00011730194, 70.58824)
 scale = Vector2(0.42358732, 0.4285222)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="StoolOutlineOver" type="Sprite2D" parent="TableHolder2" unique_id=1705195105]
 z_index = 5
@@ -423,7 +423,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(0.00011730194, 70.58824)
 scale = Vector2(0.42358732, 0.4285222)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="TableHolder2" unique_id=935985834]
 occluder = SubResource("OccluderPolygon2D_hjaso")
@@ -433,7 +433,7 @@ modulate = Color(0, 0, 0, 0.6156863)
 z_index = -390
 z_as_relative = false
 position = Vector2(-2.499989, 15.000002)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="TableSprite" type="Sprite2D" parent="TableHolder2" unique_id=431876045]
 modulate = Color(0.47397572, 0.47397572, 0.47397572, 1)
@@ -446,13 +446,13 @@ z_as_relative = false
 position = Vector2(6.1035156e-05, 14.285721)
 rotation = 1.596865
 scale = Vector2(0.48571432, 0.7178572)
-texture = ExtResource("12_f6hfk")
+texture = ExtResource("15_of2lu")
 
 [node name="Candle" type="AnimatedSprite2D" parent="TableHolder2" unique_id=1244336428]
 z_index = 10
 position = Vector2(1.0714722, -51.071423)
 scale = Vector2(0.3125, 0.3125)
-sprite_frames = ExtResource("16_mwkde")
+sprite_frames = ExtResource("7_nyt7a")
 autoplay = "default"
 frame_progress = 0.69472134
 
@@ -460,27 +460,27 @@ frame_progress = 0.69472134
 color = Color(1, 0.34509805, 0, 1)
 energy = 2.0
 range_item_cull_mask = 6
-texture = ExtResource("4_u3lyv")
+texture = ExtResource("8_eg7b0")
 texture_scale = 2.75
 height = 81.0
 
 [node name="Sprite2D" type="Sprite2D" parent="TableHolder2/Candle" unique_id=363223435]
 modulate = Color(0.8666667, 0.41568628, 0, 0.08235294)
 position = Vector2(-5.7142854, -45.714283)
-texture = ExtResource("4_u3lyv")
+texture = ExtResource("8_eg7b0")
 
 [node name="Sprite2D2" type="Sprite2D" parent="TableHolder2/Candle" unique_id=1724642098]
 modulate = Color(0.8666667, 0.41568628, 0, 0.08235294)
 position = Vector2(-5.7142854, -45.714283)
 scale = Vector2(2.21, 2.21)
-texture = ExtResource("4_u3lyv")
+texture = ExtResource("8_eg7b0")
 
 [node name="FireParticles" type="GPUParticles2D" parent="TableHolder2/Candle" unique_id=1030989081]
 z_index = 15
 position = Vector2(-3.428711, -53.714355)
 scale = Vector2(5.7142854, 5.7142854)
 amount = 30
-texture = ExtResource("23_7r23e")
+texture = ExtResource("9_r5vun")
 lifetime = 10.0
 preprocess = 8.0
 explosiveness = 1.0
@@ -490,7 +490,7 @@ process_material = SubResource("ParticleProcessMaterial_ec112")
 [node name="FireParticles2" type="GPUParticles2D" parent="TableHolder2/Candle/FireParticles" unique_id=382345632]
 z_index = 599
 amount = 30
-texture = ExtResource("23_7r23e")
+texture = ExtResource("9_r5vun")
 lifetime = 10.0
 preprocess = 13.0
 explosiveness = 1.0
@@ -510,12 +510,12 @@ z_as_relative = false
 position = Vector2(-716.07153, -394.64285)
 rotation = -1.5547916
 scale = Vector2(0.71769935, 0.7165571)
-texture = ExtResource("27_vhiot")
+texture = ExtResource("17_o0e5i")
 
 [node name="BarTable" type="Sprite2D" parent="BarTableHolder" unique_id=1675108776]
 position = Vector2(-714.2857, -457.14288)
 scale = Vector2(0.61607146, 0.47294217)
-texture = ExtResource("19_88ows")
+texture = ExtResource("18_35h0c")
 
 [node name="BarTable2" type="Sprite2D" parent="BarTableHolder/BarTable" unique_id=1956161766]
 modulate = Color(0, 0, 0, 0.7764706)
@@ -523,7 +523,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(28.985472, 41.533432)
 scale = Vector2(1.0514305, 0.39522916)
-texture = ExtResource("19_88ows")
+texture = ExtResource("18_35h0c")
 
 [node name="StoolOutline" type="Sprite2D" parent="BarTableHolder" unique_id=680449851]
 z_index = 5
@@ -537,7 +537,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(0.00011730194, 70.58824)
 scale = Vector2(0.42358732, 0.4285222)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="StoolOutline2" type="Sprite2D" parent="BarTableHolder" unique_id=1706294256]
 z_index = 5
@@ -551,7 +551,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(0.00011730194, 70.58824)
 scale = Vector2(0.42358732, 0.4285222)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="StoolOutline3" type="Sprite2D" parent="BarTableHolder" unique_id=1059053688]
 z_index = 5
@@ -565,7 +565,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(0.00011730194, 70.58824)
 scale = Vector2(0.42358732, 0.4285222)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="LongTable" type="Node2D" parent="." unique_id=1986310911]
 light_mask = 7
@@ -586,7 +586,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(0.00011730194, 70.58824)
 scale = Vector2(0.42358732, 0.4285222)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="StoolOutline2" type="Sprite2D" parent="LongTable" unique_id=1348262542]
 z_index = -5
@@ -600,7 +600,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(0.00011730194, 70.58824)
 scale = Vector2(0.42358732, 0.4285222)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="StoolOutline3" type="Sprite2D" parent="LongTable" unique_id=18748337]
 z_index = -5
@@ -614,13 +614,13 @@ z_index = -390
 z_as_relative = false
 position = Vector2(0.00011730194, 70.58824)
 scale = Vector2(0.42358732, 0.4285222)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="TableSprite" type="Sprite2D" parent="LongTable" unique_id=967342185]
 modulate = Color(0.47397572, 0.47397572, 0.47397572, 1)
 position = Vector2(3.5714834, 19.642857)
 scale = Vector2(0.559, 0.615)
-texture = ExtResource("24_fsh3r")
+texture = ExtResource("19_3sdab")
 
 [node name="DropShadow" type="Sprite2D" parent="LongTable/TableSprite" unique_id=195404743]
 modulate = Color(0, 0, 0, 0.42745098)
@@ -628,7 +628,7 @@ z_index = -390
 z_as_relative = false
 position = Vector2(-28.750397, 69.68641)
 scale = Vector2(1.1902702, 1.1253774)
-texture = ExtResource("24_fsh3r")
+texture = ExtResource("19_3sdab")
 
 [node name="BearRug" type="Sprite2D" parent="LongTable" unique_id=1687688777]
 modulate = Color(0.87828046, 0.8863126, 0.7580773, 1)
@@ -637,13 +637,13 @@ z_as_relative = false
 position = Vector2(-107.14279, 67.85713)
 rotation = -0.002473116
 scale = Vector2(0.631, 0.805)
-texture = ExtResource("24_88ows")
+texture = ExtResource("20_qr24j")
 
 [node name="Candle" type="AnimatedSprite2D" parent="LongTable" unique_id=1416811400]
 z_index = 10
 position = Vector2(62.500027, -126.78572)
 scale = Vector2(0.3125, 0.3125)
-sprite_frames = ExtResource("16_mwkde")
+sprite_frames = ExtResource("7_nyt7a")
 autoplay = "default"
 frame_progress = 0.69472134
 
@@ -651,27 +651,27 @@ frame_progress = 0.69472134
 color = Color(1, 0.34509805, 0, 1)
 energy = 2.0
 range_item_cull_mask = 6
-texture = ExtResource("4_u3lyv")
+texture = ExtResource("8_eg7b0")
 texture_scale = 2.75
 height = 81.0
 
 [node name="Sprite2D" type="Sprite2D" parent="LongTable/Candle" unique_id=1242270743]
 modulate = Color(0.8666667, 0.41568628, 0, 0.08235294)
 position = Vector2(-5.7142854, -45.714283)
-texture = ExtResource("4_u3lyv")
+texture = ExtResource("8_eg7b0")
 
 [node name="Sprite2D2" type="Sprite2D" parent="LongTable/Candle" unique_id=1904781193]
 modulate = Color(0.8666667, 0.41568628, 0, 0.08235294)
 position = Vector2(-5.7142854, -45.714283)
 scale = Vector2(2.21, 2.21)
-texture = ExtResource("4_u3lyv")
+texture = ExtResource("8_eg7b0")
 
 [node name="FireParticles" type="GPUParticles2D" parent="LongTable/Candle" unique_id=1915641598]
 z_index = 15
 position = Vector2(-3.428711, -53.714355)
 scale = Vector2(5.7142854, 5.7142854)
 amount = 30
-texture = ExtResource("23_7r23e")
+texture = ExtResource("9_r5vun")
 lifetime = 10.0
 preprocess = 11.0
 explosiveness = 1.0
@@ -681,7 +681,7 @@ process_material = SubResource("ParticleProcessMaterial_ec112")
 [node name="FireParticles2" type="GPUParticles2D" parent="LongTable/Candle/FireParticles" unique_id=1633487189]
 z_index = 599
 amount = 30
-texture = ExtResource("23_7r23e")
+texture = ExtResource("9_r5vun")
 lifetime = 10.0
 preprocess = 16.0
 explosiveness = 1.0
@@ -692,7 +692,7 @@ process_material = SubResource("ParticleProcessMaterial_ec112")
 z_index = 10
 position = Vector2(67.85717, 87.499985)
 scale = Vector2(0.3125, 0.3125)
-sprite_frames = ExtResource("16_mwkde")
+sprite_frames = ExtResource("7_nyt7a")
 autoplay = "default"
 frame_progress = 0.69472134
 
@@ -700,27 +700,27 @@ frame_progress = 0.69472134
 color = Color(1, 0.34509805, 0, 1)
 energy = 2.0
 range_item_cull_mask = 6
-texture = ExtResource("4_u3lyv")
+texture = ExtResource("8_eg7b0")
 texture_scale = 2.75
 height = 81.0
 
 [node name="Sprite2D" type="Sprite2D" parent="LongTable/Candle2" unique_id=1229323589]
 modulate = Color(0.8666667, 0.41568628, 0, 0.08235294)
 position = Vector2(-5.7142854, -45.714283)
-texture = ExtResource("4_u3lyv")
+texture = ExtResource("8_eg7b0")
 
 [node name="Sprite2D2" type="Sprite2D" parent="LongTable/Candle2" unique_id=198638684]
 modulate = Color(0.8666667, 0.41568628, 0, 0.08235294)
 position = Vector2(-5.7142854, -45.714283)
 scale = Vector2(2.21, 2.21)
-texture = ExtResource("4_u3lyv")
+texture = ExtResource("8_eg7b0")
 
 [node name="FireParticles" type="GPUParticles2D" parent="LongTable/Candle2" unique_id=1271028178]
 z_index = 15
 position = Vector2(-3.428711, -53.714355)
 scale = Vector2(5.7142854, 5.7142854)
 amount = 30
-texture = ExtResource("23_7r23e")
+texture = ExtResource("9_r5vun")
 lifetime = 10.0
 preprocess = 7.0
 explosiveness = 1.0
@@ -730,7 +730,7 @@ process_material = SubResource("ParticleProcessMaterial_ec112")
 [node name="FireParticles2" type="GPUParticles2D" parent="LongTable/Candle2/FireParticles" unique_id=1013178432]
 z_index = 599
 amount = 30
-texture = ExtResource("23_7r23e")
+texture = ExtResource("9_r5vun")
 lifetime = 10.0
 preprocess = 12.0
 explosiveness = 1.0
@@ -741,7 +741,7 @@ process_material = SubResource("ParticleProcessMaterial_ec112")
 z_index = 250
 position = Vector2(-362, -224)
 scale = Vector2(0.31, 0.31)
-texture = ExtResource("20_q26e4")
+texture = ExtResource("21_qskt6")
 
 [node name="DropShadow" type="Sprite2D" parent="LiquorCabinet" unique_id=11727506]
 modulate = Color(0, 0, 0, 0.4627451)
@@ -750,25 +750,25 @@ z_as_relative = false
 position = Vector2(-9.677414, -9.536743e-06)
 rotation = -0.04603305
 scale = Vector2(0.98, 1.039)
-texture = ExtResource("20_q26e4")
+texture = ExtResource("21_qskt6")
 
 [node name="WantedBoard" type="Sprite2D" parent="." unique_id=120799750]
 z_index = 250
 position = Vector2(133, -230)
 scale = Vector2(0.215, 0.215)
-texture = ExtResource("21_4n5rv")
+texture = ExtResource("22_5i4qb")
 
 [node name="WantedBoardDropShadow" type="Sprite2D" parent="WantedBoard" unique_id=951571341]
 modulate = Color(0, 0, 0, 0.23137255)
 z_index = -5
 position = Vector2(23.255814, 4.6511593)
 scale = Vector2(0.985, 1.04)
-texture = ExtResource("21_4n5rv")
+texture = ExtResource("22_5i4qb")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1498683399]
 environment = SubResource("Environment_4gyey")
 
-[node name="Film_grain" parent="." unique_id=1648775128 instance=ExtResource("25_cb0mw")]
+[node name="Film_grain" parent="." unique_id=1648775128 instance=ExtResource("23_k27tb")]
 offset_left = -984.0
 offset_top = -441.0
 offset_right = -984.0
@@ -780,7 +780,7 @@ offset_bottom = -441.0
 z_index = 250
 position = Vector2(529, -205)
 scale = Vector2(0.26, 0.26)
-texture = ExtResource("14_lpyuc")
+texture = ExtResource("24_5rpvg")
 
 [node name="DropShadow" type="Sprite2D" parent="Decor/PottedPlant1" unique_id=208996776]
 modulate = Color(0, 0, 0, 0.4627451)
@@ -788,13 +788,13 @@ z_index = -350
 z_as_relative = false
 position = Vector2(7.6923075, 226.9231)
 scale = Vector2(0.39174676, 0.31384945)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="PottedPlant" type="Sprite2D" parent="Decor" unique_id=2087383945]
 z_index = 250
 position = Vector2(-522, -223.99998)
 scale = Vector2(0.29, 0.29)
-texture = ExtResource("14_q0fy1")
+texture = ExtResource("25_k3ki0")
 
 [node name="Sprite2D" type="Sprite2D" parent="Decor/PottedPlant" unique_id=2101905858]
 modulate = Color(0, 0, 0, 0.4627451)
@@ -802,27 +802,27 @@ z_index = -350
 z_as_relative = false
 position = Vector2(17.241364, 272.41388)
 scale = Vector2(0.322, 0.258)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="Coyboy" type="Sprite2D" parent="Decor" unique_id=366073926]
 modulate = Color(0.70796657, 0.7079665, 0.7079665, 1)
 z_index = -350
 position = Vector2(-460, -238)
 scale = Vector2(0.415, 0.415)
-texture = ExtResource("13_k5a3a")
+texture = ExtResource("26_i1q1h")
 
 [node name="Landscape" type="Sprite2D" parent="Decor" unique_id=1640922104]
 z_index = -350
 position = Vector2(440.99994, -239.99998)
 rotation = -1.5885348
 scale = Vector2(0.41, 0.41)
-texture = ExtResource("14_83cbv")
+texture = ExtResource("27_ev0hw")
 
 [node name="Skull" type="Sprite2D" parent="Decor" unique_id=1963693394]
 z_index = -350
 position = Vector2(-199, -241.00002)
 scale = Vector2(0.225, 0.225)
-texture = ExtResource("24_a6fg5")
+texture = ExtResource("28_4smj5")
 
 [node name="DropShadow" type="Sprite2D" parent="Decor/Skull" unique_id=1134021553]
 modulate = Color(0, 0, 0, 0.4627451)
@@ -830,20 +830,20 @@ z_index = -5
 position = Vector2(-40.000027, -4.4444404)
 rotation = -0.03581368
 scale = Vector2(0.922, 0.947)
-texture = ExtResource("24_a6fg5")
+texture = ExtResource("28_4smj5")
 
 [node name="WelcomeRug" type="Sprite2D" parent="Decor" unique_id=1447865266]
 z_index = -490
 position = Vector2(-13.884599, -139.32571)
 rotation = -3.134524
 scale = Vector2(0.19, 0.13557957)
-texture = ExtResource("17_tc0tx")
+texture = ExtResource("29_3rtwa")
 
 [node name="HatRack" type="Sprite2D" parent="Decor" unique_id=1487422049]
 z_index = 250
 position = Vector2(-114.000015, -201)
 scale = Vector2(0.21, 0.21)
-texture = ExtResource("29_48ihw")
+texture = ExtResource("30_qxf1g")
 
 [node name="StoolShadow" type="Sprite2D" parent="Decor/HatRack" unique_id=583973282]
 modulate = Color(0, 0, 0, 0.16470589)
@@ -852,7 +852,7 @@ z_as_relative = false
 position = Vector2(-428.5714, 366.66666)
 rotation = -1.866384
 scale = Vector2(0.42358732, 1.9143215)
-texture = ExtResource("29_48ihw")
+texture = ExtResource("30_qxf1g")
 
 [node name="StoolShadow2" type="Sprite2D" parent="Decor/HatRack" unique_id=289663803]
 modulate = Color(0, 0, 0, 0.16470589)
@@ -860,13 +860,13 @@ z_index = -390
 z_as_relative = false
 position = Vector2(-14.285632, 242.85716)
 scale = Vector2(0.7527091, -0.25878775)
-texture = ExtResource("9_mwkde")
+texture = ExtResource("12_ukjtu")
 
 [node name="ElkHead" type="Sprite2D" parent="Decor" unique_id=219214306]
 z_index = 250
 position = Vector2(284, -263)
 scale = Vector2(0.24, 0.24)
-texture = ExtResource("27_a6fg5")
+texture = ExtResource("31_emf7n")
 
 [node name="DropShadow" type="Sprite2D" parent="Decor/ElkHead" unique_id=1915108892]
 modulate = Color(0, 0, 0, 0.39215687)
@@ -875,14 +875,14 @@ z_as_relative = false
 position = Vector2(20.833303, -8.3333435)
 rotation = 0.07337405
 scale = Vector2(0.98, 1.039)
-texture = ExtResource("27_a6fg5")
+texture = ExtResource("31_emf7n")
 
 [node name="Particles" type="Node2D" parent="Decor" unique_id=1523457996]
 
 [node name="GeneralDust" type="GPUParticles2D" parent="Decor/Particles" unique_id=1056014957]
 z_index = 600
 amount = 60
-texture = ExtResource("22_rwfy2")
+texture = ExtResource("32_2h7rh")
 lifetime = 5.0
 preprocess = 5.0
 explosiveness = 0.2
@@ -894,7 +894,7 @@ process_material = SubResource("ParticleProcessMaterial_4gyey")
 z_index = 601
 position = Vector2(0, -365)
 amount = 5
-texture = ExtResource("4_u3lyv")
+texture = ExtResource("8_eg7b0")
 lifetime = 8.0
 preprocess = 5.0
 speed_scale = 0.5
@@ -910,7 +910,7 @@ scale = Vector2(0.7479999, 1.6120003)
 color = Color(0.8506182, 0.6228676, 0.0728878, 1)
 range_item_cull_mask = 3
 shadow_enabled = true
-texture = ExtResource("3_mrqir")
+texture = ExtResource("33_5n6ot")
 height = 145.0
 
 [node name="ConeSunlight2" type="PointLight2D" parent="Decor/SunEffect" unique_id=1921407099]
@@ -920,7 +920,7 @@ color = Color(0.8506182, 0.6228676, 0.0728878, 1)
 energy = 0.3
 range_item_cull_mask = 3
 shadow_enabled = true
-texture = ExtResource("3_mrqir")
+texture = ExtResource("33_5n6ot")
 height = 145.0
 
 [node name="PointSunlight" type="PointLight2D" parent="Decor/SunEffect" unique_id=69047601]
@@ -929,20 +929,22 @@ scale = Vector2(3.152, 1.6120003)
 color = Color(0.9165839, 0.8532558, 0, 1)
 energy = 0.5
 range_item_cull_mask = 3
-texture = ExtResource("4_u3lyv")
+texture = ExtResource("8_eg7b0")
 height = 450.0
 
 [node name="SaloonDoor" type="AnimatedSprite2D" parent="." unique_id=516671616]
 z_index = 300
 position = Vector2(-53, -226.59999)
 scale = Vector2(0.265, 0.231)
-sprite_frames = ExtResource("37_d6lqd")
+sprite_frames = ExtResource("34_us243")
+frame = 12
+frame_progress = 1.0
 
 [node name="SaloonDoor2" type="AnimatedSprite2D" parent="." unique_id=2078011368]
 z_index = 300
 position = Vector2(19, -226.59999)
 scale = Vector2(0.265, 0.231)
-sprite_frames = ExtResource("37_d6lqd")
+sprite_frames = ExtResource("34_us243")
 frame = 12
 frame_progress = 1.0
 flip_h = true
