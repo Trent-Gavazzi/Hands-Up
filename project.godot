@@ -29,6 +29,8 @@ project/assembly_name="HandsUp"
 navAgent=""
 door=""
 navigation_obstacles=""
+Tables=""
+Chairs=""
 
 [input]
 

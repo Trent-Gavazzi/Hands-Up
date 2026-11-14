@@ -1,18 +1,16 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class Table : Node
 {
 	private List<Chair> chairs;
+	
 	public override void _Ready()
 	{
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+        chairs = GetChildren().OfType<Chair>().ToList();
+    }
 
 	public List<Chair> GetChairs()
 	{

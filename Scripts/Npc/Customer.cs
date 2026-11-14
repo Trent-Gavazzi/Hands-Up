@@ -20,6 +20,7 @@ public partial class Customer : CharacterBody2D
     [Signal] public delegate void ExitEventHandler(bool wasWanted, Customer customerInstance);
 
     protected Node2D door;
+    protected Marker2D spawnPoint;
     protected bool isNavReady = false;
     protected bool hasReachedDoor = false;
 
@@ -48,10 +49,14 @@ public partial class Customer : CharacterBody2D
 
 
     // TODO: PASS IN CUSTOMER ATTRIBUTES TO CONSTRUCTOR
-    public Customer(Chair target)
+    public Customer(Chair target, Node2D d, Marker2D spawn)
     {
         targetChair = target;
+        door = d;
+        spawnPoint = spawn;
     }
+
+    public Customer() { }
 
     public override void _Ready()
     {
@@ -69,10 +74,10 @@ public partial class Customer : CharacterBody2D
         hitbox.SetCollisionMaskValue(5, true); // also listen for the bullet layer
         hitbox.AreaEntered += onHitboxAreaEntered;
 
-        door = GetTree().GetFirstNodeInGroup("door") as Node2D;
         if (door == null)
         {
-            GD.PushError($"{Name}: no node in the \"door\" group");
+            door = GetTree().GetFirstNodeInGroup("door") as Node2D;
+            GD.PushWarning($"{Name}: no node passed in the \"door\" group");
         }
 
         // The agent handles both the route (navmesh) and avoiding other customers
@@ -106,7 +111,12 @@ public partial class Customer : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (!isNavReady || hasReachedDoor || isDead)
+        if (hasReachedDoor)
+        {
+            navAgent.TargetPosition = spawnPoint.GlobalPosition;
+        }
+
+        else if (!isNavReady || isDead)
         {
             return;
         }

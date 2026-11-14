@@ -10,7 +10,12 @@ public partial class GameManager : Node
 	[Export] private Player player;
 
 	[Export] private Marker2D spawnMarker;
-	[Export] private PackedScene customerTemplate;
+    [Export] private Node2D door;
+
+	// Will define visuals for generated customers
+    [Export] private PackedScene customerTemplate;
+
+
 	[Export] private ulong customerEnterTimerMSec = 3000;
 	[Export] private int baseWantedFrequency = 3;
 
@@ -75,12 +80,12 @@ public partial class GameManager : Node
 
 		if (roll > wantedFrequency)
 		{
-			customer = new Customer(targetChair);
+			customer = new Customer(targetChair, door, spawnMarker);
 			// CUSTOMERS NEED TO BE JUST RANDOMIZED CAN'T BE WANTED LOOK
 		}
 		else
 		{
-			customer = new Wanted(targetChair);
+			customer = new Wanted(targetChair, door, spawnMarker);
 			// WANTED ENEMIES NEED TO MATCH ONE OF THE POSTERS
 		}
         activeCustomers.Add(customer);

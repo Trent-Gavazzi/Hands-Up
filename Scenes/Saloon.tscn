@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://btimgqfud7uvk" path="res://Scenes/Chair.tscn" id="2_rs0cq"]
 [ext_resource type="PackedScene" uid="uid://khwa7pitxa5v" path="res://Scenes/Door.tscn" id="3_w01x6"]
 [ext_resource type="PackedScene" uid="uid://cyrd2yd15fg5v" path="res://Scenes/Customer.tscn" id="3_wa1r4"]
+[ext_resource type="Script" uid="uid://dhgm12enw1equ" path="res://Scripts/Controllers/GameManager.cs" id="5_uiyr6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rs0cq"]
 vertices = PackedVector2Array(801, 363.52344, 1130.0313, 498.89844, 8, 488.09375, 721, 363.52344, 1131.9609, 10, 932, 224.96094, 932, 139.11719, 801, 277.65625, 852, 224.96094, 570.09375, 10, 852, 139.11719, 8, 14.90625, 721, 277.65625)
@@ -26,8 +27,9 @@ size = Vector2(20, 485)
 
 [node name="Saloon" type="Node2D" unique_id=2031524267]
 
-[node name="Player" parent="." unique_id=1800572126 groups=["navAgent"] instance=ExtResource("1_rfbf8")]
+[node name="Player" parent="." unique_id=1800572126 node_paths=PackedStringArray("hitbox") groups=["navAgent"] instance=ExtResource("1_rfbf8")]
 position = Vector2(564, 252)
+hitbox = NodePath("PlayerBody/HurtBox")
 
 [node name="Customers" type="Node" parent="." unique_id=457267143]
 
@@ -57,7 +59,11 @@ position = Vector2(9, -1)
 scale = Vector2(1, 0.9888051)
 navigation_polygon = SubResource("NavigationPolygon_rs0cq")
 
-[node name="GameManager" type="Node" parent="." unique_id=926266096]
+[node name="GameManager" type="Node" parent="." unique_id=926266096 node_paths=PackedStringArray("player", "spawnMarker", "door")]
+script = ExtResource("5_uiyr6")
+player = NodePath("../Player")
+spawnMarker = NodePath("../SpawnPoint")
+door = NodePath("../Door")
 
 [node name="SaloonWalls" type="Node" parent="." unique_id=118256499]
 
@@ -82,5 +88,8 @@ shape = SubResource("RectangleShape2D_cxuum")
 [node name="LeftWall" type="CollisionShape2D" parent="SaloonWalls/WallColliders" unique_id=1147670908]
 position = Vector2(7, 252.5)
 shape = SubResource("RectangleShape2D_mt4hs")
+
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=1068208517]
+position = Vector2(574, -49)
 
 [editable path="Player"]

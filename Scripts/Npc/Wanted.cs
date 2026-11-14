@@ -10,7 +10,8 @@ public partial class Wanted : Customer
 
     // TODO: PASS IN CUSTOMER ATTRIBUTES TO CONSTRUCTOR
 	// THESE WILL LINK TO THE WANTED POSTER
-    public Wanted(Chair target) : base(target) { }
+    public Wanted(Chair target, Node2D d, Marker2D spawn) : base(target, d, spawn) { }
+	public Wanted() { }
 
 	public override void _Ready()
 	{
