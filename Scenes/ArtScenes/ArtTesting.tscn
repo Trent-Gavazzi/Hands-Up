@@ -34,6 +34,8 @@
 [ext_resource type="Texture2D" uid="uid://cau0peispb5hq" path="res://Sprites/BackgroundArt/Lighting/Cloudy.png" id="32_2h7rh"]
 [ext_resource type="Texture2D" uid="uid://bjduvic8thfl7" path="res://Sprites/BackgroundArt/Lighting/ConeFade.png" id="33_5n6ot"]
 [ext_resource type="SpriteFrames" uid="uid://mmpf2x7dxxdg" path="res://Sprites/Furniture/SaloonDoor/Animations/EntersDoorSwing.tres" id="34_us243"]
+[ext_resource type="SpriteFrames" uid="uid://c0ea64ghqv4fs" path="res://Sprites/Characters/IdleMan.tres" id="35_vqy0o"]
+[ext_resource type="SpriteFrames" uid="uid://c6meo4billxv7" path="res://Sprites/Characters/RunMan.tres" id="36_8y1bp"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j3rb5"]
 diffuse_texture = ExtResource("1_uog85")
@@ -948,3 +950,25 @@ sprite_frames = ExtResource("34_us243")
 frame = 12
 frame_progress = 1.0
 flip_h = true
+
+[node name="ManNPC" type="AnimatedSprite2D" parent="." unique_id=168182913]
+modulate = Color(0.47, 0.47, 0.47, 1)
+scale = Vector2(0.095, 0.095)
+sprite_frames = ExtResource("35_vqy0o")
+autoplay = "default"
+frame_progress = 0.8892717
+
+[node name="ManNPC2" type="AnimatedSprite2D" parent="." unique_id=1443569733]
+modulate = Color(0.47, 0.47, 0.47, 1)
+position = Vector2(466, -77)
+scale = Vector2(-0.095, 0.095)
+sprite_frames = ExtResource("35_vqy0o")
+autoplay = "default"
+frame_progress = 0.814553
+
+[node name="ManNPC3" type="AnimatedSprite2D" parent="." unique_id=1223852988]
+modulate = Color(0.47, 0.47, 0.47, 1)
+position = Vector2(280, 207)
+scale = Vector2(-0.095, 0.095)
+sprite_frames = ExtResource("36_8y1bp")
+autoplay = "default"
