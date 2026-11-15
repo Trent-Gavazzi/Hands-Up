@@ -74,7 +74,6 @@ public partial class DrinkStation : Node2D, IInteractable
     // Returns false if the hand-off failed, leaving the drink on the station
     protected virtual bool giveDrink(Node interactor)
     {
-        // TODO: put drinkType in the player's hand, return false if hands are full, e.g.
         if (interactor is not Player player || !player.tryHoldDrink(drinkType)) return false;
         isDrinkReady = false;
         EmitSignal(SignalName.DrinkTaken);

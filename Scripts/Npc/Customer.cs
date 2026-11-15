@@ -390,7 +390,8 @@ public partial class Customer : CharacterBody2D, IInteractable
     {
         if (!canInteract(interactor)) return false;
 
-        // TODO: Implement serving drink here
+        if (interactor is not Player player || !player.tryRemoveDrink(drinkTypeReq)) return false;
+            return tryServeDrink(drinkTypeReq);
         GD.Print("Player interact with customer.");
         return true;
     }
