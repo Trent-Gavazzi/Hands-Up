@@ -1,13 +1,18 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+
 
 public partial class Player : Node2D
 {
 	[Export] private PlayerMovement player;
     [Export] private Area2D hitbox;
     [Export] private NavigationObstacle2D navObstacle;
+    [Export] private int maxDrinks = 2;
+
     private const int maxHealth = 100;
 	private int health;
+    private readonly List<DrinkType> drinkInv = new List<DrinkType>();
 
 	[Signal] public delegate void HealthChangedEventHandler(int current, int max);
 	[Signal] public delegate void DiedEventHandler();
@@ -57,5 +62,33 @@ public partial class Player : Node2D
     public int getHealth()
     {
         return health;
+    }
+
+    public bool tryHoldDrink(DrinkType drink)
+    {
+        if(!isDrinksMaxed()) return false;
+        
+        drinkInv.Add(drink);
+        return true;
+    }
+
+    public bool isDrinksMaxed()
+    {
+        return drinkInv.Count >= maxDrinks;
+    }
+
+    public bool hasDrink(DrinkType drink)
+    {
+        return drinkInv.Contains(drink);
+    }
+
+    public bool tryRemoveDrink(DrinkType drink)
+    {
+        return drinkInv.Remove(drink);
+    }
+    
+    public IReadOnlyList<DrinkType> getDrinks()
+    {
+        return drinkInv;
     }
 }

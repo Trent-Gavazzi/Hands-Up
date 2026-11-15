@@ -213,6 +213,7 @@ public partial class PlayerMovement : CharacterBody2D
         }
     }
 
+
     // ---------- Input setup ----------
     // Creates default bindings only if the action isn't already defined in
     // Project Settings > Input Map, so editor bindings always take priority.
