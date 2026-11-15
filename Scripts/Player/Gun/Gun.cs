@@ -1,9 +1,11 @@
 using Godot;
+using System;
 
 public enum gunState
 {
     Holstered,
-    Drawn
+    Drawn,
+    Reloading
 }
 
 // Must be a direct child of the PlayerMovement node.
@@ -25,9 +27,14 @@ public partial class Gun : Node2D
     [Export] private Vector2 ShoulderOffset = new(0f, -4f);
     [Export] private float AimRadius = 12f;
     [Export] private float MuzzleDistance = 10f;
+    [Export] private int maxBullets = 5;
+    [Export] private float reloadTime = 1.5f;
     // Attack speed
     [Export] private ulong gunCooldownMsec = 250;
+
     private ulong lastFireTime = 0;
+    private int currentBullets;
+    private Timer reloadTimer;
 
     [Signal] private delegate void StateChangedEventHandler(gunState previous, gunState next);
 
@@ -42,12 +49,29 @@ public partial class Gun : Node2D
         _player = GetParent() as PlayerMovement;
         if (_player == null)
             GD.PushError($"{Name}: Gun is not direct child of a PlayerMovement node.");
+
+        if (player == null)
+            GD.PushError($"{Name}: 'player' export is not assigned, bullets will have no shooter.");
+
+        currentBullets = maxBullets;
+        reloadTimer = makeTimer(onReloadFinished);
     }
 
     public override void _UnhandledInput(InputEvent @event)
     {
         if (@event.IsActionPressed("toggle_gun"))
-            ChangeState(IsDrawn ? gunState.Holstered : gunState.Drawn);
+        {
+            if (CurrentState != gunState.Reloading && !player.isDrinksMaxed())
+                ChangeState(IsDrawn ? gunState.Holstered : gunState.Drawn);
+        }
+        else if (IsDrawn && @event.IsActionPressed("shoot"))
+        {
+            tryShoot();
+        }
+        else if (IsDrawn && @event.IsActionPressed("reload"))
+        {
+            tryReload();
+        }
     }
 
     // Runs after the player's _Process (children process after parents),
@@ -66,14 +90,12 @@ public partial class Gun : Node2D
                 Rotation = facingLeft ? Mathf.Pi - HolsterRotation : HolsterRotation;
                 break;
 
+            // Keep aiming while reloading so the gun follows the player
             case gunState.Drawn:
+            case gunState.Reloading:
                 Vector2 aim = GetAimDirection();
                 Position = ShoulderOffset + aim * AimRadius;
                 Rotation = aim.Angle();
-                if (Input.IsActionJustPressed("shoot"))
-                {
-                   tryShoot();
-                }
                 break;
         }
 
@@ -103,11 +125,13 @@ public partial class Gun : Node2D
         EmitSignal(SignalName.StateChanged, Variant.From(previous), Variant.From(next));
     }
 
+    // ---------- Shooting ----------
+
     private void tryShoot()
     {
         ulong currentTime = Time.GetTicksMsec();
-        
-        if(currentTime - lastFireTime >= gunCooldownMsec)
+
+        if (currentTime - lastFireTime >= gunCooldownMsec && currentBullets > 0)
         {
             shoot();
             lastFireTime = currentTime;
@@ -117,15 +141,40 @@ public partial class Gun : Node2D
     private void shoot()
     {
         Vector2 aim = GetAimDirection();
-
         Bullet bulletInstance = BulletScene.Instantiate<Bullet>();
         bulletInstance.init(aim, player);
 
-        bulletInstance.Position = HolsterOffset;
         GetTree().CurrentScene.AddChild(bulletInstance);
         bulletInstance.GlobalPosition = GlobalPosition + aim * MuzzleDistance;
 
+        currentBullets -= 1;
         GD.Print("Created and fired bullet");
+    }
+
+    // ---------- Reloading ----------
+
+    private void tryReload()
+    {
+        if (currentBullets >= maxBullets) return;
+
+        ChangeState(gunState.Reloading);
+        reloadTimer.Start(reloadTime);
+        // TODO: Play reload animation here
+    }
+
+    private void onReloadFinished()
+    {
+        currentBullets = maxBullets;
+        ChangeState(gunState.Drawn);
+    }
+
+    private Timer makeTimer(Action onTimeout)
+    {
+        Timer timer = new Timer();
+        timer.OneShot = true;              // fire once, then stop
+        timer.Timeout += onTimeout;
+        AddChild(timer);                   // must be in the tree to tick
+        return timer;
     }
 
     public bool isDrawn()

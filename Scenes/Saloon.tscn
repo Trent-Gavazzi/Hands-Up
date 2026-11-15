@@ -41,7 +41,7 @@ targetChair = NodePath("../../Chairs/Chair")
 
 [node name="Customer2" parent="Customers" unique_id=1912752529 node_paths=PackedStringArray("targetChair") instance=ExtResource("3_wa1r4")]
 position = Vector2(614.00006, 94)
-scale = Vector2(1.7377102, 1.8020893)
+scale = Vector2(1.9059741, 1.8811287)
 targetChair = NodePath("../../Chairs/Chair2")
 
 [node name="Chairs" type="Node" parent="." unique_id=2133073322]
@@ -57,7 +57,7 @@ position = Vector2(555, 18)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1893911941]
 position = Vector2(9, -1)
-scale = Vector2(1, 0.9888051)
+scale = Vector2(1, 1.006821)
 navigation_polygon = SubResource("NavigationPolygon_rs0cq")
 
 [node name="GameManager" type="Node" parent="." unique_id=926266096 node_paths=PackedStringArray("player", "spawnMarker", "door")]

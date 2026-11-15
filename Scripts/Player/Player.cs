@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+
 
 public partial class Player : Node2D
 {
@@ -8,6 +10,8 @@ public partial class Player : Node2D
     [Export] private NavigationObstacle2D navObstacle;
     private const int maxHealth = 100;
 	private int health;
+    private List<Drink> drinkInv;
+    private int maxDrinks;
 
 	[Signal] public delegate void HealthChangedEventHandler(int current, int max);
 	[Signal] public delegate void DiedEventHandler();
@@ -57,5 +61,24 @@ public partial class Player : Node2D
     public int getHealth()
     {
         return health;
+    }
+
+    public bool tryHoldDrink(DrinkType drink)
+    {
+        if(isDrinksMaxed())
+        {
+            drinkInv.Add(new Drink(drink));
+            return true;
+        }
+        return false;
+    }
+
+    public bool isDrinksMaxed()
+    {
+        if(drinkInv.Count < maxDrinks)
+        {
+            return true;
+        }
+        return false;
     }
 }
