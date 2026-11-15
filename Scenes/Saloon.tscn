@@ -39,12 +39,7 @@ position = Vector2(559, 96)
 scale = Vector2(1.7377102, 1.8020893)
 targetChair = NodePath("../../Chairs/Chair")
 
-[node name="Customer2" parent="Customers" unique_id=1912752529 node_paths=PackedStringArray("targetChair") instance=ExtResource("3_wa1r4")]
-position = Vector2(614.00006, 94)
-scale = Vector2(1.9059741, 1.8811287)
-targetChair = NodePath("../../Chairs/Chair2")
-
-[node name="Chairs" type="Node" parent="." unique_id=2133073322]
+[node name="Chairs" type="Node" parent="." unique_id=2133073322 groups=["tables"]]
 
 [node name="Chair" parent="Chairs" unique_id=854854217 instance=ExtResource("2_rs0cq")]
 position = Vector2(901, 179)
@@ -93,6 +88,6 @@ position = Vector2(7, 252.5)
 shape = SubResource("RectangleShape2D_mt4hs")
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=1068208517]
-position = Vector2(574, -49)
+position = Vector2(582, 42)
 
 [editable path="Player"]

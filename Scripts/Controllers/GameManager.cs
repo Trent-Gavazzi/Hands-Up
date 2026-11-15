@@ -5,6 +5,7 @@ using System.Linq;
 
 public partial class GameManager : Node
 {
+    [ExportGroup("Scene References")]
     [Export] private Player player;
     [Export] private Marker2D spawnMarker;
     [Export] private Node2D door;
@@ -16,51 +17,90 @@ public partial class GameManager : Node
     // Will define visuals for generated customers
     [Export] private PackedScene customerTemplate;
 
-    [Export] private ulong customerEnterTimerMSec = 3000;
-    [Export] private int baseWantedFrequency = 3;
 
-    private float totalSatisfation = 100f;
+    [ExportGroup("Level Flow")]
+    [Export] private float minSpawnDelay = 3f;   // Seconds between arrivals, randomized in this range
+    [Export] private float maxSpawnDelay = 8f;
+    [Export] private int maxActiveCustomers = 0; // 0 = limited only by free chairs
+    [Export] private int customersPerLevel = 0;  // 0 = endless
+    [Export(PropertyHint.Range, "0,10,1")] private int baseWantedFrequency = 3; // Chance out of 10
+
+    [ExportGroup("Rating")]
+    [Export(PropertyHint.Range, "0,100,1")] private float startRating = 100f;
+    // How far each departing customer pulls the rating toward their satisfaction (0-1)
+    [Export(PropertyHint.Range, "0,1,0.05")] private float ratingWeight = 0.25f;
+    [Export] private float innocentKillPenalty = 25f;
 
     private int wantedFrequency;
+    private float saloonRating;
     private ulong lastCustomerTime; // Last time a customer was allowed in
 
+    // Level stats
+    private int customersSpawned = 0;
+    private int customersLeft = 0;
+    private int customersKilled = 0;
+    private bool levelOver = false;
+
+    private Timer spawnTimer;
     private List<Table> tables;
     private List<Customer> activeCustomers = new List<Customer>();
 
     // Add some variable for wanted attributes that varies from scene to scene
 
-    private Random rand = new Random();
+    private readonly Random rand = new Random();
 
     public override void _Ready()
     {
         tables = GetTree().GetNodesInGroup("Tables").OfType<Table>().ToList();
         wantedFrequency = baseWantedFrequency;
+        saloonRating = startRating;
         setWantedAttributes();
+
+        spawnTimer = new Timer();
+        spawnTimer.OneShot = true;
+        spawnTimer.Timeout += onSpawnTimeout;
+        AddChild(spawnTimer);
+
+        string activeCap = maxActiveCustomers > 0 ? maxActiveCustomers.ToString() : "chairs";
+        string levelSize = customersPerLevel > 0 ? customersPerLevel.ToString() : "endless";
+        GD.Print($"[Saloon] Level start | spawn {minSpawnDelay}-{maxSpawnDelay}s | max active: {activeCap} | " +
+                 $"customers: {levelSize} | wanted: {wantedFrequency}/10 | rating: {saloonRating:F0}");
+
+        scheduleNextCustomer();
     }
 
-    public override void _Process(double delta)
+    private void scheduleNextCustomer()
     {
-        ulong currentTime = Time.GetTicksMsec();
-        tryCreateNewCustomer(currentTime);
+        spawnTimer.Start(GD.RandRange(minSpawnDelay, maxSpawnDelay));
     }
 
-    private bool tryCreateNewCustomer(ulong currentTime)
+    private void onSpawnTimeout()
     {
-        if (currentTime - lastCustomerTime < customerEnterTimerMSec) return false;
+        if (levelOver) return;
 
-        lastCustomerTime = currentTime;
-        return createNewCustomer();
+        if (customersPerLevel > 0 && customersSpawned >= customersPerLevel) return;
+
+        tryCreateNewCustomer();
+        scheduleNextCustomer();
     }
 
-    private bool createNewCustomer()
+    private bool tryCreateNewCustomer()
     {
+        if (maxActiveCustomers > 0 && activeCustomers.Count >= maxActiveCustomers) return false;
+
         Chair targetChair = findFreeChair();
-        if (targetChair == null) return false; // saloon is full
+        if (targetChair == null) return false;
 
+        createNewCustomer(targetChair);
+        return true;
+    }
+
+    private void createNewCustomer(Chair targetChair)
+    {
         Customer customer;
-        int roll = rand.Next(1, 11);
+        bool isWanted = rand.Next(1, 11) <= wantedFrequency;
 
-        if (roll > wantedFrequency)
+        if (!isWanted)
         {
             customer = customerScene.Instantiate<Customer>();
             // TODO: CUSTOMERS NEED TO BE JUST RANDOMIZED, CAN'T BE WANTED LOOK
@@ -80,7 +120,9 @@ public partial class GameManager : Node
 
         AddChild(customer);
         activeCustomers.Add(customer);
-        return true;
+        customersSpawned++;
+
+        GD.Print($"[Saloon] Customer #{customersSpawned} arrived{(isWanted ? " (wanted)" : "")} | active: {activeCustomers.Count}");
     }
 
     // For now just the first available seat across all tables
@@ -104,17 +146,58 @@ public partial class GameManager : Node
 
     private void onCustomerExit(bool wasWanted, Customer customerInstance)
     {
-        if (wasWanted) { handleWantedCustomer(); }
-        else { totalSatisfation += customerInstance.getSatisfaction(); }
-        activeCustomers.Remove(customerInstance);
-
-        GD.Print($"A {wasWanted} customer has exited the saloon");
         customerInstance.Exit -= onCustomerExit;
         activeCustomers.Remove(customerInstance);
+
+        bool wasKilled = customerInstance.getHealth() <= 0;
+        if (wasKilled) customersKilled++;
+        else customersLeft++;
+
+        if (wasWanted)
+        {
+            handleWantedCustomer(wasKilled);
+        }
+        else if (wasKilled)
+        {
+            setRating(saloonRating - innocentKillPenalty, "an innocent customer was shot");
+        }
+        else
+        {
+            float satisfaction = customerInstance.getSatisfaction();
+            setRating(Mathf.Lerp(saloonRating, satisfaction, ratingWeight),
+                      $"customer left at {satisfaction:F0} satisfaction");
+        }
+
+        checkLevelComplete();
+    }
+
+    private void setRating(float value, string reason)
+    {
+        float previous = saloonRating;
+        saloonRating = Mathf.Clamp(value, 0f, 100f);
+        GD.Print($"[Saloon] Rating {previous:F0} -> {saloonRating:F0} ({reason})");
+        // TODO: Lose condition / UI hook once the UI is stable
+    }
+
+    public float getSaloonRating()
+    {
+        return saloonRating;
+    }
+
+    private void checkLevelComplete()
+    {
+        if (customersPerLevel <= 0) return;
+        if (customersSpawned < customersPerLevel || activeCustomers.Count > 0) return;
+
+        levelOver = true;
+        spawnTimer.Stop();
+        GD.Print($"[Saloon] Level complete | rating: {saloonRating:F0} | left: {customersLeft} | killed: {customersKilled}");
     }
 
     // Handles wanted customer exiting saloon
-    private void handleWantedCustomer()
+    private void handleWantedCustomer(bool wasKilled)
     {
+        // TODO: Reward for catching, penalty for letting them escape
+        GD.Print(wasKilled ? "[Saloon] Wanted customer was taken down" : "[Saloon] Wanted customer escaped");
     }
 }
