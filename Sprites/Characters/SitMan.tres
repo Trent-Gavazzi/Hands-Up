@@ -1,0 +1,67 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://8tai7s3fq3eh"]
+
+[ext_resource type="Texture2D" uid="uid://dm8q1cx0w0l5w" path="res://Sprites/Characters/ManSit.png" id="1_2l0x3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hh85p"]
+atlas = ExtResource("1_2l0x3")
+region = Rect2(0, 0, 960, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_415kr"]
+atlas = ExtResource("1_2l0x3")
+region = Rect2(960, 0, 960, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8iic"]
+atlas = ExtResource("1_2l0x3")
+region = Rect2(1920, 0, 960, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cauvv"]
+atlas = ExtResource("1_2l0x3")
+region = Rect2(0, 1200, 960, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aotaq"]
+atlas = ExtResource("1_2l0x3")
+region = Rect2(960, 1200, 960, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kefh5"]
+atlas = ExtResource("1_2l0x3")
+region = Rect2(1920, 1200, 960, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhe20"]
+atlas = ExtResource("1_2l0x3")
+region = Rect2(0, 2400, 960, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gibfg"]
+atlas = ExtResource("1_2l0x3")
+region = Rect2(960, 2400, 960, 1200)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hh85p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_415kr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8iic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cauvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aotaq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kefh5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhe20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gibfg")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 12.0
+}]

@@ -36,6 +36,7 @@
 [ext_resource type="SpriteFrames" uid="uid://mmpf2x7dxxdg" path="res://Sprites/Furniture/SaloonDoor/Animations/EntersDoorSwing.tres" id="34_us243"]
 [ext_resource type="SpriteFrames" uid="uid://c0ea64ghqv4fs" path="res://Sprites/Characters/IdleMan.tres" id="35_vqy0o"]
 [ext_resource type="SpriteFrames" uid="uid://c6meo4billxv7" path="res://Sprites/Characters/RunMan.tres" id="36_8y1bp"]
+[ext_resource type="SpriteFrames" uid="uid://8tai7s3fq3eh" path="res://Sprites/Characters/SitMan.tres" id="36_ys1ld"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j3rb5"]
 diffuse_texture = ExtResource("1_uog85")
@@ -952,23 +953,25 @@ frame_progress = 1.0
 flip_h = true
 
 [node name="ManNPC" type="AnimatedSprite2D" parent="." unique_id=168182913]
-modulate = Color(0.47, 0.47, 0.47, 1)
+modulate = Color(0.85490197, 0.7058824, 0.5803922, 1)
 scale = Vector2(0.095, 0.095)
 sprite_frames = ExtResource("35_vqy0o")
 autoplay = "default"
-frame_progress = 0.8892717
+frame_progress = 0.52076095
 
 [node name="ManNPC2" type="AnimatedSprite2D" parent="." unique_id=1443569733]
-modulate = Color(0.47, 0.47, 0.47, 1)
-position = Vector2(466, -77)
+modulate = Color(0.85490197, 0.7058824, 0.5803922, 1)
+z_index = 350
+position = Vector2(424, 13)
 scale = Vector2(-0.095, 0.095)
-sprite_frames = ExtResource("35_vqy0o")
+sprite_frames = ExtResource("36_ys1ld")
 autoplay = "default"
-frame_progress = 0.814553
+frame_progress = 0.630689
 
 [node name="ManNPC3" type="AnimatedSprite2D" parent="." unique_id=1223852988]
-modulate = Color(0.47, 0.47, 0.47, 1)
+modulate = Color(0.85490197, 0.7058824, 0.5803922, 1)
 position = Vector2(280, 207)
 scale = Vector2(-0.095, 0.095)
 sprite_frames = ExtResource("36_8y1bp")
 autoplay = "default"
+frame_progress = 0.9982126
