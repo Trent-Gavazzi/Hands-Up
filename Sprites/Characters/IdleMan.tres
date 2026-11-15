@@ -1,0 +1,67 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://c0ea64ghqv4fs"]
+
+[ext_resource type="Texture2D" uid="uid://cdo5alagnec3r" path="res://Sprites/Characters/ManIdle.png" id="1_qcbxg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uh07u"]
+atlas = ExtResource("1_qcbxg")
+region = Rect2(0, 0, 960, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5qah"]
+atlas = ExtResource("1_qcbxg")
+region = Rect2(960, 0, 960, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4jwf"]
+atlas = ExtResource("1_qcbxg")
+region = Rect2(1920, 0, 960, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ek73u"]
+atlas = ExtResource("1_qcbxg")
+region = Rect2(0, 1200, 960, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fh75t"]
+atlas = ExtResource("1_qcbxg")
+region = Rect2(960, 1200, 960, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8n481"]
+atlas = ExtResource("1_qcbxg")
+region = Rect2(1920, 1200, 960, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bf1v"]
+atlas = ExtResource("1_qcbxg")
+region = Rect2(0, 2400, 960, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0u42"]
+atlas = ExtResource("1_qcbxg")
+region = Rect2(960, 2400, 960, 1200)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uh07u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5qah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4jwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ek73u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fh75t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8n481")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bf1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0u42")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 12.0
+}]
