@@ -110,23 +110,24 @@ public partial class Customer : CharacterBody2D, IInteractable
 
     public override void _PhysicsProcess(double delta)
     {
-        if (hasReachedDoor)
-        {
-            navAgent.TargetPosition = spawnPoint.GlobalPosition;
-        }
-
-        else if (!isNavReady || isDead)
-        {
-            return;
-        }
+        if (!isNavReady || isDead) return;
 
         if (isLeaving)
         {
             moveToTarget(delta);
             if (navAgent.IsNavigationFinished())
             {
-                hasReachedDoor = true;
-                navAgent.AvoidanceEnabled = false; // stops blocking doorway
+                if (!hasReachedDoor)
+                {
+                    // Through the door: stop blocking the doorway and head to the spawn point
+                    hasReachedDoor = true;
+                    navAgent.AvoidanceEnabled = false;
+                    navAgent.TargetPosition = spawnPoint.GlobalPosition;
+                }
+                else
+                {
+                    exitSaloon();
+                }
             }
         }
         else if (!isSeated)
@@ -260,7 +261,18 @@ public partial class Customer : CharacterBody2D, IInteractable
 
         // Slow down near the point so we don't overshoot it in one frame
         float speed = Mathf.Min(walkSpeed, toNext.Length() / (float)delta);
-        navAgent.Velocity = toNext.Normalized() * speed;
+        Vector2 desired = toNext.Normalized() * speed;
+
+        if (hasReachedDoor)
+        {
+            // Avoidance is off past the door, so move directly instead of going through the agent
+            Velocity = desired;
+            MoveAndSlide();
+        }
+        else
+        {
+            navAgent.Velocity = desired;
+        }
     }
 
     private void onVelocityComputed(Vector2 safeVelocity)
@@ -391,8 +403,14 @@ public partial class Customer : CharacterBody2D, IInteractable
         if (!canInteract(interactor)) return false;
 
         if (interactor is not Player player || !player.tryRemoveDrink(drinkTypeReq)) return false;
-            return tryServeDrink(drinkTypeReq);
-        GD.Print("Player interact with customer.");
-        return true;
+        GD.Print($"Serving Drink {drinkTypeReq}.");
+        return tryServeDrink(drinkTypeReq);
+    }
+
+    private void exitSaloon()
+    {
+        SetPhysicsProcess(false); // several physics ticks can run before QueueFree takes effect
+        EmitSignal(SignalName.Exit, isWanted, this);
+        QueueFree();
     }
 }
