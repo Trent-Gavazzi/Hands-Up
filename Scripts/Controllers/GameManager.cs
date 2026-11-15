@@ -6,6 +6,10 @@ using System.Linq;
 public partial class GameManager : Node
 {
     [ExportGroup("Scene References")]
+    // Make the game manager an easily accessible instance
+    public static GameManager Instance { get; private set; }
+
+    // Player, door, and spawning
     [Export] private Player player;
     [Export] private Marker2D spawnMarker;
     [Export] private Node2D door;
@@ -15,7 +19,8 @@ public partial class GameManager : Node
     [Export] private PackedScene wantedScene;   // Wanted.tscn
 
     // Will define visuals for generated customers
-    [Export] private PackedScene customerTemplate;
+    [Export] private PackedScene customerTemplateManager;
+    public CharacterTemplateManager characterTemplateManager { get; private set; }
 
 
     [ExportGroup("Level Flow")]
@@ -51,11 +56,14 @@ public partial class GameManager : Node
 
     public override void _Ready()
     {
+        // Make the game manager have an easily accessible static instance
+        Instance = this;
+
+        // Set up the tables and wanted frequency
         tables = GetTree().GetNodesInGroup("Tables").OfType<Table>().ToList();
         wantedFrequency = baseWantedFrequency;
         saloonRating = startRating;
         setWantedAttributes();
-
         spawnTimer = new Timer();
         spawnTimer.OneShot = true;
         spawnTimer.Timeout += onSpawnTimeout;
@@ -67,6 +75,8 @@ public partial class GameManager : Node
                  $"customers: {levelSize} | wanted: {wantedFrequency}/10 | rating: {saloonRating:F0}");
 
         scheduleNextCustomer();
+        // Create the customer template manager
+        characterTemplateManager = customerTemplateManager.Instantiate<CharacterTemplateManager>();
     }
 
     private void scheduleNextCustomer()
@@ -103,14 +113,15 @@ public partial class GameManager : Node
         if (!isWanted)
         {
             customer = customerScene.Instantiate<Customer>();
-            // TODO: CUSTOMERS NEED TO BE JUST RANDOMIZED, CAN'T BE WANTED LOOK
+            // Set the customers template manager
+            customer.characterTemplateManager = characterTemplateManager;
         }
         else
         {
             Wanted wanted = wantedScene.Instantiate<Wanted>();
             wanted.setPlayer(player);
-            // TODO: WANTED ENEMIES NEED TO MATCH ONE OF THE POSTERS
             customer = wanted;
+            customer.characterTemplateManager = characterTemplateManager;
         }
 
         // Must be configured before AddChild, since _Ready reads these values

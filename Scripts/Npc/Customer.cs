@@ -49,13 +49,32 @@ public partial class Customer : CharacterBody2D, IInteractable
 
     protected bool interactionEnabled = false; // once seated we turn on the interactable (line 374)
 
+    // Visual Attributes
+    public CharacterTemplateManager characterTemplateManager;
+    private VisualAttributes myAttributes;
+    [Export] AnimatedSprite2D animatedSprite2D;
+
     // Call before adding to the scene tree; _Ready depends on these values
     // TODO: PASS IN CUSTOMER ATTRIBUTES HERE
     public void setup(Chair target, Node2D d, Marker2D spawn)
     {
+        // Set the target chair location
         targetChair = target;
         door = d;
         spawnPoint = spawn;
+
+        // Get our visual attributes data
+        if(!isWanted)
+        {
+            myAttributes = characterTemplateManager.getNonWanted();
+        } else
+        {
+            myAttributes = characterTemplateManager.getWanted();
+        }
+
+        // Use that data to change our appearance
+        animatedSprite2D.Modulate = myAttributes.color;
+
     }
 
     public override void _Ready()

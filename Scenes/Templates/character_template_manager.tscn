@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://oputeih667d6"]
+
+[ext_resource type="Script" uid="uid://wq8vyv2r3t3t" path="res://Scripts/Controllers/CharacterTemplateManager.cs" id="1_pgqvq"]
+
+[node name="CharacterTemplateManager" type="Node2D" unique_id=83425585]
+script = ExtResource("1_pgqvq")
+colorTypes = PackedColorArray(0.76240367, 0.76240367, 0.76240367, 1, 0.7607843, 0.7607843, 0.7607843, 1, 0.7607843, 0.7607843, 0.7607843, 1, 0.7607843, 0.7607843, 0.7607843, 1, 0.7607843, 0.7607843, 0.7607843, 1, 0.7607843, 0.7607843, 0.7607843, 1, 0.7607843, 0.7607843, 0.7607843, 1)
