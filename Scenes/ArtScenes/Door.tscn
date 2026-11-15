@@ -1,5 +1,27 @@
 [gd_scene format=3 uid="uid://khwa7pitxa5v"]
 
+[ext_resource type="Texture2D" uid="uid://c6b75wrd67v2y" path="res://icon.svg" id="1_2o05y"]
+[ext_resource type="SpriteFrames" uid="uid://mmpf2x7dxxdg" path="res://Sprites/Furniture/SaloonDoor/Animations/EntersDoorSwing.tres" id="2_7ky0j"]
+
 [node name="Door" type="Marker2D" unique_id=854244518 groups=["door"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1886079565]
+visible = false
+texture = ExtResource("1_2o05y")
+
+[node name="SaloonDoor" type="AnimatedSprite2D" parent="." unique_id=885471497]
+z_index = 300
+position = Vector2(-35, -5.5999966)
+scale = Vector2(0.265, 0.231)
+sprite_frames = ExtResource("2_7ky0j")
+frame = 12
+frame_progress = 1.0
+
+[node name="SaloonDoor2" type="AnimatedSprite2D" parent="." unique_id=1509971968]
+z_index = 300
+position = Vector2(37, -5.5999966)
+scale = Vector2(0.265, 0.231)
+sprite_frames = ExtResource("2_7ky0j")
+frame = 12
+frame_progress = 1.0
+flip_h = true
