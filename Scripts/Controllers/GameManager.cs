@@ -106,6 +106,7 @@ public partial class GameManager : Node
     {
         if (wasWanted) { handleWantedCustomer(); }
         else { totalSatisfation += customerInstance.getSatisfaction(); }
+        activeCustomers.Remove(customerInstance);
 
         GD.Print($"A {wasWanted} customer has exited the saloon");
         customerInstance.Exit -= onCustomerExit;
