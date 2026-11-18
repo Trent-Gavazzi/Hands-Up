@@ -1,0 +1,543 @@
+[gd_scene format=3 uid="uid://c1wfn50c3fd5m"]
+
+[ext_resource type="Texture2D" uid="uid://dpqgcrq2iicsc" path="res://Sprites/Menu/SaloonOutsideBuilding.png" id="1_3ila8"]
+[ext_resource type="Texture2D" uid="uid://hmfp6c8pxck5" path="res://Sprites/Menu/LandscapeBackground.png" id="2_rj135"]
+[ext_resource type="PackedScene" uid="uid://wlii3h67iqha" path="res://Scenes/ArtScenes/film_grain.tscn" id="2_xmd6l"]
+[ext_resource type="Texture2D" uid="uid://d7dj3pgt1cwb" path="res://Sprites/Menu/CanyonBackground.png" id="4_fogo3"]
+[ext_resource type="Texture2D" uid="uid://n6556xqv3hes" path="res://Sprites/BackgroundArt/Lighting/Radial.png" id="5_8x2f0"]
+[ext_resource type="Texture2D" uid="uid://dun81womjbtng" path="res://Sprites/WhiteRectangle.png" id="6_yr2wf"]
+[ext_resource type="Texture2D" uid="uid://bjduvic8thfl7" path="res://Sprites/BackgroundArt/Lighting/ConeFade.png" id="7_834ge"]
+[ext_resource type="Texture2D" uid="uid://cebmieiarmsv0" path="res://Sprites/BackgroundArt/Lighting/SoftRadial.png" id="8_wxx5e"]
+[ext_resource type="Texture2D" uid="uid://cau0peispb5hq" path="res://Sprites/BackgroundArt/Lighting/Cloudy.png" id="9_kucd3"]
+[ext_resource type="Texture2D" uid="uid://nhmo4gtxg1u3" path="res://Sprites/Menu/Clouds/PaintCloud.png" id="10_k5lh5"]
+[ext_resource type="Texture2D" uid="uid://seu7w12ij17s" path="res://Sprites/Menu/Clouds/PaintCloud1.png" id="11_3ntmr"]
+
+[sub_resource type="Gradient" id="Gradient_xmd6l"]
+colors = PackedColorArray(0.039215688, 0, 0, 1, 1, 1, 0.93333334, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0gqvp"]
+gradient = SubResource("Gradient_xmd6l")
+
+[sub_resource type="Environment" id="Environment_fogo3"]
+background_mode = 3
+tonemap_mode = 2
+glow_enabled = true
+glow_normalized = true
+glow_bloom = 0.3
+adjustment_enabled = true
+adjustment_brightness = 0.9
+adjustment_contrast = 1.1
+adjustment_saturation = 1.1
+adjustment_color_correction = SubResource("GradientTexture1D_0gqvp")
+
+[sub_resource type="Curve" id="Curve_kucd3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_k5lh5"]
+curve = SubResource("Curve_kucd3")
+
+[sub_resource type="Curve" id="Curve_50few"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.8651686), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_w7yrn"]
+curve = SubResource("Curve_50few")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xyb5x"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(1, 1, 0)
+spread = 35.0
+initial_velocity_min = 39.05
+initial_velocity_max = 69.67
+gravity = Vector3(0, 15, 0)
+scale_min = 0.14999999
+scale_max = 0.19999999
+scale_curve = SubResource("CurveTexture_w7yrn")
+color = Color(0.90588236, 0.7607843, 0, 0.5254902)
+alpha_curve = SubResource("CurveTexture_k5lh5")
+
+[sub_resource type="Curve" id="Curve_w7yrn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9099099, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xyb5x"]
+curve = SubResource("Curve_w7yrn")
+
+[sub_resource type="Curve" id="Curve_834ge"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.8651686), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_48ihw"]
+curve = SubResource("Curve_834ge")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k5lh5"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -14.9999895
+angle_max = 15.0000105
+spread = 8.0
+initial_velocity_min = 24.63
+initial_velocity_max = 50.14
+gravity = Vector3(0, 0, 0)
+scale_min = 0.11
+scale_max = 0.21
+scale_curve = SubResource("CurveTexture_48ihw")
+color = Color(0.98039216, 0.7764706, 0.57254905, 0.3254902)
+alpha_curve = SubResource("CurveTexture_xyb5x")
+turbulence_noise_strength = 0.05
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ntmr"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -14.9999895
+angle_max = 15.0000105
+direction = Vector3(-1, 0, 0)
+spread = 8.0
+initial_velocity_min = 24.63
+initial_velocity_max = 50.14
+gravity = Vector3(0, 0, 0)
+scale_min = 0.11
+scale_max = 0.21
+scale_curve = SubResource("CurveTexture_48ihw")
+color = Color(0.98039216, 0.7764706, 0.57254905, 0.41960785)
+alpha_curve = SubResource("CurveTexture_xyb5x")
+turbulence_noise_strength = 0.05
+
+[sub_resource type="Curve" id="Curve_k5lh5"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2364865, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7r23e"]
+curve = SubResource("Curve_k5lh5")
+
+[sub_resource type="Curve" id="Curve_3ntmr"]
+_data = [Vector2(0.0067567676, 0), 0.0, 0.0, 0, 0, Vector2(0.24324325, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rwfy2"]
+curve = SubResource("Curve_3ntmr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_50few"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(600, 300, 1)
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 15.0
+initial_velocity_max = 30.0
+angular_velocity_min = -110.47002
+angular_velocity_max = -110.47002
+gravity = Vector3(0, 10, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = -2.2351742e-06
+scale_min = 0.01
+scale_max = 0.02
+scale_curve = SubResource("CurveTexture_rwfy2")
+color = Color(0.84313726, 0.3764706, 0.043137256, 0.18039216)
+alpha_curve = SubResource("CurveTexture_7r23e")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.09999997
+turbulence_noise_strength = 0.2
+
+[sub_resource type="Curve" id="Curve_yr2wf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_65opp"]
+curve = SubResource("Curve_yr2wf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kucd3"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = 205.70001
+angle_max = 205.70001
+spread = 15.0
+initial_velocity_min = 396.19998
+initial_velocity_max = 396.19998
+gravity = Vector3(0, 3, 0)
+scale_min = 0.01
+scale_max = 0.01
+scale_curve = SubResource("CurveTexture_48ihw")
+color = Color(0.8793683, 0.73731226, 0.5185934, 0.11372549)
+alpha_curve = SubResource("CurveTexture_65opp")
+turbulence_noise_strength = 0.05
+
+[node name="MainMenu" type="Node2D" unique_id=811958578]
+
+[node name="SaloonOutsideBuilding" type="Sprite2D" parent="." unique_id=708116736]
+z_index = 100
+position = Vector2(-2.9999998, 43)
+scale = Vector2(0.49, 0.49)
+texture = ExtResource("1_3ila8")
+
+[node name="DropShadow" type="Sprite2D" parent="SaloonOutsideBuilding" unique_id=1342262775]
+modulate = Color(0, 0, 0, 0.18431373)
+z_index = -5
+position = Vector2(469.3878, 355.10202)
+rotation = 1.7691872
+scale = Vector2(0.2222409, 0.5601568)
+texture = ExtResource("1_3ila8")
+
+[node name="LandscapeBackground" type="Sprite2D" parent="." unique_id=491024656]
+position = Vector2(-8, -121)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_rj135")
+
+[node name="LandscapeBackground2" type="Sprite2D" parent="LandscapeBackground" unique_id=1148667323]
+modulate = Color(0.6638241, 0.6638241, 0.6638241, 1)
+z_index = -5
+position = Vector2(-8.000001, 38.66667)
+scale = Vector2(0.99333334, 0.6066667)
+texture = ExtResource("2_rj135")
+flip_h = true
+
+[node name="Film_grain" parent="." unique_id=1648775128 instance=ExtResource("2_xmd6l")]
+offset_left = -947.00006
+offset_top = -486.0
+offset_right = -947.00006
+offset_bottom = -486.0
+
+[node name="TextureRect" parent="Film_grain" index="0" unique_id=1146906754]
+modulate = Color(1, 1, 1, 0.023529412)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=689275038]
+z_index = 4000
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=985918756]
+environment = SubResource("Environment_fogo3")
+
+[node name="CanyonBackground" type="Sprite2D" parent="." unique_id=939731341]
+modulate = Color(0.81285614, 0.70305955, 0.5177633, 1)
+z_index = -100
+position = Vector2(-3.0000002, 168)
+scale = Vector2(0.745, 0.745)
+texture = ExtResource("4_fogo3")
+
+[node name="MrBlueSky" type="Sprite2D" parent="." unique_id=1834643517]
+modulate = Color(0.9790918, 0.7782881, 0.5718559, 1)
+z_index = -400
+position = Vector2(10.999999, -113.999985)
+scale = Vector2(4.545, 2.415)
+texture = ExtResource("6_yr2wf")
+
+[node name="ConeFade4" type="Sprite2D" parent="MrBlueSky" unique_id=1719138266]
+modulate = Color(0.21568628, 0, 0.8784314, 0.5137255)
+z_index = -290
+z_as_relative = false
+position = Vector2(-3.0803075, 80.745346)
+rotation = -3.1184127
+scale = Vector2(0.8354475, 0.41405612)
+skew = -0.016634226
+texture = ExtResource("7_834ge")
+
+[node name="ConeFade" type="Sprite2D" parent="MrBlueSky" unique_id=942315375]
+modulate = Color(0.21568628, 0, 0.8784314, 0.5137255)
+z_index = -290
+z_as_relative = false
+position = Vector2(-2.8602853, 59.62731)
+rotation = -3.1184127
+scale = Vector2(0.8354475, 0.41405612)
+skew = -0.016634226
+texture = ExtResource("7_834ge")
+
+[node name="ConeFade2" type="Sprite2D" parent="MrBlueSky" unique_id=1678895396]
+modulate = Color(0.5857853, 0.28985578, 0.5462213, 0.5137255)
+z_index = -290
+z_as_relative = false
+position = Vector2(-2.8602853, 59.62731)
+rotation = -3.1184127
+scale = Vector2(0.8533881, 0.595411)
+skew = -0.016634345
+texture = ExtResource("7_834ge")
+
+[node name="ConeFade3" type="Sprite2D" parent="MrBlueSky" unique_id=515030659]
+modulate = Color(0.7398879, 0.06794536, 0.43397763, 0.5137255)
+z_index = -290
+z_as_relative = false
+position = Vector2(-2.8602853, 59.62731)
+rotation = -3.1184127
+scale = Vector2(0.7735202, 0.72769463)
+skew = -0.016634345
+texture = ExtResource("7_834ge")
+
+[node name="SoftRadial3" type="Sprite2D" parent="MrBlueSky" unique_id=753713174]
+modulate = Color(0.981633, 0.6225364, 0, 0.06666667)
+z_index = 200
+z_as_relative = false
+position = Vector2(-111.33113, 81.15939)
+scale = Vector2(0.4840484, 1.0848861)
+texture = ExtResource("8_wxx5e")
+
+[node name="SoftRadial4" type="Sprite2D" parent="MrBlueSky" unique_id=1252110010]
+modulate = Color(0.99999994, 0.13986173, 0.25098413, 0.06666667)
+z_index = 200
+z_as_relative = false
+position = Vector2(-80.30802, -87.370575)
+scale = Vector2(0.4840484, 1.0848861)
+texture = ExtResource("8_wxx5e")
+
+[node name="SoftRadial5" type="Sprite2D" parent="MrBlueSky" unique_id=637374601]
+modulate = Color(0.4817853, 8.759796e-06, 0.34149948, 0.06666667)
+z_index = 200
+z_as_relative = false
+position = Vector2(84.048416, 134.98962)
+scale = Vector2(0.4840484, 1.0848861)
+texture = ExtResource("8_wxx5e")
+
+[node name="Sun" type="Sprite2D" parent="." unique_id=135840439]
+modulate = Color(1, 0.70980394, 0, 0.30980393)
+z_index = -200
+position = Vector2(-639, -325)
+texture = ExtResource("8_wxx5e")
+
+[node name="Sun2" type="Sprite2D" parent="Sun" unique_id=81390842]
+modulate = Color(1, 0.8745098, 0.4, 0.30980393)
+z_index = -200
+z_as_relative = false
+position = Vector2(-5, -43)
+texture = ExtResource("8_wxx5e")
+
+[node name="Sun3" type="Sprite2D" parent="Sun" unique_id=927689687]
+modulate = Color(1, 0.8745098, 0.4, 0.30980393)
+z_index = -200
+z_as_relative = false
+position = Vector2(114, -150)
+texture = ExtResource("8_wxx5e")
+
+[node name="Godray" type="Sprite2D" parent="Sun" unique_id=900589760]
+modulate = Color(1, 0.8509804, 0.4, 0.25490198)
+z_index = 200
+z_as_relative = false
+position = Vector2(156, 140)
+rotation = -0.858407
+scale = Vector2(0.20000124, 2.072412)
+texture = ExtResource("8_wxx5e")
+
+[node name="Godray1" type="Sprite2D" parent="Sun" unique_id=1184382020]
+modulate = Color(1, 0.8745098, 0.4, 0.35686275)
+z_index = 200
+z_as_relative = false
+position = Vector2(161, 177.99997)
+rotation = -0.62996405
+scale = Vector2(0.20000124, 2.072412)
+texture = ExtResource("8_wxx5e")
+
+[node name="Godray3" type="Sprite2D" parent="Sun" unique_id=896225533]
+modulate = Color(1, 0.8745098, 0.28235295, 0.26666668)
+z_index = 200
+z_as_relative = false
+position = Vector2(165, 61.999992)
+rotation = -0.93178827
+scale = Vector2(0.20000124, 2.072412)
+texture = ExtResource("8_wxx5e")
+
+[node name="Godray2" type="Sprite2D" parent="Sun" unique_id=1717976787]
+modulate = Color(1, 0.8745098, 0.25882354, 0.21960784)
+z_index = 200
+z_as_relative = false
+position = Vector2(55, 125)
+rotation = -0.62996405
+scale = Vector2(0.20000124, 2.072412)
+texture = ExtResource("8_wxx5e")
+
+[node name="SunDotEffect" type="GPUParticles2D" parent="Sun" unique_id=1824397491]
+z_index = 601
+position = Vector2(41, 9)
+amount = 30
+texture = ExtResource("5_8x2f0")
+lifetime = 16.0
+preprocess = 16.0
+speed_scale = 0.5
+visibility_rect = Rect2(-960, 0, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_xyb5x")
+
+[node name="Particles" type="Node2D" parent="." unique_id=517501970]
+
+[node name="Clouds" type="Node2D" parent="Particles" unique_id=960460552]
+
+[node name="CloudEffect" type="GPUParticles2D" parent="Particles/Clouds" unique_id=336737843]
+z_index = -350
+z_as_relative = false
+position = Vector2(-681, -68)
+amount = 40
+texture = ExtResource("10_k5lh5")
+lifetime = 44.0
+preprocess = 32.0
+speed_scale = 0.5
+visibility_rect = Rect2(-960, 0, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_k5lh5")
+
+[node name="CloudEffect2" type="GPUParticles2D" parent="Particles/Clouds" unique_id=1512399372]
+z_index = -350
+z_as_relative = false
+position = Vector2(-681, -68)
+amount = 40
+texture = ExtResource("11_3ntmr")
+lifetime = 44.0
+preprocess = 32.0
+speed_scale = 0.5
+visibility_rect = Rect2(-960, 0, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_k5lh5")
+
+[node name="CloudEffect3" type="GPUParticles2D" parent="Particles/Clouds" unique_id=2141047528]
+z_index = -350
+z_as_relative = false
+position = Vector2(-675, -135)
+amount = 40
+texture = ExtResource("10_k5lh5")
+lifetime = 44.0
+preprocess = 32.0
+speed_scale = 0.5
+visibility_rect = Rect2(-960, 0, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_k5lh5")
+
+[node name="CloudEffect4" type="GPUParticles2D" parent="Particles/Clouds" unique_id=1752988773]
+z_index = -350
+z_as_relative = false
+position = Vector2(-675, -135)
+amount = 40
+texture = ExtResource("11_3ntmr")
+lifetime = 44.0
+preprocess = 32.0
+speed_scale = 0.5
+visibility_rect = Rect2(-960, 0, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_k5lh5")
+
+[node name="CloudEffectReverse" type="GPUParticles2D" parent="Particles/Clouds" unique_id=1464551844]
+z_index = -350
+z_as_relative = false
+position = Vector2(644, -79)
+amount = 40
+texture = ExtResource("10_k5lh5")
+lifetime = 44.0
+preprocess = 32.0
+speed_scale = 0.5
+visibility_rect = Rect2(-960, 0, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_3ntmr")
+
+[node name="CloudEffectReverse2" type="GPUParticles2D" parent="Particles/Clouds" unique_id=495477334]
+z_index = -350
+z_as_relative = false
+position = Vector2(644, -79)
+amount = 40
+texture = ExtResource("11_3ntmr")
+lifetime = 44.0
+preprocess = 32.0
+speed_scale = 0.5
+visibility_rect = Rect2(-960, 0, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_3ntmr")
+
+[node name="CloudEffectReverse3" type="GPUParticles2D" parent="Particles/Clouds" unique_id=807641933]
+z_index = -350
+z_as_relative = false
+position = Vector2(653, -153)
+amount = 40
+texture = ExtResource("10_k5lh5")
+lifetime = 44.0
+preprocess = 32.0
+speed_scale = 0.5
+visibility_rect = Rect2(-960, 0, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_3ntmr")
+
+[node name="CloudEffectReverse4" type="GPUParticles2D" parent="Particles/Clouds" unique_id=1574246319]
+z_index = -350
+z_as_relative = false
+position = Vector2(653, -153)
+amount = 40
+texture = ExtResource("11_3ntmr")
+lifetime = 44.0
+preprocess = 32.0
+speed_scale = 0.5
+visibility_rect = Rect2(-960, 0, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_3ntmr")
+
+[node name="FallingDust" type="GPUParticles2D" parent="Particles" unique_id=1059794898]
+z_index = 30
+z_as_relative = false
+amount = 120
+texture = ExtResource("9_kucd3")
+lifetime = 5.0
+preprocess = 5.0
+explosiveness = 0.2
+randomness = 0.4
+visibility_rect = Rect2(-960, -540, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_50few")
+
+[node name="FallingDust2" type="GPUParticles2D" parent="Particles" unique_id=1868292138]
+z_index = 120
+z_as_relative = false
+amount = 120
+texture = ExtResource("9_kucd3")
+lifetime = 5.0
+preprocess = 5.0
+explosiveness = 0.2
+randomness = 0.4
+visibility_rect = Rect2(-960, -540, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_50few")
+
+[node name="WindEffect" type="GPUParticles2D" parent="Particles" unique_id=832794564]
+z_index = 600
+z_as_relative = false
+position = Vector2(-718, 195)
+amount = 80
+texture = ExtResource("8_wxx5e")
+lifetime = 16.0
+preprocess = 5.0
+speed_scale = 0.5
+visibility_rect = Rect2(-960, 0, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_kucd3")
+
+[node name="WindEffect2" type="GPUParticles2D" parent="Particles" unique_id=402799912]
+z_index = 31
+z_as_relative = false
+position = Vector2(-718, 195)
+amount = 80
+texture = ExtResource("8_wxx5e")
+lifetime = 16.0
+preprocess = 5.0
+speed_scale = 0.5
+visibility_rect = Rect2(-960, 0, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_kucd3")
+
+[node name="BottomVignetteEffect" type="Node2D" parent="." unique_id=1030143116]
+
+[node name="BottomVignette" type="Sprite2D" parent="BottomVignetteEffect" unique_id=38977741]
+modulate = Color(0, 0, 0, 0.3254902)
+z_index = 300
+position = Vector2(-39, 431.00003)
+rotation = -3.121497
+scale = Vector2(4.251403, 0.99999994)
+texture = ExtResource("7_834ge")
+
+[node name="BottomVignette2" type="Sprite2D" parent="BottomVignetteEffect" unique_id=2083241538]
+modulate = Color(0, 0, 0, 0.3254902)
+z_index = 300
+position = Vector2(-37, 467)
+rotation = -3.121497
+scale = Vector2(4.251403, 0.99999994)
+texture = ExtResource("7_834ge")
+
+[node name="BottomVignette3" type="Sprite2D" parent="BottomVignetteEffect" unique_id=1521321944]
+modulate = Color(0, 0, 0, 0.3254902)
+z_index = 300
+position = Vector2(-37, 486)
+rotation = -3.121497
+scale = Vector2(4.251403, 0.99999994)
+texture = ExtResource("7_834ge")
+
+[node name="BottomVignette4" type="Sprite2D" parent="BottomVignetteEffect" unique_id=1272148831]
+modulate = Color(0, 0, 0, 0.3254902)
+z_index = 300
+position = Vector2(-37, 505.00003)
+rotation = -3.121497
+scale = Vector2(4.251403, 0.99999994)
+texture = ExtResource("7_834ge")
+
+[editable path="Film_grain"]
