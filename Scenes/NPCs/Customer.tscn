@@ -2,18 +2,21 @@
 
 [ext_resource type="Script" uid="uid://cn7ueui0br4ef" path="res://Scripts/Npc/Customer.cs" id="1_o7g7w"]
 [ext_resource type="Texture2D" uid="uid://c6b75wrd67v2y" path="res://icon.svg" id="2_r206j"]
+[ext_resource type="SpriteFrames" uid="uid://c0ea64ghqv4fs" path="res://Sprites/Characters/IdleMan.tres" id="3_8yhpo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r206j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r206j"]
 
-[node name="Customer" type="CharacterBody2D" unique_id=1912752529 node_paths=PackedStringArray("hitbox", "navAgent") groups=["navAgent"]]
+[node name="Customer" type="CharacterBody2D" unique_id=1912752529 node_paths=PackedStringArray("hitbox", "navAgent", "animatedSprite2D") groups=["navAgent"]]
 z_index = 10
 script = ExtResource("1_o7g7w")
 hitbox = NodePath("HitBox")
 navAgent = NodePath("NavigationAgent2D")
+animatedSprite2D = NodePath("ManNPC")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1401653171]
+visible = false
 position = Vector2(0, -9.000001)
 scale = Vector2(0.145, 0.145)
 texture = ExtResource("2_r206j")
@@ -36,3 +39,11 @@ collision_mask = 17
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=589474660]
 z_index = 10
 shape = SubResource("CapsuleShape2D_r206j")
+
+[node name="ManNPC" type="AnimatedSprite2D" parent="." unique_id=1153544936]
+modulate = Color(0.85309345, 0.70631397, 0.5786693, 1)
+position = Vector2(2.9999998, -16.999998)
+scale = Vector2(0.05, 0.05)
+sprite_frames = ExtResource("3_8yhpo")
+autoplay = "default"
+frame_progress = 0.8892717

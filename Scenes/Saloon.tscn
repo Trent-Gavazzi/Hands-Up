@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://khwa7pitxa5v" path="res://Scenes/ArtScenes/Door.tscn" id="3_w01x6"]
 [ext_resource type="PackedScene" uid="uid://cyrd2yd15fg5v" path="res://Scenes/NPCs/Customer.tscn" id="3_wa1r4"]
 [ext_resource type="Script" uid="uid://dhgm12enw1equ" path="res://Scripts/Controllers/GameManager.cs" id="5_uiyr6"]
-[ext_resource type="PackedScene" uid="uid://c0vfj7vqjcan5" path="res://Scenes/NPCs/Wanted.tscn" id="6_g47cs"]
+[ext_resource type="PackedScene" uid="uid://oputeih667d6" path="res://Scenes/Templates/character_template_manager.tscn" id="6_g47cs"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rs0cq"]
 vertices = PackedVector2Array(801, 363.52344, 1130.0313, 498.89844, 8, 488.09375, 721, 363.52344, 1131.9609, 10, 932, 224.96094, 932, 139.11719, 801, 277.65625, 852, 224.96094, 570.09375, 10, 852, 139.11719, 8, 14.90625, 721, 277.65625)
@@ -55,13 +55,11 @@ position = Vector2(9, -1)
 scale = Vector2(1, 1.006821)
 navigation_polygon = SubResource("NavigationPolygon_rs0cq")
 
-[node name="GameManager" type="Node" parent="." unique_id=926266096 node_paths=PackedStringArray("player", "spawnMarker", "door")]
+[node name="GameManager" type="Node" parent="." unique_id=926266096 node_paths=PackedStringArray("player", "spawnMarker")]
 script = ExtResource("5_uiyr6")
 player = NodePath("../Player")
 spawnMarker = NodePath("../SpawnPoint")
-door = NodePath("../Door")
-customerScene = ExtResource("3_wa1r4")
-wantedScene = ExtResource("6_g47cs")
+customerTemplateManager = ExtResource("6_g47cs")
 
 [node name="SaloonWalls" type="Node" parent="." unique_id=118256499]
 
