@@ -13,7 +13,7 @@ public partial class PlayerMovement : CharacterBody2D
 {
     [ExportGroup("Nodes")]
     [Export] public Gun Gun;               // optional
-    [Export] public Sprite2D BodySprite;   // optional; flipped to match the facing side
+    [Export] public AnimatedSprite2D BodySprite;   // optional; flipped to match the facing side
     [Export] public bool TextureFacesLeft = false;
 
 

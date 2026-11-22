@@ -2,6 +2,9 @@
 
 [ext_resource type="SpriteFrames" uid="uid://mmpf2x7dxxdg" path="res://Sprites/Furniture/SaloonDoor/Animations/EntersDoorSwing.tres" id="2_7ky0j"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2o05y"]
+size = Vector2(133, 87)
+
 [node name="Door" type="Marker2D" unique_id=854244518 groups=["door"]]
 
 [node name="SaloonDoor" type="AnimatedSprite2D" parent="." unique_id=885471497]
@@ -20,3 +23,11 @@ sprite_frames = ExtResource("2_7ky0j")
 frame = 12
 frame_progress = 1.0
 flip_h = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=955082053]
+collision_layer = 5
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=723179366]
+position = Vector2(1.5, 0.5)
+shape = SubResource("RectangleShape2D_2o05y")

@@ -2,25 +2,27 @@
 
 [ext_resource type="Script" uid="uid://lasjm6m7ckms" path="res://Scripts/Player/Player.cs" id="1_5ixxa"]
 [ext_resource type="Script" uid="uid://bhwuwk7nen1bf" path="res://Scripts/Player/PlayerMovement.cs" id="1_rpqav"]
-[ext_resource type="Texture2D" uid="uid://c6b75wrd67v2y" path="res://icon.svg" id="2_gntrk"]
+[ext_resource type="SpriteFrames" uid="uid://c0ea64ghqv4fs" path="res://Sprites/Characters/IdleMan.tres" id="3_52ee3"]
 [ext_resource type="Script" uid="uid://bra1bstbpuf8u" path="res://Scripts/Player/Gun/Gun.cs" id="3_gntrk"]
 [ext_resource type="PackedScene" uid="uid://btd24125367b6" path="res://Scenes/Objects/Bullet.tscn" id="4_dewec"]
+[ext_resource type="Texture2D" uid="uid://rx5ixmbm8iqe" path="res://Sprites/Gun/Revolver.png" id="6_bhhdu"]
 [ext_resource type="Script" uid="uid://dqkf52pbdyomv" path="res://Scripts/Interaction/Interactor.cs" id="6_nn08x"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ojl55"]
-radius = 40.0
-height = 120.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52ee3"]
+size = Vector2(51.841747, 42)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dgcv6"]
-radius = 32.7
-height = 65.4
+radius = 19.0
+height = 70.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dgcv6"]
 size = Vector2(134, 128)
 
-[node name="Player" type="Node2D" unique_id=176422580 node_paths=PackedStringArray("player", "navObstacle")]
+[node name="Player" type="Node2D" unique_id=176422580 node_paths=PackedStringArray("player", "hitbox", "navObstacle")]
+z_index = 1000
 script = ExtResource("1_5ixxa")
 player = NodePath("PlayerBody")
+hitbox = NodePath("PlayerBody/HurtBox")
 navObstacle = NodePath("PlayerBody/NavigationObstacle2D")
 
 [node name="PlayerBody" type="CharacterBody2D" parent="." unique_id=1800572126 node_paths=PackedStringArray("Gun", "BodySprite") groups=["navigation_obstacles"]]
@@ -34,8 +36,9 @@ script = ExtResource("1_rpqav")
 Gun = NodePath("Gun")
 BodySprite = NodePath("PlayerSprite")
 
-[node name="PlayerSprite" type="Sprite2D" parent="PlayerBody" unique_id=398942296]
-texture = ExtResource("2_gntrk")
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="PlayerBody" unique_id=1743102725]
+scale = Vector2(0.135, 0.135)
+sprite_frames = ExtResource("3_52ee3")
 
 [node name="Gun" type="Node2D" parent="PlayerBody" unique_id=1331938409 node_paths=PackedStringArray("GunSprite", "player")]
 position = Vector2(0, -1)
@@ -45,24 +48,27 @@ BulletScene = ExtResource("4_dewec")
 player = NodePath("../..")
 
 [node name="GunSprite" type="Sprite2D" parent="PlayerBody/Gun" unique_id=1382153982]
-texture = ExtResource("2_gntrk")
+position = Vector2(46.000004, 3)
+scale = Vector2(0.24, 0.24)
+texture = ExtResource("6_bhhdu")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="PlayerBody" unique_id=1953331764 groups=["navigation_obstacles"]]
 position = Vector2(-1, 0)
 radius = 10.0
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="PlayerBody" unique_id=227589741]
+position = Vector2(-5.9999995, 54)
 scale = Vector2(1.466, 1)
-shape = SubResource("CapsuleShape2D_ojl55")
+shape = SubResource("RectangleShape2D_52ee3")
 
 [node name="HurtBox" type="Area2D" parent="PlayerBody" unique_id=1544285134]
 position = Vector2(0, 62)
 scale = Vector2(2, 2)
-collision_layer = 21
+collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody/HurtBox" unique_id=1168957605]
-position = Vector2(0, -31)
+position = Vector2(-3, -27)
 shape = SubResource("CapsuleShape2D_dgcv6")
 
 [node name="Interactor" type="Area2D" parent="PlayerBody" unique_id=2017587505 node_paths=PackedStringArray("interactorOwner")]
@@ -72,5 +78,5 @@ script = ExtResource("6_nn08x")
 interactorOwner = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody/Interactor" unique_id=1824765917]
-position = Vector2(130, 0)
+position = Vector2(102, 6)
 shape = SubResource("RectangleShape2D_dgcv6")

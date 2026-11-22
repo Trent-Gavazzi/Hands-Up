@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\tjgav\\OneDrive\\Desktop\\Godot-Projects\\Hands-Up\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{274EA288-0935-4CCF-A4CF-B2D79FB50777}|HandsUp.csproj|c:\\users\\tjgav\\onedrive\\desktop\\godot-projects\\hands-up\\scripts\\player\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{274EA288-0935-4CCF-A4CF-B2D79FB50777}|HandsUp.csproj|solutionrelative:scripts\\player\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{274EA288-0935-4CCF-A4CF-B2D79FB50777}|HandsUp.csproj|c:\\users\\tjgav\\onedrive\\desktop\\godot-projects\\hands-up\\scripts\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{274EA288-0935-4CCF-A4CF-B2D79FB50777}|HandsUp.csproj|solutionrelative:scripts\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -25,10 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{274EA288-0935-4CCF-A4CF-B2D79FB50777}|HandsUp.csproj|c:\\users\\tjgav\\onedrive\\desktop\\godot-projects\\hands-up\\scripts\\player\\gun\\gun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{274EA288-0935-4CCF-A4CF-B2D79FB50777}|HandsUp.csproj|solutionrelative:scripts\\player\\gun\\gun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{274EA288-0935-4CCF-A4CF-B2D79FB50777}|HandsUp.csproj|c:\\users\\tjgav\\onedrive\\desktop\\godot-projects\\hands-up\\scripts\\player\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{274EA288-0935-4CCF-A4CF-B2D79FB50777}|HandsUp.csproj|solutionrelative:scripts\\player\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{274EA288-0935-4CCF-A4CF-B2D79FB50777}|HandsUp.csproj|c:\\users\\tjgav\\onedrive\\desktop\\godot-projects\\hands-up\\scripts\\player\\gun\\bullet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -83,11 +83,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\tjgav\\OneDrive\\Desktop\\Godot-Projects\\Hands-Up\\Scripts\\Player\\Player.cs",
               "RelativeDocumentMoniker": "Scripts\\Player\\Player.cs",
@@ -105,20 +105,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "CharacterTemplateManager.cs",
               "DocumentMoniker": "C:\\Users\\tjgav\\OneDrive\\Desktop\\Godot-Projects\\Hands-Up\\Scripts\\Controllers\\CharacterTemplateManager.cs",
               "RelativeDocumentMoniker": "Scripts\\Controllers\\CharacterTemplateManager.cs",
-              "ToolTip": "C:\\Users\\tjgav\\OneDrive\\Desktop\\Godot-Projects\\Hands-Up\\Scripts\\Controllers\\CharacterTemplateManager.cs*",
-              "RelativeToolTip": "Scripts\\Controllers\\CharacterTemplateManager.cs*",
+              "ToolTip": "C:\\Users\\tjgav\\OneDrive\\Desktop\\Godot-Projects\\Hands-Up\\Scripts\\Controllers\\CharacterTemplateManager.cs",
+              "RelativeToolTip": "Scripts\\Controllers\\CharacterTemplateManager.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-21T23:01:43.22Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-21T23:01:43.22Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Customer.cs",
               "DocumentMoniker": "C:\\Users\\tjgav\\OneDrive\\Desktop\\Godot-Projects\\Hands-Up\\Scripts\\Npc\\Customer.cs",
               "RelativeDocumentMoniker": "Scripts\\Npc\\Customer.cs",
@@ -126,12 +125,11 @@
               "RelativeToolTip": "Scripts\\Npc\\Customer.cs",
               "ViewState": "AgIAADAAAAAAAAAAAAAewDoAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-15T03:32:52.467Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-15T03:32:52.467Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "DrinkStation.cs",
               "DocumentMoniker": "C:\\Users\\tjgav\\OneDrive\\Desktop\\Godot-Projects\\Hands-Up\\Scripts\\Environment\\DrinkStations\\DrinkStation.cs",
               "RelativeDocumentMoniker": "Scripts\\Environment\\DrinkStations\\DrinkStation.cs",
@@ -143,7 +141,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Gun.cs",
               "DocumentMoniker": "C:\\Users\\tjgav\\OneDrive\\Desktop\\Godot-Projects\\Hands-Up\\Scripts\\Player\\Gun\\Gun.cs",
               "RelativeDocumentMoniker": "Scripts\\Player\\Gun\\Gun.cs",
@@ -155,15 +153,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "PlayerMovement.cs",
               "DocumentMoniker": "C:\\Users\\tjgav\\OneDrive\\Desktop\\Godot-Projects\\Hands-Up\\Scripts\\Player\\PlayerMovement.cs",
               "RelativeDocumentMoniker": "Scripts\\Player\\PlayerMovement.cs",
               "ToolTip": "C:\\Users\\tjgav\\OneDrive\\Desktop\\Godot-Projects\\Hands-Up\\Scripts\\Player\\PlayerMovement.cs",
               "RelativeToolTip": "Scripts\\Player\\PlayerMovement.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAUwBoAAABTAAAAAAAAAA==",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAIwG4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-15T03:32:52.473Z"
+              "WhenOpened": "2026-11-15T03:32:52.473Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -191,7 +190,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "GameManager.cs",
               "DocumentMoniker": "C:\\Users\\tjgav\\OneDrive\\Desktop\\Godot-Projects\\Hands-Up\\Scripts\\Controllers\\GameManager.cs",
               "RelativeDocumentMoniker": "Scripts\\Controllers\\GameManager.cs",
@@ -199,8 +198,7 @@
               "RelativeToolTip": "Scripts\\Controllers\\GameManager.cs",
               "ViewState": "AgIAAHwAAAAAAAAAAAAwwHwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-15T03:32:52.477Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-15T03:32:52.477Z"
             },
             {
               "$type": "Document",
