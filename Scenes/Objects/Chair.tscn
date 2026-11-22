@@ -2,13 +2,19 @@
 
 [ext_resource type="Script" uid="uid://c1nnpa282q8qq" path="res://Scripts/Environment/Chair.cs" id="1_67f5f"]
 [ext_resource type="Texture2D" uid="uid://c7m27rwmch6n5" path="res://Sprites/Furniture/Chair/StoolOutline.png" id="2_5ghvp"]
+[ext_resource type="Texture2D" uid="uid://cntpa0lqrrbrw" path="res://Sprites/Furniture/Chair/StoolNormal.png" id="3_4oddf"]
+[ext_resource type="Texture2D" uid="uid://cp4j16d7x3ydo" path="res://Sprites/Furniture/Tables/Table1.png" id="4_77lx3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uiyr6"]
-size = Vector2(60, 60)
+size = Vector2(78, 91.22966)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_nooxk"]
+diffuse_texture = ExtResource("2_5ghvp")
+normal_texture = ExtResource("3_4oddf")
 
 [node name="Chair" type="Node2D" unique_id=854854217 node_paths=PackedStringArray("collider") groups=["chairs", "navigation_obstacles"]]
 visibility_layer = 4
-z_index = 1
+z_index = -5
 script = ExtResource("1_67f5f")
 collider = NodePath("PlayerCollider")
 
@@ -18,9 +24,20 @@ disable_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollider" unique_id=953099893]
 z_index = 1
+position = Vector2(-1, 9.796124)
 scale = Vector2(1, 1.119)
 shape = SubResource("RectangleShape2D_uiyr6")
 
-[node name="chairSprite" type="Sprite2D" parent="." unique_id=1746774582]
-scale = Vector2(0.35423878, 0.36133787)
-texture = ExtResource("2_5ghvp")
+[node name="chairSprite" type="Sprite2D" parent="." unique_id=2002677319]
+z_index = -5
+position = Vector2(0, 9.999996)
+scale = Vector2(0.45535713, 0.45535713)
+texture = SubResource("CanvasTexture_nooxk")
+
+[node name="StoolShadow" type="Sprite2D" parent="chairSprite" unique_id=1944937066]
+modulate = Color(0, 0, 0, 0.3254902)
+z_index = -390
+z_as_relative = false
+position = Vector2(0.00011730194, 70.58824)
+scale = Vector2(0.42358732, 0.4285222)
+texture = ExtResource("4_77lx3")
