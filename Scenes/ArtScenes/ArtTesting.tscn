@@ -37,6 +37,10 @@
 [ext_resource type="SpriteFrames" uid="uid://c0ea64ghqv4fs" path="res://Sprites/Characters/IdleMan.tres" id="35_vqy0o"]
 [ext_resource type="SpriteFrames" uid="uid://c6meo4billxv7" path="res://Sprites/Characters/RunMan.tres" id="36_8y1bp"]
 [ext_resource type="SpriteFrames" uid="uid://8tai7s3fq3eh" path="res://Sprites/Characters/SitMan.tres" id="36_ys1ld"]
+[ext_resource type="Script" uid="uid://c6lxc7j3is5m4" path="res://Scripts/StickerSystem/StickerAnchor.cs" id="37_nyt7a"]
+[ext_resource type="Texture2D" uid="uid://lmjp1d4fytlu" path="res://Sprites/Interactibles/Drinks/WhiskeyKeg.png" id="38_41405"]
+[ext_resource type="Script" uid="uid://djg005q2q0t18" path="res://Scripts/StickerSystem/StickerFrameData.cs" id="38_eg7b0"]
+[ext_resource type="Texture2D" uid="uid://ci1swq4hhc2xg" path="res://Sprites/Interactibles/Drinks/Mug.png" id="39_nyt7a"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j3rb5"]
 diffuse_texture = ExtResource("1_uog85")
@@ -174,6 +178,54 @@ scale_max = 0.19999999
 scale_curve = SubResource("CurveTexture_48ihw")
 color = Color(1, 1, 0, 0.011764706)
 alpha_curve = SubResource("CurveTexture_65opp")
+
+[sub_resource type="Resource" id="Resource_eg7b0"]
+script = ExtResource("38_eg7b0")
+Position = Vector2(263.15787, 105.26317)
+RotationDegrees = 0.06888843
+Scale = Vector2(1.842, 1.842)
+
+[sub_resource type="Resource" id="Resource_vydcb"]
+script = ExtResource("38_eg7b0")
+Position = Vector2(263.15787, 105.26317)
+RotationDegrees = -0.109025605
+Scale = Vector2(1.8421053, 1.8421053)
+
+[sub_resource type="Resource" id="Resource_yfstu"]
+script = ExtResource("38_eg7b0")
+Position = Vector2(263.15787, 105.26317)
+RotationDegrees = 4.9291415
+Scale = Vector2(1.8421053, 1.8421053)
+
+[sub_resource type="Resource" id="Resource_ukjtu"]
+script = ExtResource("38_eg7b0")
+Position = Vector2(263.15787, 105.26317)
+RotationDegrees = -1.2176199
+Scale = Vector2(1.8421053, 1.8421053)
+
+[sub_resource type="Resource" id="Resource_6ma3a"]
+script = ExtResource("38_eg7b0")
+Position = Vector2(263.15787, 105.26317)
+RotationDegrees = -6.0293407
+Scale = Vector2(1.8421053, 1.8421053)
+
+[sub_resource type="Resource" id="Resource_eerjy"]
+script = ExtResource("38_eg7b0")
+Position = Vector2(263.15787, 105.26317)
+RotationDegrees = -8.794667
+Scale = Vector2(1.8421053, 1.8421053)
+
+[sub_resource type="Resource" id="Resource_of2lu"]
+script = ExtResource("38_eg7b0")
+Position = Vector2(263.15787, 105.26317)
+RotationDegrees = -6.36953
+Scale = Vector2(1.8421053, 1.8421053)
+
+[sub_resource type="Resource" id="Resource_2eb28"]
+script = ExtResource("38_eg7b0")
+Position = Vector2(263.15787, 105.26317)
+RotationDegrees = -4.195849
+Scale = Vector2(1.8421053, 1.8421053)
 
 [node name="ArtTesting" type="Node2D" unique_id=1642862765]
 
@@ -957,7 +1009,18 @@ modulate = Color(0.85490197, 0.7058824, 0.5803922, 1)
 scale = Vector2(0.095, 0.095)
 sprite_frames = ExtResource("35_vqy0o")
 autoplay = "default"
-frame_progress = 0.52076095
+frame = 1
+
+[node name="Mug" type="Sprite2D" parent="ManNPC" unique_id=1451917065 node_paths=PackedStringArray("TargetSprite")]
+position = Vector2(263.15787, 105.26317)
+rotation = 0.00120233
+scale = Vector2(19.94383, 1.8421053)
+texture = ExtResource("39_nyt7a")
+script = ExtResource("37_nyt7a")
+TargetSprite = NodePath("..")
+FrameData = Dictionary[String, Array]({
+"default": Array[ExtResource("38_eg7b0")]([SubResource("Resource_eg7b0"), SubResource("Resource_vydcb"), SubResource("Resource_yfstu"), SubResource("Resource_ukjtu"), SubResource("Resource_6ma3a"), SubResource("Resource_eerjy"), SubResource("Resource_of2lu"), SubResource("Resource_2eb28")])
+})
 
 [node name="ManNPC2" type="AnimatedSprite2D" parent="." unique_id=1443569733]
 modulate = Color(0.85490197, 0.7058824, 0.5803922, 1)
@@ -975,3 +1038,8 @@ scale = Vector2(-0.095, 0.095)
 sprite_frames = ExtResource("36_8y1bp")
 autoplay = "default"
 frame_progress = 0.9982126
+
+[node name="WhiskeyKeg" type="Sprite2D" parent="." unique_id=102007062]
+position = Vector2(524, 283)
+scale = Vector2(0.185, 0.185)
+texture = ExtResource("38_41405")
