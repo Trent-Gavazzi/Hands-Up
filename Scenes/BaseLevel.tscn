@@ -203,6 +203,7 @@ source_geometry_mode = 1
 source_geometry_group_name = &"navigation_obstacles"
 
 [node name="BaseLevel" type="Node2D" unique_id=1642862765]
+y_sort_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1667972893]
 
@@ -886,6 +887,7 @@ customerTemplateManager = ExtResource("35_j3wwy")
 position = Vector2(-14, -431)
 
 [node name="Player" parent="." unique_id=176422580 instance=ExtResource("36_j3wwy")]
+position = Vector2(17, -3)
 
 [node name="SaloonWalls" type="Node" parent="." unique_id=1037526586]
 
@@ -917,10 +919,12 @@ position = Vector2(7, 252.5)
 shape = SubResource("RectangleShape2D_u5vi5")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=2114721222]
+visible = false
 position = Vector2(-569, -198)
 scale = Vector2(1, 1.006821)
 navigation_polygon = SubResource("NavigationPolygon_j3wwy")
 
 [node name="Customer" parent="." unique_id=1912752529 node_paths=PackedStringArray("targetChair") instance=ExtResource("37_3tka0")]
-position = Vector2(-133, -95)
+y_sort_enabled = true
+position = Vector2(-2, 11)
 targetChair = NodePath("../LongTable/ChairBottom")

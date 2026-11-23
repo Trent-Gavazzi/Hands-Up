@@ -9,7 +9,7 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r206j"]
 
 [node name="Customer" type="CharacterBody2D" unique_id=1912752529 node_paths=PackedStringArray("hitbox", "navAgent", "animatedSprite2D") groups=["navAgent"]]
-z_index = 10
+z_index = 250
 script = ExtResource("1_o7g7w")
 hitbox = NodePath("HitBox")
 navAgent = NodePath("NavigationAgent2D")
@@ -45,5 +45,5 @@ modulate = Color(0.85309345, 0.70631397, 0.5786693, 1)
 position = Vector2(2.9999998, -16.999998)
 scale = Vector2(0.05, 0.05)
 sprite_frames = ExtResource("3_8yhpo")
+animation = &"Sit"
 autoplay = "default"
-frame_progress = 0.8892717

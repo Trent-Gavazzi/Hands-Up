@@ -13,7 +13,7 @@ public enum gunState
 public partial class Gun : Node2D
 {
     [ExportGroup("Nodes")]
-    [Export] private Sprite2D GunSprite;
+    [Export] private AnimatedSprite2D GunSprite;
     [Export] private PackedScene BulletScene { get; set; }
     [Export] private Player player;
 
@@ -122,6 +122,15 @@ public partial class Gun : Node2D
 
         gunState previous = CurrentState;
         CurrentState = next;
+
+        // Play the proper animation
+        if (GunSprite != null)
+        {
+            string anim = CurrentState == gunState.Reloading ? "Reload" : "default";
+            GunSprite.Play(anim);
+        }
+
+
         EmitSignal(SignalName.StateChanged, Variant.From(previous), Variant.From(next));
     }
 
@@ -159,7 +168,6 @@ public partial class Gun : Node2D
 
         ChangeState(gunState.Reloading);
         reloadTimer.Start(reloadTime);
-        // TODO: Play reload animation here
     }
 
     private void onReloadFinished()

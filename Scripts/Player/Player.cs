@@ -9,6 +9,8 @@ public partial class Player : Node2D
     [Export] private Area2D hitbox;
     [Export] private NavigationObstacle2D navObstacle;
     [Export] private int maxDrinks = 2;
+    // Animate the player
+    [Export] private AnimatedSprite2D sprite;
 
     private const int maxHealth = 100;
 	private int health;
@@ -27,6 +29,27 @@ public partial class Player : Node2D
     public override void _PhysicsProcess(double delta)
     {
         navObstacle.Velocity = player.Velocity;
+        UpdateAnimation();
+    }
+
+    private void UpdateAnimation()
+    {
+        if (sprite == null || player == null) return;
+
+        bool isMoving = player.Velocity.LengthSquared() > 1f;
+        string targetAnim = "default";
+
+        if (isMoving)
+        {
+            bool movingLeft = player.Velocity.X < -1f;
+            bool movingRight = player.Velocity.X > 1f;
+            bool isRunningBackward = (player.FacingLeft && movingRight) || (!player.FacingLeft && movingLeft);
+
+            targetAnim = isRunningBackward ? "BackRun" : "Run";
+        }
+
+        if (sprite.Animation != targetAnim)
+            sprite.Play(targetAnim);
     }
 
     public void takeDamage(int amount)

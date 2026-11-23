@@ -171,6 +171,9 @@ public partial class Customer : CharacterBody2D, IInteractable
                 }
             }
         }
+
+        // Update the animation
+        UpdateAnimation();
     }
 
     public bool sitInChair()
@@ -431,5 +434,34 @@ public partial class Customer : CharacterBody2D, IInteractable
         SetPhysicsProcess(false); // several physics ticks can run before QueueFree takes effect
         EmitSignal(SignalName.Exit, isWanted, this);
         QueueFree();
+    }
+
+
+    // Animation
+    private void UpdateAnimation()
+    {
+        if (animatedSprite2D == null) return;
+
+        string targetAnim;
+
+        if (isSeated)
+        {
+            targetAnim = "Sit";
+        }
+        else if (Velocity.LengthSquared() > 1f)
+        {
+            targetAnim = "Run";
+
+            // Flip sprite to face movement direction (assuming art faces right by default)
+            if (Mathf.Abs(Velocity.X) > 1f)
+                animatedSprite2D.FlipH = Velocity.X < 0f;
+        }
+        else
+        {
+            targetAnim = "default";
+        }
+
+        if (animatedSprite2D.Animation != targetAnim)
+            animatedSprite2D.Play(targetAnim);
     }
 }

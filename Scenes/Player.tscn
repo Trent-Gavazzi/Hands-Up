@@ -5,8 +5,56 @@
 [ext_resource type="SpriteFrames" uid="uid://c0ea64ghqv4fs" path="res://Sprites/Characters/IdleMan.tres" id="3_52ee3"]
 [ext_resource type="Script" uid="uid://bra1bstbpuf8u" path="res://Scripts/Player/Gun/Gun.cs" id="3_gntrk"]
 [ext_resource type="PackedScene" uid="uid://btd24125367b6" path="res://Scenes/Objects/Bullet.tscn" id="4_dewec"]
+[ext_resource type="Texture2D" uid="uid://bmuyduks66c2m" path="res://Sprites/Gun/Reload/RelaodRevolver1.png" id="6_1e7my"]
 [ext_resource type="Texture2D" uid="uid://rx5ixmbm8iqe" path="res://Sprites/Gun/Revolver.png" id="6_bhhdu"]
 [ext_resource type="Script" uid="uid://dqkf52pbdyomv" path="res://Scripts/Interaction/Interactor.cs" id="6_nn08x"]
+[ext_resource type="Texture2D" uid="uid://b3quaup7qf8hg" path="res://Sprites/Gun/Reload/RelaodRevolver2.png" id="7_arntx"]
+[ext_resource type="Texture2D" uid="uid://bh2dsqjnh1wjt" path="res://Sprites/Gun/Reload/RelaodRevolver3.png" id="8_lslt6"]
+[ext_resource type="Texture2D" uid="uid://bwdugiweeoabq" path="res://Sprites/Gun/Reload/RelaodRevolver4.png" id="9_ulo2v"]
+[ext_resource type="Texture2D" uid="uid://cmq7etq8cof1k" path="res://Sprites/Gun/Reload/RelaodRevolver5.png" id="10_1iu4k"]
+[ext_resource type="Texture2D" uid="uid://bts3chjeca6b8" path="res://Sprites/Gun/Reload/RelaodRevolver6.png" id="11_m0x7a"]
+[ext_resource type="Texture2D" uid="uid://b32kt4url7xr8" path="res://Sprites/Gun/Reload/RelaodRevolver7.png" id="12_5v66d"]
+[ext_resource type="Texture2D" uid="uid://bk6atbqwcea6j" path="res://Sprites/Gun/Reload/RelaodRevolver8.png" id="13_x63xi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j3rb5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_1e7my")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_arntx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_lslt6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ulo2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_1iu4k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_m0x7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_5v66d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_x63xi")
+}],
+"loop": 1,
+"name": &"Reload",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_bhhdu")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_52ee3"]
 size = Vector2(51.841747, 42)
@@ -18,15 +66,16 @@ height = 70.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dgcv6"]
 size = Vector2(134, 128)
 
-[node name="Player" type="Node2D" unique_id=176422580 node_paths=PackedStringArray("player", "hitbox", "navObstacle")]
-z_index = 1000
+[node name="Player" type="Node2D" unique_id=176422580 node_paths=PackedStringArray("player", "hitbox", "navObstacle", "sprite")]
+z_index = 250
+y_sort_enabled = true
 script = ExtResource("1_5ixxa")
 player = NodePath("PlayerBody")
 hitbox = NodePath("PlayerBody/HurtBox")
 navObstacle = NodePath("PlayerBody/NavigationObstacle2D")
+sprite = NodePath("PlayerBody/PlayerSprite")
 
 [node name="PlayerBody" type="CharacterBody2D" parent="." unique_id=1800572126 node_paths=PackedStringArray("Gun", "BodySprite") groups=["navigation_obstacles"]]
-z_index = 10
 position = Vector2(0, -31)
 scale = Vector2(0.5, 0.5)
 disable_mode = 2
@@ -39,6 +88,8 @@ BodySprite = NodePath("PlayerSprite")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="PlayerBody" unique_id=1743102725]
 scale = Vector2(0.135, 0.135)
 sprite_frames = ExtResource("3_52ee3")
+animation = &"BackRun"
+frame_progress = 0.26448417
 
 [node name="Gun" type="Node2D" parent="PlayerBody" unique_id=1331938409 node_paths=PackedStringArray("GunSprite", "player")]
 position = Vector2(0, -1)
@@ -47,10 +98,12 @@ GunSprite = NodePath("GunSprite")
 BulletScene = ExtResource("4_dewec")
 player = NodePath("../..")
 
-[node name="GunSprite" type="Sprite2D" parent="PlayerBody/Gun" unique_id=1382153982]
+[node name="GunSprite" type="AnimatedSprite2D" parent="PlayerBody/Gun" unique_id=171612222]
 position = Vector2(46.000004, 3)
 scale = Vector2(0.24, 0.24)
-texture = ExtResource("6_bhhdu")
+sprite_frames = SubResource("SpriteFrames_j3rb5")
+autoplay = "default"
+frame_progress = 0.9597434
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="PlayerBody" unique_id=1953331764 groups=["navigation_obstacles"]]
 position = Vector2(-1, 0)
