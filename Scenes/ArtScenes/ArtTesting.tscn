@@ -40,7 +40,10 @@
 [ext_resource type="Script" uid="uid://c6lxc7j3is5m4" path="res://Scripts/StickerSystem/StickerAnchor.cs" id="37_nyt7a"]
 [ext_resource type="Texture2D" uid="uid://lmjp1d4fytlu" path="res://Sprites/Interactibles/Drinks/WhiskeyKeg.png" id="38_41405"]
 [ext_resource type="Script" uid="uid://djg005q2q0t18" path="res://Scripts/StickerSystem/StickerFrameData.cs" id="38_eg7b0"]
-[ext_resource type="Texture2D" uid="uid://ci1swq4hhc2xg" path="res://Sprites/Interactibles/Drinks/Mug.png" id="39_nyt7a"]
+[ext_resource type="Texture2D" uid="uid://cwaj6arpiy3fc" path="res://Sprites/Characters/Stickers/CowboyHat1.png" id="39_eg7b0"]
+[ext_resource type="Texture2D" uid="uid://uq8cd1iu1wk4" path="res://Sprites/Characters/Stickers/Mustache3.png" id="40_vydcb"]
+[ext_resource type="Texture2D" uid="uid://dhc6s2b7yqwva" path="res://Sprites/Characters/Stickers/BandanaRed.png" id="40_yfstu"]
+[ext_resource type="Texture2D" uid="uid://cs3ip8rb2r727" path="res://Sprites/Interactibles/Drinks/MilkJug.png" id="44_yfstu"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j3rb5"]
 diffuse_texture = ExtResource("1_uog85")
@@ -181,51 +184,192 @@ alpha_curve = SubResource("CurveTexture_65opp")
 
 [sub_resource type="Resource" id="Resource_eg7b0"]
 script = ExtResource("38_eg7b0")
-Position = Vector2(263.15787, 105.26317)
-RotationDegrees = 0.06888843
-Scale = Vector2(1.842, 1.842)
+AnimationName = "default"
+Position = Vector2(-21.05264, -326.31573)
+RotationDegrees = 13.408428
+Scale = Vector2(3.8421056, 3.8421056)
+
+[sub_resource type="Resource" id="Resource_r5vun"]
+script = ExtResource("38_eg7b0")
+AnimationName = "default"
+Frame = 1
+Position = Vector2(-10.526314, -326.31583)
+RotationDegrees = 16.582287
+Scale = Vector2(3.8421056, 3.8421056)
 
 [sub_resource type="Resource" id="Resource_vydcb"]
 script = ExtResource("38_eg7b0")
-Position = Vector2(263.15787, 105.26317)
-RotationDegrees = -0.109025605
-Scale = Vector2(1.8421053, 1.8421053)
+AnimationName = "default"
+Frame = 2
+Position = Vector2(10.526318, -326.3158)
+RotationDegrees = 18.531765
+Scale = Vector2(3.8421056, 3.8421056)
 
 [sub_resource type="Resource" id="Resource_yfstu"]
 script = ExtResource("38_eg7b0")
-Position = Vector2(263.15787, 105.26317)
-RotationDegrees = 4.9291415
-Scale = Vector2(1.8421053, 1.8421053)
+AnimationName = "default"
+Frame = 3
+Position = Vector2(10.526309, -315.78946)
+RotationDegrees = 16.457731
+Scale = Vector2(3.8421056, 3.8421056)
 
 [sub_resource type="Resource" id="Resource_ukjtu"]
 script = ExtResource("38_eg7b0")
-Position = Vector2(263.15787, 105.26317)
-RotationDegrees = -1.2176199
-Scale = Vector2(1.8421053, 1.8421053)
+AnimationName = "default"
+Frame = 4
+Position = Vector2(10.526315, -294.73685)
+RotationDegrees = 20.443827
+Scale = Vector2(3.8421056, 3.8421056)
 
 [sub_resource type="Resource" id="Resource_6ma3a"]
 script = ExtResource("38_eg7b0")
-Position = Vector2(263.15787, 105.26317)
-RotationDegrees = -6.0293407
-Scale = Vector2(1.8421053, 1.8421053)
+AnimationName = "default"
+Frame = 5
+Position = Vector2(-2.861023e-06, -294.73688)
+RotationDegrees = 11.05595
+Scale = Vector2(3.8421056, 3.8421056)
 
 [sub_resource type="Resource" id="Resource_eerjy"]
 script = ExtResource("38_eg7b0")
-Position = Vector2(263.15787, 105.26317)
-RotationDegrees = -8.794667
-Scale = Vector2(1.8421053, 1.8421053)
+AnimationName = "default"
+Frame = 6
+Position = Vector2(-31.578949, -315.78946)
+RotationDegrees = 7.384423
+Scale = Vector2(3.8421056, 3.8421056)
 
 [sub_resource type="Resource" id="Resource_of2lu"]
 script = ExtResource("38_eg7b0")
-Position = Vector2(263.15787, 105.26317)
-RotationDegrees = -6.36953
-Scale = Vector2(1.8421053, 1.8421053)
+AnimationName = "default"
+Frame = 7
+Position = Vector2(-21.052631, -326.31583)
+RotationDegrees = 10.547067
+Scale = Vector2(3.8421056, 3.8421056)
 
 [sub_resource type="Resource" id="Resource_2eb28"]
 script = ExtResource("38_eg7b0")
-Position = Vector2(263.15787, 105.26317)
-RotationDegrees = -4.195849
-Scale = Vector2(1.8421053, 1.8421053)
+AnimationName = "Run"
+Position = Vector2(-10.526313, -400.00003)
+RotationDegrees = 21.049566
+Scale = Vector2(3.8421056, 3.8421056)
+
+[sub_resource type="Resource" id="Resource_o0e5i"]
+script = ExtResource("38_eg7b0")
+AnimationName = "Run"
+Frame = 1
+Position = Vector2(-31.578945, -368.42108)
+RotationDegrees = 15.214652
+Scale = Vector2(3.8421056, 3.8421056)
+
+[sub_resource type="Resource" id="Resource_35h0c"]
+script = ExtResource("38_eg7b0")
+AnimationName = "Run"
+Frame = 2
+Position = Vector2(-42.105263, -357.89478)
+RotationDegrees = 11.981279
+Scale = Vector2(3.8421056, 3.8421056)
+
+[sub_resource type="Resource" id="Resource_3sdab"]
+script = ExtResource("38_eg7b0")
+AnimationName = "Run"
+Frame = 3
+Position = Vector2(-52.63158, -368.42108)
+RotationDegrees = 14.67959
+Scale = Vector2(3.8421056, 3.8421056)
+
+[sub_resource type="Resource" id="Resource_qr24j"]
+script = ExtResource("38_eg7b0")
+AnimationName = "Run"
+Frame = 4
+Position = Vector2(-52.63158, -400.00003)
+RotationDegrees = 10.893094
+Scale = Vector2(3.8421056, 3.8421056)
+
+[sub_resource type="Resource" id="Resource_qskt6"]
+script = ExtResource("38_eg7b0")
+AnimationName = "Run"
+Frame = 5
+Position = Vector2(-21.052633, -421.05267)
+RotationDegrees = 16.91808
+Scale = Vector2(3.8421056, 3.8421056)
+
+[sub_resource type="Resource" id="Resource_5i4qb"]
+script = ExtResource("38_eg7b0")
+AnimationName = "Run"
+Frame = 6
+Position = Vector2(-31.578949, -421.05267)
+RotationDegrees = 11.155147
+Scale = Vector2(3.8421056, 3.8421056)
+
+[sub_resource type="Resource" id="Resource_k27tb"]
+script = ExtResource("38_eg7b0")
+AnimationName = "Run"
+Frame = 7
+Position = Vector2(-42.105263, -410.52637)
+RotationDegrees = 17.791332
+Scale = Vector2(3.8421056, 3.8421056)
+
+[sub_resource type="Resource" id="Resource_5rpvg"]
+script = ExtResource("38_eg7b0")
+AnimationName = "default"
+Position = Vector2(31.578857, -242.1052)
+RotationDegrees = 6.4849687
+Scale = Vector2(1.43, 1.43)
+
+[sub_resource type="Resource" id="Resource_k3ki0"]
+script = ExtResource("38_eg7b0")
+AnimationName = "default"
+Frame = 1
+Position = Vector2(52.63165, -242.10524)
+RotationDegrees = 9.195014
+Scale = Vector2(1.43, 1.43)
+
+[sub_resource type="Resource" id="Resource_i1q1h"]
+script = ExtResource("38_eg7b0")
+AnimationName = "default"
+Frame = 2
+Position = Vector2(73.68428, -242.10524)
+RotationDegrees = 11.850756
+Scale = Vector2(1.43, 1.43)
+
+[sub_resource type="Resource" id="Resource_ev0hw"]
+script = ExtResource("38_eg7b0")
+AnimationName = "default"
+Frame = 3
+Position = Vector2(63.157967, -210.52629)
+RotationDegrees = 11.850756
+Scale = Vector2(1.43, 1.43)
+
+[sub_resource type="Resource" id="Resource_4smj5"]
+script = ExtResource("38_eg7b0")
+AnimationName = "default"
+Frame = 4
+Position = Vector2(31.579018, -200.00002)
+RotationDegrees = 9.303799
+Scale = Vector2(1.355, 1.355)
+
+[sub_resource type="Resource" id="Resource_3rtwa"]
+script = ExtResource("38_eg7b0")
+AnimationName = "default"
+Frame = 5
+Position = Vector2(31.579018, -210.52634)
+RotationDegrees = 5.11051
+Scale = Vector2(1.38, 1.38)
+
+[sub_resource type="Resource" id="Resource_qxf1g"]
+script = ExtResource("38_eg7b0")
+AnimationName = "default"
+Frame = 6
+Position = Vector2(21.0527, -231.57896)
+RotationDegrees = 6.573908
+Scale = Vector2(1.38, 1.38)
+
+[sub_resource type="Resource" id="Resource_emf7n"]
+script = ExtResource("38_eg7b0")
+AnimationName = "default"
+Frame = 7
+Position = Vector2(31.578857, -242.1052)
+RotationDegrees = 6.4849687
+Scale = Vector2(1.43, 1.43)
 
 [node name="ArtTesting" type="Node2D" unique_id=1642862765]
 
@@ -1006,21 +1150,42 @@ flip_h = true
 
 [node name="ManNPC" type="AnimatedSprite2D" parent="." unique_id=168182913]
 modulate = Color(0.85490197, 0.7058824, 0.5803922, 1)
+position = Vector2(-151, -35)
 scale = Vector2(0.095, 0.095)
 sprite_frames = ExtResource("35_vqy0o")
 autoplay = "default"
-frame = 1
+frame = 2
+frame_progress = 0.51662576
 
-[node name="Mug" type="Sprite2D" parent="ManNPC" unique_id=1451917065 node_paths=PackedStringArray("TargetSprite")]
-position = Vector2(263.15787, 105.26317)
-rotation = 0.00120233
-scale = Vector2(19.94383, 1.8421053)
-texture = ExtResource("39_nyt7a")
+[node name="CowboyHat1" type="Sprite2D" parent="ManNPC" unique_id=538769568 node_paths=PackedStringArray("TargetSprite")]
+z_index = 2
+position = Vector2(10.526318, -326.3158)
+rotation = 0.3234403
+scale = Vector2(3.8421056, 3.8421056)
+texture = ExtResource("39_eg7b0")
 script = ExtResource("37_nyt7a")
 TargetSprite = NodePath("..")
-FrameData = Dictionary[String, Array]({
-"default": Array[ExtResource("38_eg7b0")]([SubResource("Resource_eg7b0"), SubResource("Resource_vydcb"), SubResource("Resource_yfstu"), SubResource("Resource_ukjtu"), SubResource("Resource_6ma3a"), SubResource("Resource_eerjy"), SubResource("Resource_of2lu"), SubResource("Resource_2eb28")])
-})
+Keyframes = Array[ExtResource("38_eg7b0")]([SubResource("Resource_eg7b0"), SubResource("Resource_r5vun"), SubResource("Resource_vydcb"), SubResource("Resource_yfstu"), SubResource("Resource_ukjtu"), SubResource("Resource_6ma3a"), SubResource("Resource_eerjy"), SubResource("Resource_of2lu"), SubResource("Resource_2eb28"), SubResource("Resource_o0e5i"), SubResource("Resource_35h0c"), SubResource("Resource_3sdab"), SubResource("Resource_qr24j"), SubResource("Resource_qskt6"), SubResource("Resource_5i4qb"), SubResource("Resource_k27tb")])
+
+[node name="Mustache2" type="Sprite2D" parent="ManNPC" unique_id=1854474360 node_paths=PackedStringArray("TargetSprite")]
+position = Vector2(73.68428, -242.10524)
+rotation = 0.2068347
+scale = Vector2(1.43, 1.43)
+script = ExtResource("37_nyt7a")
+TargetSprite = NodePath("..")
+Keyframes = Array[ExtResource("38_eg7b0")]([SubResource("Resource_5rpvg"), SubResource("Resource_k3ki0"), SubResource("Resource_i1q1h"), SubResource("Resource_ev0hw"), SubResource("Resource_4smj5"), SubResource("Resource_3rtwa"), SubResource("Resource_qxf1g"), SubResource("Resource_emf7n")])
+
+[node name="Mustache3" type="Sprite2D" parent="ManNPC/Mustache2" unique_id=653901984]
+position = Vector2(-1.1574707, 30.328339)
+rotation = 0.026695801
+scale = Vector2(1.5944057, 1.5944057)
+texture = ExtResource("40_vydcb")
+
+[node name="BandanaBlue" type="Sprite2D" parent="ManNPC/Mustache2" unique_id=664055945]
+position = Vector2(-38.784668, 173.6085)
+rotation = 0.05984378
+scale = Vector2(2.0242915, 2.0242915)
+texture = ExtResource("40_yfstu")
 
 [node name="ManNPC2" type="AnimatedSprite2D" parent="." unique_id=1443569733]
 modulate = Color(0.85490197, 0.7058824, 0.5803922, 1)
@@ -1043,3 +1208,8 @@ frame_progress = 0.9982126
 position = Vector2(524, 283)
 scale = Vector2(0.185, 0.185)
 texture = ExtResource("38_41405")
+
+[node name="MilkJug" type="Sprite2D" parent="." unique_id=138379682]
+position = Vector2(463, -177)
+scale = Vector2(0.21, 0.21)
+texture = ExtResource("44_yfstu")

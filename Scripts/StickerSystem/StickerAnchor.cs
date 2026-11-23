@@ -4,10 +4,21 @@ using Godot.Collections;
 [Tool]
 public partial class StickerAnchor : Node2D
 {
-    [Export] public AnimatedSprite2D TargetSprite { get; set; }
+    private AnimatedSprite2D _targetSprite;
 
-    // Map "AnimationName" -> Array of StickerFrameData (one per frame)
-    [Export] public Dictionary<string, Array<StickerFrameData>> FrameData { get; set; } = new();
+    [Export]
+    public AnimatedSprite2D TargetSprite
+    {
+        get => _targetSprite;
+        set
+        {
+            _targetSprite = value;
+            ResetTracking();
+        }
+    }
+
+    // One entry per (animation, frame) pair, holding the transform for that frame.
+    [Export] public Array<StickerFrameData> Keyframes { get; set; } = new();
 
     [ExportGroup("Editor Helpers")]
     [ExportToolButton("Initialize Current Anim")]
@@ -19,102 +30,134 @@ public partial class StickerAnchor : Node2D
     [ExportToolButton("Bake & Next Frame")]
     public Callable BakeAndNextButton => Callable.From(BakeAndNextFrame);
 
-    private void BakeAndNextFrame()
-    {
-        if (TargetSprite?.SpriteFrames == null) return;
+    [ExportToolButton("Apply Current Frame")]
+    public Callable ApplyFrameButton => Callable.From(ForceApplyCurrentFrame);
 
-        BakeCurrentFrame();
-
-        string anim = TargetSprite.Animation;
-        int count = TargetSprite.SpriteFrames.GetFrameCount(anim);
-        if (count > 0)
-        {
-            TargetSprite.Frame = (TargetSprite.Frame + 1) % count;
-        }
-    }
-
-    private AnimatedSprite2D _connectedSprite;
-
-    
-
+    private string _lastAnim;
+    private int _lastFrame = -1;
 
     public override void _Ready()
     {
-        ConnectSprite();
-        ApplyCurrentFrame();
+        // Run after the sprite has advanced its frame this tick.
+        ProcessPriority = 1;
+        ResetTracking();
     }
 
     public override void _Process(double delta)
     {
-        // Reconnect automatically if you assign/change TargetSprite in the Inspector
-        if (Engine.IsEditorHint() && _connectedSprite != TargetSprite)
-        {
-            ConnectSprite();
-            ApplyCurrentFrame();
-        }
+        if (_targetSprite == null || !GodotObject.IsInstanceValid(_targetSprite)) return;
+
+        string anim = _targetSprite.Animation;
+        int frame = _targetSprite.Frame;
+
+        if (anim == _lastAnim && frame == _lastFrame) return;
+
+        _lastAnim = anim;
+        _lastFrame = frame;
+        ApplyFrame(anim, frame);
     }
 
-    private void ConnectSprite()
+    // ---------- Lookup / apply ----------
+
+    private int FindIndex(string anim, int frame)
     {
-        if (_connectedSprite != null && GodotObject.IsInstanceValid(_connectedSprite))
-        {
-            _connectedSprite.FrameChanged -= ApplyCurrentFrame;
-            _connectedSprite.AnimationChanged -= ApplyCurrentFrame;
-        }
+        if (Keyframes == null) return -1;
 
-        _connectedSprite = TargetSprite;
-
-        if (_connectedSprite != null)
+        for (int i = 0; i < Keyframes.Count; i++)
         {
-            _connectedSprite.FrameChanged += ApplyCurrentFrame;
-            _connectedSprite.AnimationChanged += ApplyCurrentFrame;
+            var k = Keyframes[i];
+            if (k != null && k.AnimationName == anim && k.Frame == frame)
+                return i;
         }
+        return -1;
     }
 
-    private void ApplyCurrentFrame()
+    private void ApplyFrame(string anim, int frame)
     {
-        if (TargetSprite == null || FrameData == null) return;
+        int index = FindIndex(anim, frame);
+        if (index >= 0)
+            Keyframes[index].ApplyTo(this);
+    }
 
-        string anim = TargetSprite.Animation;
-        int frame = TargetSprite.Frame;
+    private void ResetTracking()
+    {
+        _lastAnim = null;
+        _lastFrame = -1;
+    }
 
-        if (FrameData.TryGetValue(anim, out var frames) && frame >= 0 && frame < frames.Count)
-        {
-            frames[frame]?.ApplyTo(this);
-        }
+    private bool HasValidSprite()
+    {
+        return _targetSprite != null
+            && GodotObject.IsInstanceValid(_targetSprite)
+            && _targetSprite.SpriteFrames != null;
+    }
+
+    private void MarkDirty()
+    {
+        if (!Engine.IsEditorHint()) return;
+
+        NotifyPropertyListChanged();
+        EditorInterface.Singleton?.MarkSceneAsUnsaved();
+    }
+
+    // ---------- Editor buttons ----------
+
+    private void ForceApplyCurrentFrame()
+    {
+        if (!HasValidSprite()) return;
+        ApplyFrame(_targetSprite.Animation, _targetSprite.Frame);
     }
 
     private void InitializeCurrentAnimation()
     {
-        if (TargetSprite?.SpriteFrames == null) return;
+        if (!HasValidSprite()) return;
 
-        string anim = TargetSprite.Animation;
-        int count = TargetSprite.SpriteFrames.GetFrameCount(anim);
+        Keyframes ??= new Array<StickerFrameData>();
 
-        if (!FrameData.ContainsKey(anim))
+        string anim = _targetSprite.Animation;
+        int count = _targetSprite.SpriteFrames.GetFrameCount(anim);
+
+        for (int f = 0; f < count; f++)
         {
-            FrameData[anim] = new Array<StickerFrameData>();
+            if (FindIndex(anim, f) < 0)
+                Keyframes.Add(StickerFrameData.FromNode(this, anim, f));
         }
 
-        var list = FrameData[anim];
-        while (list.Count < count)
-        {
-            list.Add(StickerFrameData.FromNode(this));
-        }
-
-        NotifyPropertyListChanged();
+        MarkDirty();
     }
 
     private void BakeCurrentFrame()
     {
-        if (TargetSprite?.SpriteFrames == null) return;
+        if (!HasValidSprite()) return;
 
-        InitializeCurrentAnimation();
+        Keyframes ??= new Array<StickerFrameData>();
 
-        string anim = TargetSprite.Animation;
-        int frame = TargetSprite.Frame;
+        string anim = _targetSprite.Animation;
+        int frame = _targetSprite.Frame;
 
-        FrameData[anim][frame] = StickerFrameData.FromNode(this);
-        NotifyPropertyListChanged();
+        // Replace (rather than mutate) so shared resources are never edited by accident.
+        var data = StickerFrameData.FromNode(this, anim, frame);
+        int index = FindIndex(anim, frame);
+
+        if (index >= 0)
+            Keyframes[index] = data;
+        else
+            Keyframes.Add(data);
+
+        MarkDirty();
+    }
+
+    private void BakeAndNextFrame()
+    {
+        if (!HasValidSprite()) return;
+
+        BakeCurrentFrame();
+
+        int count = _targetSprite.SpriteFrames.GetFrameCount(_targetSprite.Animation);
+        if (count > 0)
+        {
+            // _Process will pick up the frame change and apply the next frame's data.
+            _targetSprite.Frame = (_targetSprite.Frame + 1) % count;
+        }
     }
 }
