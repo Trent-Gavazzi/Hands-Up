@@ -925,12 +925,9 @@ scale = Vector2(1, 1.006821)
 navigation_polygon = SubResource("NavigationPolygon_j3wwy")
 
 [node name="Customer" parent="." unique_id=1912752529 node_paths=PackedStringArray("targetChair") instance=ExtResource("37_3tka0")]
-<<<<<<< Updated upstream
 y_sort_enabled = true
 position = Vector2(-2, 11)
-=======
 position = Vector2(-82, -92)
->>>>>>> Stashed changes
 targetChair = NodePath("../LongTable/ChairBottom")
 
 [node name="Customer2" parent="." unique_id=1116773257 node_paths=PackedStringArray("targetChair") instance=ExtResource("37_3tka0")]
