@@ -3,7 +3,7 @@ using System;
 
 public partial class Customer : CharacterBody2D, IInteractable
 {
-    [Export] protected Area2D hitbox; // Gets hit by bullets
+    [Export] protected Area2D hitbox; // Gets hit by bullets, also detected by the player's Interactor
     [Export] protected NavigationAgent2D navAgent;
     [Export] protected Chair targetChair;
     [Export] protected float walkSpeed = 50f;
@@ -47,34 +47,20 @@ public partial class Customer : CharacterBody2D, IInteractable
     protected Timer graceTimer;
     protected Timer stayTimer;
 
-    protected bool interactionEnabled = false; // once seated we turn on the interactable (line 374)
+    protected bool interactionEnabled = false; // Turned on once seated
 
-    // Visual Attributes
-    public CharacterTemplateManager characterTemplateManager;
-    private VisualAttributes myAttributes;
-    [Export] AnimatedSprite2D animatedSprite2D;
+    // ---------- Visual attributes ----------
 
-    // Call before adding to the scene tree; _Ready depends on these values
-    // TODO: PASS IN CUSTOMER ATTRIBUTES HERE
-    public void setup(Chair target, Node2D d, Marker2D spawn)
+    [Export] protected AnimatedSprite2D animatedSprite2D; // Tinted with the customer's look; defaults to the whole customer
+    protected VisualAttributes attributes;
+
+    // Called by the GameManager before adding to the scene tree; _Ready depends on these values
+    public void setup(Chair target, Node2D d, Marker2D spawn, VisualAttributes looks)
     {
-        // Set the target chair location
         targetChair = target;
         door = d;
         spawnPoint = spawn;
-
-        // Get our visual attributes data
-        if(!isWanted)
-        {
-            myAttributes = characterTemplateManager.getNonWanted();
-        } else
-        {
-            myAttributes = characterTemplateManager.getWanted();
-        }
-
-        // Use that data to change our appearance
-        animatedSprite2D.Modulate = myAttributes.color;
-
+        attributes = looks;
     }
 
     public override void _Ready()
@@ -86,11 +72,16 @@ public partial class Customer : CharacterBody2D, IInteractable
 
         satisfaction = maxSatisfaction;
 
+        // Apply the look chosen by the GameManager
+        if (animatedSprite2D != null) animatedSprite2D.Modulate = attributes.color;
+        else Modulate = attributes.color;
+
         // Top-down: no floor/ceiling logic, collisions treated equally on all sides
         MotionMode = MotionModeEnum.Floating;
 
         health = maxHealth;
         hitbox.SetCollisionMaskValue(5, true); // also listen for the bullet layer
+        hitbox.SetCollisionLayerValue(IInteractable.InteractionLayer, true); // detectable by the player's Interactor
         hitbox.AreaEntered += onHitboxAreaEntered;
 
         if (door == null)
@@ -196,6 +187,7 @@ public partial class Customer : CharacterBody2D, IInteractable
         if (isLeaving || isDead) return;
 
         // TODO: Animation for getting out of a chair
+        setEnabled(false);
         clearDrinkState();
         targetChair.setOccupied(false);
         isSeated = false;
@@ -205,6 +197,13 @@ public partial class Customer : CharacterBody2D, IInteractable
         {
             navAgent.TargetPosition = door.GlobalPosition;
         }
+    }
+
+    private void exitSaloon()
+    {
+        SetPhysicsProcess(false); // several physics ticks can run before QueueFree takes effect
+        EmitSignal(SignalName.Exit, isWanted, this);
+        QueueFree();
     }
 
     // ---------- Health ----------
@@ -238,6 +237,7 @@ public partial class Customer : CharacterBody2D, IInteractable
     private void die()
     {
         isDead = true;
+        setEnabled(false);
         clearDrinkState();
 
         // Free the chair unless we'd already given it up by leaving
@@ -314,6 +314,7 @@ public partial class Customer : CharacterBody2D, IInteractable
         if (isDead || isLeaving) return;
 
         // TODO: ANIMATION FOR SITTING GOES HERE
+        setEnabled(true);
         stayTimer.Start(stayTime);
         scheduleNextDrinkRequest();
     }
@@ -404,17 +405,25 @@ public partial class Customer : CharacterBody2D, IInteractable
         leaveChair();
     }
 
+    // ---------- Visual attributes ----------
+
+    public VisualAttributes getAttributes()
+    {
+        return attributes;
+    }
+
     // ---------- IInteractable ----------
+
     public virtual bool isEnabled()
     {
-        return interactionEnabled && isDead;
+        return interactionEnabled && !isDead;
     }
 
     public virtual void setEnabled(bool value)
     {
         interactionEnabled = value;
     }
-    
+
     public virtual bool canInteract(Node interactor)
     {
         return isEnabled() && isSeated && drinkRequest;
@@ -423,17 +432,15 @@ public partial class Customer : CharacterBody2D, IInteractable
     public virtual bool interact(Node interactor)
     {
         if (!canInteract(interactor)) return false;
-
         if (interactor is not Player player || !player.tryRemoveDrink(drinkTypeReq)) return false;
-        GD.Print($"Serving Drink {drinkTypeReq}.");
+
+        GD.Print($"Serving drink {drinkTypeReq}.");
         return tryServeDrink(drinkTypeReq);
     }
 
-    private void exitSaloon()
+    public virtual string getPrompt()
     {
-        SetPhysicsProcess(false); // several physics ticks can run before QueueFree takes effect
-        EmitSignal(SignalName.Exit, isWanted, this);
-        QueueFree();
+        return drinkRequest ? $"Serve {drinkTypeReq}" : "";
     }
 
 

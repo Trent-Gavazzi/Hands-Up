@@ -5,10 +5,10 @@ using System.Linq;
 
 public partial class GameManager : Node
 {
-    [ExportGroup("Scene References")]
     // Make the game manager an easily accessible instance
     public static GameManager Instance { get; private set; }
 
+    [ExportGroup("Scene References")]
     // Player, door, and spawning
     [Export] private Player player;
     [Export] private Marker2D spawnMarker;
@@ -18,10 +18,9 @@ public partial class GameManager : Node
     [Export] private PackedScene customerScene; // Customer.tscn
     [Export] private PackedScene wantedScene;   // Wanted.tscn
 
-    // Will define visuals for generated customers
+    // Defines visuals for generated customers
     [Export] private PackedScene customerTemplateManager;
     public CharacterTemplateManager characterTemplateManager { get; private set; }
-
 
     [ExportGroup("Level Flow")]
     [Export] private float minSpawnDelay = 3f;   // Seconds between arrivals, randomized in this range
@@ -38,32 +37,32 @@ public partial class GameManager : Node
 
     private int wantedFrequency;
     private float saloonRating;
-    private ulong lastCustomerTime; // Last time a customer was allowed in
 
     // Level stats
     private int customersSpawned = 0;
     private int customersLeft = 0;
     private int customersKilled = 0;
+    private int wantedCaught = 0;
     private bool levelOver = false;
 
     private Timer spawnTimer;
     private List<Table> tables;
-    private List<Customer> activeCustomers = new List<Customer>();
-
-    // Add some variable for wanted attributes that varies from scene to scene
+    private readonly List<Customer> activeCustomers = new List<Customer>();
 
     private readonly Random rand = new Random();
 
     public override void _Ready()
     {
-        // Make the game manager have an easily accessible static instance
         Instance = this;
 
-        // Set up the tables and wanted frequency
         tables = GetTree().GetNodesInGroup("Tables").OfType<Table>().ToList();
         wantedFrequency = baseWantedFrequency;
         saloonRating = startRating;
-        setWantedAttributes();
+
+        // Must be in the tree so its _Ready generates the wanted looks
+        characterTemplateManager = customerTemplateManager.Instantiate<CharacterTemplateManager>();
+        AddChild(characterTemplateManager);
+
         spawnTimer = new Timer();
         spawnTimer.OneShot = true;
         spawnTimer.Timeout += onSpawnTimeout;
@@ -73,11 +72,17 @@ public partial class GameManager : Node
         string levelSize = customersPerLevel > 0 ? customersPerLevel.ToString() : "endless";
         GD.Print($"[Saloon] Level start | spawn {minSpawnDelay}-{maxSpawnDelay}s | max active: {activeCap} | " +
                  $"customers: {levelSize} | wanted: {wantedFrequency}/10 | rating: {saloonRating:F0}");
+        printWantedPosters();
 
         scheduleNextCustomer();
-        // Create the customer template manager
-        characterTemplateManager = customerTemplateManager.Instantiate<CharacterTemplateManager>();
     }
+
+    public override void _ExitTree()
+    {
+        if (Instance == this) Instance = null;
+    }
+
+    // ---------- Spawning ----------
 
     private void scheduleNextCustomer()
     {
@@ -88,6 +93,7 @@ public partial class GameManager : Node
     {
         if (levelOver) return;
 
+        // Everyone for this level has arrived, wait for them to leave
         if (customersPerLevel > 0 && customersSpawned >= customersPerLevel) return;
 
         tryCreateNewCustomer();
@@ -99,7 +105,7 @@ public partial class GameManager : Node
         if (maxActiveCustomers > 0 && activeCustomers.Count >= maxActiveCustomers) return false;
 
         Chair targetChair = findFreeChair();
-        if (targetChair == null) return false;
+        if (targetChair == null) return false; // saloon is full
 
         createNewCustomer(targetChair);
         return true;
@@ -108,24 +114,25 @@ public partial class GameManager : Node
     private void createNewCustomer(Chair targetChair)
     {
         Customer customer;
-        bool isWanted = rand.Next(1, 11) <= wantedFrequency;
+        VisualAttributes looks;
+        bool isWanted = false;
 
-        if (!isWanted)
-        {
-            customer = customerScene.Instantiate<Customer>();
-            // Set the customers template manager
-            customer.characterTemplateManager = characterTemplateManager;
-        }
-        else
+        // Falls back to a regular customer if every wanted look is already in the saloon
+        if (rand.Next(1, 11) <= wantedFrequency && characterTemplateManager.tryGetWanted(out looks))
         {
             Wanted wanted = wantedScene.Instantiate<Wanted>();
             wanted.setPlayer(player);
             customer = wanted;
-            customer.characterTemplateManager = characterTemplateManager;
+            isWanted = true;
+        }
+        else
+        {
+            customer = customerScene.Instantiate<Customer>();
+            looks = characterTemplateManager.getNonWanted();
         }
 
         // Must be configured before AddChild, since _Ready reads these values
-        customer.setup(targetChair, door, spawnMarker);
+        customer.setup(targetChair, door, spawnMarker, looks);
         customer.Position = spawnMarker.GlobalPosition;
         customer.Exit += onCustomerExit;
 
@@ -133,7 +140,8 @@ public partial class GameManager : Node
         activeCustomers.Add(customer);
         customersSpawned++;
 
-        GD.Print($"[Saloon] Customer #{customersSpawned} arrived{(isWanted ? " (wanted)" : "")} | active: {activeCustomers.Count}");
+        GD.Print($"[Saloon] Customer #{customersSpawned} arrived{(isWanted ? " (wanted)" : "")} " +
+                 $"| color: #{looks.color.ToHtml(false)} | active: {activeCustomers.Count}");
     }
 
     // For now just the first available seat across all tables
@@ -150,10 +158,15 @@ public partial class GameManager : Node
         return null;
     }
 
-    private void setWantedAttributes()
+    // Console stand-in for the poster UI
+    private void printWantedPosters()
     {
-        // Creates the attributes to match the wanted customers on the posters
+        IEnumerable<string> colors = characterTemplateManager.wantedAttributeList
+            .Select(w => "#" + w.color.ToHtml(false));
+        GD.Print($"[Saloon] Wanted posters: {string.Join(", ", colors)}");
     }
+
+    // ---------- Exits & rating ----------
 
     private void onCustomerExit(bool wasWanted, Customer customerInstance)
     {
@@ -166,7 +179,7 @@ public partial class GameManager : Node
 
         if (wasWanted)
         {
-            handleWantedCustomer(wasKilled);
+            handleWantedCustomer(customerInstance, wasKilled);
         }
         else if (wasKilled)
         {
@@ -180,6 +193,29 @@ public partial class GameManager : Node
         }
 
         checkLevelComplete();
+    }
+
+    // Handles wanted customer exiting saloon
+    private void handleWantedCustomer(Customer customerInstance, bool wasKilled)
+    {
+        if (wasKilled)
+        {
+            // Caught for good: their look stays out of the pool
+            wantedCaught++;
+            GD.Print($"[Saloon] Wanted customer taken down ({wantedCaught}/{characterTemplateManager.wantedAttributeList.Count})");
+
+            if (wantedCaught >= characterTemplateManager.wantedAttributeList.Count)
+            {
+                GD.Print("[Saloon] All wanted outlaws caught");
+            }
+        }
+        else
+        {
+            // Escaped: they can come back later
+            characterTemplateManager.returnWanted(customerInstance.getAttributes());
+            GD.Print("[Saloon] Wanted customer escaped");
+            // TODO: Penalty for letting them escape
+        }
     }
 
     private void setRating(float value, string reason)
@@ -202,13 +238,7 @@ public partial class GameManager : Node
 
         levelOver = true;
         spawnTimer.Stop();
-        GD.Print($"[Saloon] Level complete | rating: {saloonRating:F0} | left: {customersLeft} | killed: {customersKilled}");
-    }
-
-    // Handles wanted customer exiting saloon
-    private void handleWantedCustomer(bool wasKilled)
-    {
-        // TODO: Reward for catching, penalty for letting them escape
-        GD.Print(wasKilled ? "[Saloon] Wanted customer was taken down" : "[Saloon] Wanted customer escaped");
+        GD.Print($"[Saloon] Level complete | rating: {saloonRating:F0} | left: {customersLeft} | " +
+                 $"killed: {customersKilled} | wanted caught: {wantedCaught}");
     }
 }
